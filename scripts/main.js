@@ -15,20 +15,8 @@
 
         root.app = app = new App($app)
 
-        $play.addEventListener('click', function onPlay() {
-            let username = $username.value
-            let invalidUsername = !username.match(/^[a-z]+$/)
-
-            if (invalidUsername) {
-                return logger.error('Username format invalid')
-            }
-
-            app.startGame(username, [$background, $entities, $foreground], function () {
-                $app.classList.add('initialized')
-                $welcome.remove()
-            })
-
-        })
+        $play.addEventListener('click', onPlay)
+        $username.addEventListener('keyup', onPlay)
 
         document.addEventListener('mousemove', function (event) {
 
@@ -38,6 +26,25 @@
                 app.game.updateCoordinate(event)
             }
         })
+
+        function onPlay() {
+            let keyupNotEnter = event.type === 'keyup' && event.keyCode !== 13
+            if (keyupNotEnter) {
+                return
+            }
+
+            let username = $username.value
+            let invalidUsername = !username.match(/^[a-z]+$/)
+            if (invalidUsername) {
+                return logger.error('Username format invalid')
+            }
+
+            app.startGame(username, [$background, $entities, $foreground], function () {
+                $app.classList.add('initialized')
+                $welcome.remove()
+            })
+
+        }
 
     }
 
