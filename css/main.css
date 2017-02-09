@@ -1,0 +1,20 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+
+#background,
+#entities,
+#foreground {
+  position: absolute;
+  display: none;
+}
+
+.initialized #background,
+.initialized #entities,
+.initialized #foreground {
+  display: block;
+}
