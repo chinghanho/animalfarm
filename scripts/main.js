@@ -19,11 +19,12 @@
         $username.addEventListener('keyup', onPlay)
 
         document.addEventListener('mousemove', function (event) {
-
             if (event.target !== $foreground) { return }
 
-            if (app.game && app.game.started) {
-                app.game.updateCoordinate(event)
+            let game = app.game
+
+            if (game && game.started) {
+                game.setMouseCoordinate(event)
             }
         })
 

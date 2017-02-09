@@ -2,18 +2,18 @@
 
     'use strict'
 
-    class Logger {
+    class Log {
 
         constructor(env) {
             this.env = env || 'development'
 
             this.info  = console.info
-            this.log   = console.log
+            this.debug   = console.log
             this.error = console.error
         }
 
     }
 
-    root.logger = new Logger('development')
+    root.log = new Log('development')
 
 })(this)
