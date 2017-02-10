@@ -12,20 +12,14 @@
             this.$foreground = canvases[2]
 
             this.cursorGridPosition = []
+            this.entities = []
 
             this.initMap()
             this.initPathFinder()
             this.initRenderer()
             this.initUpdater()
             this.initPlayer(username)
-
-            // TODO: move this line to others class
-            let item = new Item()
-            item.setPosition(29 * this.map.tileSize, 0 * this.map.tileSize)
-            item.setGridPosition(30, 1)
-            this.entities = []
-            this.entities.push(this.player)
-            this.entities.push(item)
+            this.initEntities()
 
             this.start()
             log.info('Game initialized')
@@ -56,7 +50,15 @@
             this.player = new Player(username)
             this.player.setPosition(13 * this.map.tileSize, 8 * this.map.tileSize)
             this.player.setGridPosition(14, 9)
+            this.entities.push(this.player)
             log.info('Player initialized')
+        }
+
+        initEntities() {
+            let item = new Item()
+            item.setPosition(29 * this.map.tileSize, 0 * this.map.tileSize)
+            item.setGridPosition(30, 1)
+            this.entities.push(item)
         }
 
         targetCellChanged(gridX, gridY) {
