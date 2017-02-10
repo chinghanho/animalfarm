@@ -14,7 +14,7 @@
             this.cursorGridPosition = []
             this.entities = []
 
-            this.map        = new Map()
+            this.map        = new _Map()
             this.pathFinder = new PathFinder()
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
             this.updater    = new Updater(this)
@@ -70,8 +70,6 @@
 
             this.player.moveTo(gridX, gridY, path)
         }
-
-
 
         tick() {
             this.renderer.renderFrame()

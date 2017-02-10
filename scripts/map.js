@@ -27,6 +27,6 @@
 
     }
 
-    root.Map = Map
+    root._Map = Map
 
 })(this)
