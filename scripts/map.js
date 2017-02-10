@@ -20,7 +20,7 @@
             for (var i = 0; i < this.tilesY; i++) {
                 this.grid[i] = []
                 for (var j = 0; j < this.tilesX; j++) {
-                    this.grid[i][j] = {}
+                    this.grid[i][j] = 0
                 }
             }
         }
