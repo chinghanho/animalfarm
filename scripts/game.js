@@ -48,8 +48,8 @@
         }
 
         mousemove(event) {
-            let gridX = Math.floor(event.offsetX / this.$foreground.width  * this.map.tilesX)
-            let gridY = Math.floor(event.offsetY / this.$foreground.height * this.map.tilesY)
+            let gridX = Math.floor(event.offsetX / this.map.width  * this.map.tilesX)
+            let gridY = Math.floor(event.offsetY / this.map.height * this.map.tilesY)
 
             if (this.targetCellChanged(gridX, gridY)) {
                 this.setMouseCoordinate(gridX, gridY)
@@ -61,17 +61,23 @@
             log.debug(this.cursorGridPosition)
         }
 
-        mouseclick() {
+        /**
+         * Process game logic when the player triggers a click event during the game.
+         */
+        click() {
             let gridX = this.cursorGridPosition[0]
-            let gridY = this.cursorGridPosition[1]
-            let start = [this.player.gridX, this.player.gridY]
-            let end   = [gridX, gridY]
-            let path  = this.pathFinder.findPath(this.map.grid, start, end)
+              , gridY = this.cursorGridPosition[1]
+              , start = [this.player.gridX, this.player.gridY]
+              , end   = [gridX, gridY]
+              , path  = this.pathFinder.findPath(this.map.grid, start, end)
 
             this.player.moveTo(gridX, gridY, path)
+            console.log(this.player.orientation)
         }
 
         tick() {
+            this.currentTime = new Date().getTime()
+
             this.renderer.renderFrame()
             this.updater.update()
             requestAnimFrame(this.tick.bind(this))

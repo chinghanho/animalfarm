@@ -10,6 +10,7 @@
 
         update() {
             this.updateCharacters()
+            this.updateTransitions()
         }
 
         updateCharacters() {
@@ -21,19 +22,34 @@
             })
         }
 
-        updateCharacter(character) {
-
-            // Estimate of the movement distance for one update
-            var tick = Math.round(this.game.map.tileSize / Math.round((character.moveSpeed / (1000 / this.game.renderer.FPS))));
-
-            if (character.moving && !character.movement.isProgressing()) {
-                // console.count('yo')
-                // character.movement.start()
-                // character.x += tick
-
-                if (character.gridX === character._moveToGrid[0] && character.gridY === character._moveToGrid[1]) {
-                    character.moveEnd()
+        updateTransitions() {
+            let that = this
+            that.game.entities.forEach(function (entity) {
+                let m = entity.movement
+                if (m) {
+                    if (m.inProgress) {
+                        m.step(that.game.currentTime)
+                    }
                 }
+            })
+        }
+
+        updateCharacter(character) {
+            // Estimate of the movement distance for one update
+            let tileSize = this.game.map.tileSize
+            let tick     = Math.round(tileSize / character.moveSpeed * Math.round(1000 / this.game.renderer.FPS))
+
+            if (character.isMoving() && !character.movement.inProgress) {
+                character.movement.start(this.game.currentTime,
+                                         function (x) {
+                                             character.x = x
+                                         },
+                                         function () {
+                                             character.x = character.movement.endValue
+                                         },
+                                         character.x + tick,
+                                         character.x + tileSize,
+                                         character.moveSpeed)
             }
         }
 

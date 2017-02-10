@@ -33,7 +33,7 @@
             }
 
             if (event.type === 'click') {
-                game.mouseclick()
+                game.click()
             }
         }
 

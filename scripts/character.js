@@ -14,31 +14,64 @@
         constructor() {
             super()
 
+            this.path = null
+
             // Speeds
             this.atkSpeed  = 50
             this.moveSpeed = 200
 
+            // Default
             this.orientation = orientations.DOWN
-            this.moving = false
 
             this.movement = new Transition()
         }
 
+        isMoving() {
+            return !(this.path === null)
+        }
+
         moveTo(gridX, gridY, path) {
-            this.moving      = true
-            this._path       = path
+            if (this.isMoving()) { this.moveEnd() }
+
+            this.path       = path
             this._moveToGrid = [gridX, gridY]
+
+            this.setOrientation()
         }
 
         moveEnd() {
-            this.moving      = false
-            this._path       = null
+            this.path       = null
             this._moveToGrid = null
         }
 
-        setOrientation(orientation) {
-            if (orientation) { this.orientation = orientation }
-            return this
+        nextStep() {
+            //
+        }
+
+        setOrientation() {
+            let destX = this.path[1][0]
+            let destY = this.path[1][1]
+
+            log.debug(this.gridX, this.gridY)
+            log.debug(destX, destY)
+
+            if (this.gridX === destX && this.gridY < destY) {
+                this.orientation = orientations.DOWN
+            }
+
+            if (this.gridX === destX && this.gridY > destY) {
+                this.orientation = orientations.UP
+            }
+
+            if (this.gridY === destY && this.gridX > destX) {
+                this.orientation = orientations.LEFT
+            }
+
+            if (this.gridY === destY && this.gridX < destX) {
+                this.orientation = orientations.RIGHT
+            }
+
+            return this.orientation
         }
 
     }
