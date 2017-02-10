@@ -8,6 +8,8 @@
             this.game   = game
             this.map    = this.game.map
 
+            this.FPS = 60
+
             this.$background = $background
             this.$entities   = $entities
             this.$foreground = $foreground
@@ -24,7 +26,6 @@
             this.$foreground.height = this.map.height
 
             this.initBackground()
-            this.initForeground()
         }
 
         initBackground() {
@@ -33,31 +34,54 @@
             this.backgroundCtx.fill()
         }
 
-        initForeground() {
-            //
+        drawMouseTargetCell() {
+            let gridX = this.game.cursorGridPosition[0]
+            let gridY = this.game.cursorGridPosition[1]
+            this.drawGridCell(gridX, gridY, 'hsla(3, 71%, 56%, 1)')
         }
 
-        drawCell(x, y, color) {
-            x = x * this.map.tileSize
-            y = y * this.map.tileSize
+        drawGridCell(gridX, gridY, color) {
+            gridX = gridX * this.map.tileSize
+            gridY = gridY * this.map.tileSize
 
-            this.foregroundCtx.clearRect(0, 0, this.$foreground.width, this.$foreground.height)
             this.foregroundCtx.beginPath()
-            this.foregroundCtx.rect(x, y, this.map.tileSize, this.map.tileSize)
+            this.foregroundCtx.rect(gridX, gridY, this.map.tileSize, this.map.tileSize)
             this.foregroundCtx.lineWidth = 2
             this.foregroundCtx.strokeStyle = color
             this.foregroundCtx.stroke()
         }
 
+        drawEntities() {
+            let that = this
+
+            that.game.entities.forEach(function (entity) {
+                that.drawEntityAt(entity.x, entity.y, entity.color)
+            })
+        }
+
         drawEntityAt(x, y, color) {
             let radius = this.map.tileSize / 2
-            x = x * this.map.tileSize + (this.map.tileSize / 2)
-            y = y * this.map.tileSize + (this.map.tileSize / 2)
+            x = x + (this.map.tileSize / 2)
+            y = y + (this.map.tileSize / 2)
 
             this.entitiesCtx.beginPath()
             this.entitiesCtx.arc(x, y, radius, 0, Math.PI * 2)
             this.entitiesCtx.fillStyle = color
             this.entitiesCtx.fill()
+        }
+
+        clearScreen(ctx) {
+            ctx.clearRect(0, 0, this.map.width, this.map.height);
+        }
+
+        renderFrame() {
+            this.clearScreen(this.foregroundCtx)
+            this.clearScreen(this.entitiesCtx)
+
+            if (this.game && this.game.started) {
+                this.drawMouseTargetCell()
+                this.drawEntities()
+            }
         }
 
     }

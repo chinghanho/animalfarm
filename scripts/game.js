@@ -11,18 +11,23 @@
             this.$entities   = canvases[1]
             this.$foreground = canvases[2]
 
-            this.currentTargetCellCoordinate = []
+            this.cursorGridPosition = []
 
             this.initMap()
+            this.initPathFinder()
             this.initRenderer()
+            this.initUpdater()
             this.initPlayer(username)
 
             // TODO: move this line to others class
-            this.renderer.drawEntityAt(this.player.x, this.player.y, 'hsla(107, 68%, 55%, 1)')
-            let item = new Item(27, 1)
-            this.renderer.drawEntityAt(item.x, item.y, 'hsla(207, 89%, 66%, 1)')
+            let item = new Item()
+            item.setPosition(29 * this.map.tileSize, 0 * this.map.tileSize)
+            item.setGridPosition(30, 1)
+            this.entities = []
+            this.entities.push(this.player)
+            this.entities.push(item)
 
-            this.started = true
+            this.start()
             log.info('Game initialized')
             next.call(this)
         }
@@ -32,29 +37,69 @@
             log.info('Map initialized')
         }
 
+        initPathFinder() {
+            this.pathFinder = new PathFinder()
+            log.info('PathFinder initialized')
+        }
+
         initRenderer() {
             this.renderer = new Renderer(this, this.$background, this.$entities, this.$foreground)
             log.info('Renderer initialized')
         }
 
+        initUpdater() {
+            this.updater = new Updater(this)
+            log.info('Updater initialized')
+        }
+
         initPlayer(username) {
-            this.player = new Player(username, 14, 9)
+            this.player = new Player(username)
+            this.player.setPosition(13 * this.map.tileSize, 8 * this.map.tileSize)
+            this.player.setGridPosition(14, 9)
             log.info('Player initialized')
         }
 
-        targetCellChanged(x, y) {
-            return !this.currentTargetCellCoordinate || (this.currentTargetCellCoordinate[0] !== x || this.currentTargetCellCoordinate[1] !== y)
+        targetCellChanged(gridX, gridY) {
+            return !this.cursorGridPosition
+                || (this.cursorGridPosition[0] !== gridX || this.cursorGridPosition[1] !== gridY)
         }
 
-        setMouseCoordinate(event) {
-            let x = Math.floor(event.offsetX / this.$foreground.width * 30)
-            let y = Math.floor(event.offsetY / this.$foreground.height * 20)
+        mousemove(event) {
+            let gridX = Math.floor(event.offsetX / this.$foreground.width  * this.map.tilesX)
+            let gridY = Math.floor(event.offsetY / this.$foreground.height * this.map.tilesY)
 
-            if (this.targetCellChanged(x, y)) {
-                this.currentTargetCellCoordinate = [x, y]
-                this.renderer.drawCell(x, y, 'hsla(3, 71%, 56%, 1)')
-                log.debug(this.currentTargetCellCoordinate)
+            if (this.targetCellChanged(gridX, gridY)) {
+                this.setMouseCoordinate(gridX, gridY)
             }
+        }
+
+        setMouseCoordinate(gridX, gridY) {
+            this.cursorGridPosition = [gridX, gridY]
+            log.debug(this.cursorGridPosition)
+        }
+
+        mouseclick() {
+            let gridX = this.cursorGridPosition[0]
+            let gridY = this.cursorGridPosition[1]
+            let start = [this.player.gridX, this.player.gridY]
+            let end   = [gridX, gridY]
+            let path  = this.pathFinder.findPath(this.map.grid, start, end)
+
+            this.player.moveTo(gridX, gridY, path)
+        }
+
+
+
+        tick() {
+            this.renderer.renderFrame()
+            this.updater.update()
+            requestAnimFrame(this.tick.bind(this))
+        }
+
+        start() {
+            this.tick()
+            this.started = true
+            log.info('Game Started')
         }
 
     }

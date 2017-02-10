@@ -4,9 +4,21 @@
 
     class Entity {
 
-        constructor(x, y) {
-            this.x = x || 0
-            this.y = y || 0
+        constructor() {
+            this.x     = null
+            this.y     = null
+            this.gridX = null
+            this.gridY = null
+        }
+
+        setPosition(x, y) {
+            this.x = x
+            this.y = y
+        }
+
+        setGridPosition(n, m) {
+            this.gridX = n
+            this.gridY = m
         }
 
     }

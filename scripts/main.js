@@ -15,20 +15,29 @@
 
         root.app = app = new App($app)
 
-        $play.addEventListener('click', onPlay)
-        $username.addEventListener('keyup', onPlay)
+        $play.addEventListener('click', playReady)
+        $username.addEventListener('keyup', playReady)
 
-        document.addEventListener('mousemove', function (event) {
+        document.addEventListener('mousemove', onPlaying)
+        document.addEventListener('click', onPlaying)
+
+        function onPlaying(event) {
             if (event.target !== $foreground) { return }
 
             let game = app.game
 
-            if (game && game.started) {
-                game.setMouseCoordinate(event)
-            }
-        })
+            if (game && !game.started) { return }
 
-        function onPlay() {
+            if (event.type === 'mousemove') {
+                game.mousemove(event)
+            }
+
+            if (event.type === 'click') {
+                game.mouseclick()
+            }
+        }
+
+        function playReady() {
             let keyupNotEnter = event.type === 'keyup' && event.keyCode !== 13
             if (keyupNotEnter) {
                 return

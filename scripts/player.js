@@ -2,11 +2,12 @@
 
     'use strict'
 
-    class Player extends Entity {
+    class Player extends Character {
 
-        constructor(username, x, y) {
-            super(x, y)
+        constructor(username) {
+            super()
             this.username = username
+            this.color = 'hsla(107, 68%, 55%, 1)'
         }
 
     }
