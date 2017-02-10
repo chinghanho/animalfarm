@@ -2,13 +2,6 @@
 
     'use strict'
 
-    var orientations = {
-        'UP': 1,
-        'RIGHT': 2,
-        'DOWN': 3,
-        'LEFT': 4
-    }
-
     class Character extends Entity {
 
         constructor() {
@@ -21,7 +14,7 @@
             this.moveSpeed = 200
 
             // Default
-            this.orientation = orientations.DOWN
+            this.orientation = Types.Orientations.DOWN
 
             this.movement = new Transition()
         }
@@ -30,47 +23,59 @@
             return !(this.path === null)
         }
 
-        moveTo(gridX, gridY, path) {
-            if (this.isMoving()) { this.moveEnd() }
-
-            this.path       = path
-            this._moveToGrid = [gridX, gridY]
-
+        moveTo(path) {
+            this.path = path
             this.setOrientation()
         }
 
-        moveEnd() {
-            this.path       = null
-            this._moveToGrid = null
-        }
-
         nextStep() {
-            //
+            if (this.path.length > 0) {
+                let gridX = this.path[this.path.length - 1][0]
+                let gridY = this.path[this.path.length - 1][1]
+                if (this.gridX === gridX && this.gridY === gridY) {
+                    this.path = null
+                    log.debug('path null')
+                }
+                else {
+                    this.path.shift()
+                    if (this.path.length > 0) {
+                        this.setOrientation()
+                    }
+                }
+            }
+
         }
 
         setOrientation() {
-            let destX = this.path[1][0]
-            let destY = this.path[1][1]
-
-            log.debug(this.gridX, this.gridY)
-            log.debug(destX, destY)
+            let destX = this.path[0][0]
+            let destY = this.path[0][1]
 
             if (this.gridX === destX && this.gridY < destY) {
-                this.orientation = orientations.DOWN
+                this.orientation = Types.Orientations.DOWN
+                log.debug('DOWN')
             }
 
             if (this.gridX === destX && this.gridY > destY) {
-                this.orientation = orientations.UP
+                this.orientation = Types.Orientations.UP
+                log.debug('UP')
             }
 
             if (this.gridY === destY && this.gridX > destX) {
-                this.orientation = orientations.LEFT
+                this.orientation = Types.Orientations.LEFT
+                log.debug('LEFT')
             }
 
             if (this.gridY === destY && this.gridX < destX) {
-                this.orientation = orientations.RIGHT
+                this.orientation = Types.Orientations.RIGHT
+                log.debug('RIGHT')
             }
 
+            if (this.gridX === destX && this.gridY === destY) {
+                this.orientation = Types.Orientations.DOWN
+                log.debug('IDLE')
+            }
+
+            log.debug(this.orientation)
             return this.orientation
         }
 

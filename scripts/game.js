@@ -30,7 +30,7 @@
         initPlayer(username) {
             this.player = new Player(username)
             this.player.setPosition(13 * this.map.tileSize, 8 * this.map.tileSize)
-            this.player.setGridPosition(14, 9)
+            this.player.setGridPosition(13, 8)
             this.entities.push(this.player)
             log.info('Player initialized')
         }
@@ -38,7 +38,7 @@
         initEntities() {
             let item = new Item()
             item.setPosition(29 * this.map.tileSize, 0 * this.map.tileSize)
-            item.setGridPosition(30, 1)
+            item.setGridPosition(29, 0)
             this.entities.push(item)
         }
 
@@ -71,8 +71,13 @@
               , end   = [gridX, gridY]
               , path  = this.pathFinder.findPath(this.map.grid, start, end)
 
-            this.player.moveTo(gridX, gridY, path)
-            console.log(this.player.orientation)
+            path.shift()
+
+            log.debug('start', start)
+            log.debug('end', end)
+            console.table(path)
+
+            this.player.moveTo(path)
         }
 
         tick() {

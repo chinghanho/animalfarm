@@ -21,29 +21,29 @@
 
         step(currentTime) {
             if (this.count > 0) {
-                this.count -= 1;
-                log.debug(currentTime + ": jumped frame");
+                this.count -= 1
+                log.debug(currentTime + ": jumped frame")
             }
             else {
-                var elapsed = currentTime - this.startTime;
+                var elapsed = currentTime - this.startTime
 
                 if (elapsed > this.duration) {
                     elapsed = this.duration
                 }
 
-                var diff = this.endValue - this.startValue;
-                var i = this.startValue + ((diff / this.duration) * elapsed);
+                var diff = this.endValue - this.startValue
+                var i = this.startValue + ((diff / this.duration) * elapsed)
 
-                i = Math.round(i);
+                i = Math.round(i)
 
                 if (elapsed === this.duration || i === this.endValue) {
-                    this.stop();
+                    this.stop()
                     if (this.stopFunction) {
-                        this.stopFunction();
+                        this.stopFunction()
                     }
                 }
                 else if (this.updateFunction) {
-                    this.updateFunction(i);
+                    this.updateFunction(i)
                 }
             }
         }

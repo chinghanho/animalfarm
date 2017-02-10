@@ -18,6 +18,8 @@
         $play.addEventListener('click', playReady)
         $username.addEventListener('keyup', playReady)
 
+        playReady({}, true)
+
         document.addEventListener('mousemove', onPlaying)
         document.addEventListener('click', onPlaying)
 
@@ -37,7 +39,7 @@
             }
         }
 
-        function playReady() {
+        function playReady(event, pass) {
             let keyupNotEnter = event.type === 'keyup' && event.keyCode !== 13
             if (keyupNotEnter) {
                 return
@@ -45,8 +47,8 @@
 
             let username = $username.value
             let invalidUsername = !username.match(/^[a-z]+$/)
-            if (invalidUsername) {
-                return logger.error('Username format invalid')
+            if (invalidUsername && !pass) {
+                return log.error('Username format invalid')
             }
 
             app.startGame(username, [$background, $entities, $foreground], function () {
