@@ -14,36 +14,17 @@
             this.cursorGridPosition = []
             this.entities = []
 
-            this.initMap()
-            this.initPathFinder()
-            this.initRenderer()
-            this.initUpdater()
+            this.map        = new Map()
+            this.pathFinder = new PathFinder()
+            this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
+            this.updater    = new Updater(this)
+
             this.initPlayer(username)
             this.initEntities()
 
             this.start()
             log.info('Game initialized')
             next.call(this)
-        }
-
-        initMap() {
-            this.map = new Map()
-            log.info('Map initialized')
-        }
-
-        initPathFinder() {
-            this.pathFinder = new PathFinder()
-            log.info('PathFinder initialized')
-        }
-
-        initRenderer() {
-            this.renderer = new Renderer(this, this.$background, this.$entities, this.$foreground)
-            log.info('Renderer initialized')
-        }
-
-        initUpdater() {
-            this.updater = new Updater(this)
-            log.info('Updater initialized')
         }
 
         initPlayer(username) {
