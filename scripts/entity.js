@@ -19,6 +19,8 @@
         setGridPosition(n, m) {
             this.gridX = n
             this.gridY = m
+
+            this.setPosition(n * 32, m * 32)
         }
 
     }
