@@ -27,6 +27,10 @@
             return !(this.path === null)
         }
 
+        idle() {
+            this.path = null
+        }
+
         isDestinationChanged() {
             return this.newDestination !== null
         }
@@ -38,6 +42,11 @@
             }
 
             this.path = this.requestPathfingTo(destination)
+
+            if (this.path && !(this.path.length > 0)) {
+                return this.idle()
+            }
+
             this.setOrientation()
         }
 
@@ -47,16 +56,18 @@
                 this.newDestination = null
             }
 
-            if (this.path && this.path.length > 0) {
-                let gridX = this.path[this.path.length - 1][0]
-                let gridY = this.path[this.path.length - 1][1]
-                if (this.gridX === gridX && this.gridY === gridY) {
-                    this.path = null
-                }
-                else {
-                    this.path.shift()
-                    if (this.path.length > 0) {
-                        this.setOrientation()
+            if (this.path) {
+                if (this.path.length > 0) {
+                    let gridX = this.path[this.path.length - 1][0]
+                    let gridY = this.path[this.path.length - 1][1]
+                    if (this.gridX === gridX && this.gridY === gridY) {
+                        this.idle()
+                    }
+                    else {
+                        this.path.shift()
+                        if (this.path.length > 0) {
+                            this.setOrientation()
+                        }
                     }
                 }
             }
@@ -66,7 +77,7 @@
             let start = [this.gridX, this.gridY]
             if (this.gridX === destination[0] && this.gridY === destination[1]) { return null }
 
-            if (!onRequestPath) {
+            if (!this.onRequestPath) {
                 return log.error('there is not onRequestPath callback')
             }
 
