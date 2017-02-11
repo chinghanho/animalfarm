@@ -99,7 +99,6 @@
                 this.orientation = Types.Orientations.DOWN
             }
 
-            log.debug(this.orientation)
             return this.orientation
         }
 

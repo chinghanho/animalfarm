@@ -29,23 +29,19 @@
 
         initPlayer(username) {
             let self = this
-
             self.player = new Player(username)
             self.player.setGridPosition(13, 8)
-            self.player.setPosition(self.player.gridX * self.map.tileSize, self.player.gridY * self.map.tileSize)
             self.entities.push(self.player)
-
             self.player.onRequestPath = function (start, end) {
                 return self.pathFinder.findPath(self.map.pathingGrid, start, end)
             }
-
             log.info('Player initialized')
         }
 
         initEntities() {
             let item = new Item()
-            item.setGridPosition(29, 0)
-            item.setPosition(item.gridX * this.map.tileSize, item.gridY * this.map.tileSize)
+            item.setGridPosition(14, 8)
+            this.map.registerEnityPosition(item)
             this.entities.push(item)
         }
 
