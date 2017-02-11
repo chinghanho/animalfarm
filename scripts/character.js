@@ -65,6 +65,11 @@
         requestPathfingTo(destination) {
             let start = [this.gridX, this.gridY]
             if (this.gridX === destination[0] && this.gridY === destination[1]) { return null }
+
+            if (!onRequestPath) {
+                return log.error('there is not onRequestPath callback')
+            }
+
             return this.onRequestPath(start, destination)
         }
 
