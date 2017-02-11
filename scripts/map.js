@@ -16,11 +16,11 @@
         }
 
         generateGrid() {
-            this.grid = []
+            this.pathingGrid = []
             for (var i = 0; i < this.tilesY; i++) {
-                this.grid[i] = []
+                this.pathingGrid[i] = []
                 for (var j = 0; j < this.tilesX; j++) {
-                    this.grid[i][j] = 0
+                    this.pathingGrid[i][j] = 0
                 }
             }
         }

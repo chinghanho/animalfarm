@@ -52,7 +52,6 @@
                 let gridY = this.path[this.path.length - 1][1]
                 if (this.gridX === gridX && this.gridY === gridY) {
                     this.path = null
-                    log.debug('path null')
                 }
                 else {
                     this.path.shift()
@@ -65,10 +64,13 @@
 
         requestPathfingTo(destination) {
             let start = [this.gridX, this.gridY]
+            if (this.gridX === destination[0] && this.gridY === destination[1]) { return null }
             return this.onRequestPath(start, destination)
         }
 
         setOrientation() {
+            if (!this.path) { return }
+
             let destX = this.path[0][0]
             let destY = this.path[0][1]
 
@@ -79,27 +81,22 @@
 
             if (this.gridX === destX && this.gridY < destY) {
                 this.orientation = Types.Orientations.DOWN
-                log.debug('DOWN')
             }
 
             if (this.gridX === destX && this.gridY > destY) {
                 this.orientation = Types.Orientations.UP
-                log.debug('UP')
             }
 
             if (this.gridY === destY && this.gridX > destX) {
                 this.orientation = Types.Orientations.LEFT
-                log.debug('LEFT')
             }
 
             if (this.gridY === destY && this.gridX < destX) {
                 this.orientation = Types.Orientations.RIGHT
-                log.debug('RIGHT')
             }
 
             if (this.gridX === destX && this.gridY === destY) {
                 this.orientation = Types.Orientations.DOWN
-                log.debug('IDLE')
             }
 
             log.debug(this.orientation)

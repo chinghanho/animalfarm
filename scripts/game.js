@@ -36,7 +36,7 @@
             self.entities.push(self.player)
 
             self.player.onRequestPath = function (start, end) {
-                return self.pathFinder.findPath(self.map.grid, start, end)
+                return self.pathFinder.findPath(self.map.pathingGrid, start, end)
             }
 
             log.info('Player initialized')
