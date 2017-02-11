@@ -41,15 +41,15 @@
 
             if (character.isMoving() && !character.movement.inProgress) {
                 if (character.orientation === Types.Orientations.UP) {
-                    log.debug('update up')
                     character.movement.start(this.game.currentTime,
                                              (y) => {
-                                                let gridY = Math.floor(y / this.game.map.height  * this.game.map.tilesY)
                                                 character.y = y
-                                                character.gridY = gridY
                                              },
                                              () => {
                                                  character.y = character.movement.endValue
+                                                 let gridY = Math.floor(character.y / this.game.map.height  * this.game.map.tilesY)
+                                                 character.gridY = gridY
+                                                 log.debug('update up', [character.gridX, character.gridY])
                                                  character.nextStep()
                                              },
                                              character.y - tick,
@@ -58,15 +58,15 @@
                 }
 
                 if (character.orientation === Types.Orientations.RIGHT) {
-                    log.debug('update right')
                     character.movement.start(this.game.currentTime,
                                              (x) => {
-                                                let gridX = Math.floor(x / this.game.map.width  * this.game.map.tilesX)
                                                 character.x =  x
-                                                character.gridX = gridX
                                              },
                                              () => {
                                                  character.x = character.movement.endValue
+                                                 let gridX = Math.floor(character.x / this.game.map.width  * this.game.map.tilesX)
+                                                 character.gridX = gridX
+                                                 log.debug('update right', [character.gridX, character.gridY])
                                                  character.nextStep()
                                              },
                                              character.x + tick,
@@ -75,15 +75,15 @@
                 }
 
                 if (character.orientation === Types.Orientations.DOWN) {
-                    log.debug('update down')
                     character.movement.start(this.game.currentTime,
                                              (y) => {
-                                                let gridY = Math.floor(y / this.game.map.height  * this.game.map.tilesY)
                                                 character.y =  y
-                                                character.gridY = gridY
                                              },
                                              () => {
                                                  character.y = character.movement.endValue
+                                                 let gridY = Math.floor(character.y / this.game.map.height  * this.game.map.tilesY)
+                                                 character.gridY = gridY
+                                                 log.debug('update down', [character.gridX, character.gridY])
                                                  character.nextStep()
                                              },
                                              character.y + tick,
@@ -92,15 +92,15 @@
                 }
 
                 if (character.orientation === Types.Orientations.LEFT) {
-                    log.debug('update left')
                     character.movement.start(this.game.currentTime,
                                              (x) => {
-                                                let gridX = Math.floor(x / this.game.map.width  * this.game.map.tilesX)
                                                 character.x =  x
-                                                character.gridX = gridX
                                              },
                                              () => {
                                                  character.x = character.movement.endValue
+                                                 let gridX = Math.floor(character.x / this.game.map.width  * this.game.map.tilesX)
+                                                 character.gridX = gridX
+                                                 log.debug('update left', [character.gridX, character.gridY])
                                                  character.nextStep()
                                              },
                                              character.x - tick,

@@ -8,6 +8,10 @@
             super()
 
             this.path = null
+            this.newDestination = null
+
+            // Callbacks
+            this.onRequestPath = null
 
             // Speeds
             this.atkSpeed  = 50
@@ -23,13 +27,27 @@
             return !(this.path === null)
         }
 
-        moveTo(path) {
-            this.path = path
+        isDestinationChanged() {
+            return this.newDestination !== null
+        }
+
+        moveTo(destination) {
+            if (this.isMoving()) {
+                this.newDestination = destination
+                return
+            }
+
+            this.path = this.requestPathfingTo(destination)
             this.setOrientation()
         }
 
         nextStep() {
-            if (this.path.length > 0) {
+            if (this.isDestinationChanged()) {
+                this.path = this.requestPathfingTo(this.newDestination)
+                this.newDestination = null
+            }
+
+            if (this.path && this.path.length > 0) {
                 let gridX = this.path[this.path.length - 1][0]
                 let gridY = this.path[this.path.length - 1][1]
                 if (this.gridX === gridX && this.gridY === gridY) {
@@ -43,12 +61,21 @@
                     }
                 }
             }
+        }
 
+        requestPathfingTo(destination) {
+            let start = [this.gridX, this.gridY]
+            return this.onRequestPath(start, destination)
         }
 
         setOrientation() {
             let destX = this.path[0][0]
             let destY = this.path[0][1]
+
+            if (destX === this.gridX && destY === this.gridY) {
+                destX = this.path[1][0]
+                destY = this.path[1][1]
+            }
 
             if (this.gridX === destX && this.gridY < destY) {
                 this.orientation = Types.Orientations.DOWN
