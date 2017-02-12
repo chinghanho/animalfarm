@@ -12,6 +12,7 @@
             this.$foreground = canvases[2]
 
             this.cursorGridPosition = []
+            this.cursorPosition = []
             this.entities = []
 
             this.renderingGrid = new Grid('number')
@@ -62,15 +63,23 @@
         }
 
         mousemove(event) {
-            let gridX = Math.floor(event.offsetX / this.renderingGrid.width  * this.renderingGrid.tilesX)
-            let gridY = Math.floor(event.offsetY / this.renderingGrid.height * this.renderingGrid.tilesY)
+            var gridX, gridY
+
+            this.setMousePosition(event.offsetX, event.offsetY)
+
+            gridX = Math.floor(this.cursorPosition[0] / this.renderingGrid.width  * this.renderingGrid.tilesX)
+            gridY = Math.floor(this.cursorPosition[1] / this.renderingGrid.height * this.renderingGrid.tilesY)
 
             if (this.targetCellChanged(gridX, gridY)) {
-                this.setMouseCoordinate(gridX, gridY)
+                this.setMouseGridPosition(gridX, gridY)
             }
         }
 
-        setMouseCoordinate(gridX, gridY) {
+        setMousePosition(x, y) {
+            this.cursorPosition = [event.offsetX, event.offsetY]
+        }
+
+        setMouseGridPosition(gridX, gridY) {
             this.cursorGridPosition = [gridX, gridY]
             log.debug(this.cursorGridPosition)
         }

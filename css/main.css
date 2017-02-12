@@ -11,6 +11,7 @@ body {
 #foreground {
   position: absolute;
   display: none;
+  cursor: none;
 }
 
 .initialized #background,

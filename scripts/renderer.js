@@ -26,6 +26,7 @@
             this.$foreground.height = this.grid.height
 
             this.initBackground()
+            this.initCursor()
         }
 
         initBackground() {
@@ -44,10 +45,23 @@
             })
         }
 
+        initCursor() {
+            let self = this
+            self.loadImage('../images/lipstick.png', function (image) {
+                self.cursor = image
+            })
+        }
+
         drawMouseTargetCell() {
             let gridX = this.game.cursorGridPosition[0]
             let gridY = this.game.cursorGridPosition[1]
             this.drawGridCell(gridX, gridY, 'hsla(3, 71%, 56%, 1)')
+        }
+
+        drawCursor() {
+            if (this.cursor && this.game.cursorPosition.length > 0) {
+                this.foregroundCtx.drawImage(this.cursor, this.game.cursorPosition[0], this.game.cursorPosition[1], 24, 24)
+            }
         }
 
         drawGridCell(gridX, gridY, color) {
@@ -90,6 +104,7 @@
 
             if (this.game && this.game.started) {
                 this.drawMouseTargetCell()
+                this.drawCursor()
                 this.drawEntities()
             }
         }
@@ -99,9 +114,9 @@
             let tileset = new Image()
 
             tileset.onload = function () {
-                if(tileset.width % self.grid.tileSize > 0) {
-                    return log.error("Tileset size should be a multiple of "+ self.grid.tileSize)
-                }
+                // if(tileset.width % self.grid.tileSize > 0) {
+                //     return log.error("Tileset size should be a multiple of "+ self.grid.tileSize)
+                // }
                 callback(tileset)
             }
 
