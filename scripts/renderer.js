@@ -29,9 +29,19 @@
         }
 
         initBackground() {
-            this.backgroundCtx.fillStyle = 'black'
-            this.backgroundCtx.rect(0, 0, this.$background.width, this.$background.height)
-            this.backgroundCtx.fill()
+            let self = this
+
+            self.loadImage('../images/ground.png', function (image) {
+
+                for (let i = 0; i < self.grid.tilesX; i++) {
+                    self.backgroundCtx.drawImage(image, i * self.grid.tileSize, 0, self.grid.tileSize, self.grid.tileSize)
+                    for (let j = 0; j < self.grid.tilesY; j++) {
+                        self.backgroundCtx.drawImage(image, i * self.grid.tileSize, j * self.grid.tileSize, self.grid.tileSize, self.grid.tileSize)
+                    }
+                }
+
+
+            })
         }
 
         drawMouseTargetCell() {
@@ -82,6 +92,20 @@
                 this.drawMouseTargetCell()
                 this.drawEntities()
             }
+        }
+
+        loadImage(filepath, callback) {
+            let self = this
+            let tileset = new Image()
+
+            tileset.onload = function () {
+                if(tileset.width % self.grid.tileSize > 0) {
+                    return log.error("Tileset size should be a multiple of "+ self.grid.tileSize)
+                }
+                callback(tileset)
+            }
+
+            tileset.src = filepath
         }
 
     }
