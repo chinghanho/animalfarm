@@ -7,6 +7,8 @@
         constructor() {}
 
         findPath(grid, start, end) {
+            if (grid instanceof Grid) { grid = grid.grid }
+
             return AStar(grid, start, end)
         }
 

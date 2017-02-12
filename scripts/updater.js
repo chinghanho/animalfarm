@@ -35,61 +35,64 @@
         }
 
         updateCharacter(character) {
+            let c    = character
+            let grid = this.game.renderingGrid
+
             // Estimate of the movement distance for one update
-            let tileSize = this.game.map.tileSize
-            let tick     = Math.round(tileSize / character.moveSpeed * Math.round(1000 / this.game.renderer.FPS))
+            let tileSize = grid.tileSize
+            let tick     = Math.round(tileSize / c.moveSpeed * Math.round(1000 / this.game.renderer.FPS))
 
-            if (character.isMoving() && !character.movement.inProgress) {
-                if (character.orientation === Types.Orientations.UP) {
-                    character.movement.start(this.game.currentTime,
-                                             (y) => { character.y = y },
+            if (c.isMoving() && !c.movement.inProgress) {
+                if (c.orientation === Types.Orientations.UP) {
+                    c.movement.start(this.game.currentTime,
+                                             (y) => { c.y = y },
                                              ()  => {
-                                                 let gridY = Math.floor(character.movement.endValue / this.game.map.height  * this.game.map.tilesY)
-                                                 character.setGridPosition(character.gridX, gridY)
-                                                 character.nextStep()
+                                                 let gridY = Math.floor(c.movement.endValue / grid.height  * grid.tilesY)
+                                                 c.setGridPosition(c.gridX, gridY)
+                                                 c.nextStep()
                                              },
-                                             character.y - tick,
-                                             character.y - tileSize,
-                                             character.moveSpeed)
+                                             c.y - tick,
+                                             c.y - tileSize,
+                                             c.moveSpeed)
                 }
 
-                if (character.orientation === Types.Orientations.RIGHT) {
-                    character.movement.start(this.game.currentTime,
-                                             (x) => { character.x =  x },
+                if (c.orientation === Types.Orientations.RIGHT) {
+                    c.movement.start(this.game.currentTime,
+                                             (x) => { c.x =  x },
                                              ()  => {
-                                                 let gridX = Math.floor(character.movement.endValue / this.game.map.width  * this.game.map.tilesX)
-                                                 character.setGridPosition(gridX, character.gridY)
-                                                 character.nextStep()
+                                                 let gridX = Math.floor(c.movement.endValue / grid.width  * grid.tilesX)
+                                                 c.setGridPosition(gridX, c.gridY)
+                                                 c.nextStep()
                                              },
-                                             character.x + tick,
-                                             character.x + tileSize,
-                                             character.moveSpeed)
+                                             c.x + tick,
+                                             c.x + tileSize,
+                                             c.moveSpeed)
                 }
 
-                if (character.orientation === Types.Orientations.DOWN) {
-                    character.movement.start(this.game.currentTime,
-                                             (y) => { character.y =  y },
+                if (c.orientation === Types.Orientations.DOWN) {
+                    c.movement.start(this.game.currentTime,
+                                             (y) => { c.y =  y },
                                              ()  => {
-                                                 let gridY = Math.floor(character.movement.endValue / this.game.map.height  * this.game.map.tilesY)
-                                                 character.setGridPosition(character.gridX, gridY)
-                                                 character.nextStep()
+                                                 let gridY = Math.floor(c.movement.endValue / grid.height  * grid.tilesY)
+                                                 c.setGridPosition(c.gridX, gridY)
+                                                 c.nextStep()
                                              },
-                                             character.y + tick,
-                                             character.y + tileSize,
-                                             character.moveSpeed)
+                                             c.y + tick,
+                                             c.y + tileSize,
+                                             c.moveSpeed)
                 }
 
-                if (character.orientation === Types.Orientations.LEFT) {
-                    character.movement.start(this.game.currentTime,
-                                             (x) => { character.x =  x },
+                if (c.orientation === Types.Orientations.LEFT) {
+                    c.movement.start(this.game.currentTime,
+                                             (x) => { c.x =  x },
                                              ()  => {
-                                                 let gridX = Math.floor(character.movement.endValue / this.game.map.width  * this.game.map.tilesX)
-                                                 character.setGridPosition(gridX, character.gridY)
-                                                 character.nextStep()
+                                                 let gridX = Math.floor(c.movement.endValue / grid.width  * grid.tilesX)
+                                                 c.setGridPosition(gridX, c.gridY)
+                                                 c.nextStep()
                                              },
-                                             character.x - tick,
-                                             character.x - tileSize,
-                                             character.moveSpeed)
+                                             c.x - tick,
+                                             c.x - tileSize,
+                                             c.moveSpeed)
                 }
             }
         }

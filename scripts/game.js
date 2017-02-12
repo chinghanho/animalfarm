@@ -14,7 +14,10 @@
             this.cursorGridPosition = []
             this.entities = []
 
-            this.map        = new _Map()
+            this.renderingGrid = new Grid('number')
+            this.pathingGrid   = new Grid('number')
+            this.entitiesGrid  = new Grid('object')
+
             this.pathFinder = new PathFinder()
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
             this.updater    = new Updater(this)
@@ -33,7 +36,7 @@
             self.player.setGridPosition(13, 8)
             self.entities.push(self.player)
             self.player.onRequestPath = function (start, end) {
-                return self.pathFinder.findPath(self.map.pathingGrid, start, end)
+                return self.pathFinder.findPath(self.pathingGrid, start, end)
             }
             log.info('Player initialized')
         }
@@ -41,7 +44,7 @@
         initEntities() {
             let item = new Item()
             item.setGridPosition(14, 8)
-            this.map.registerEnityPosition(item)
+            this.pathingGrid.register(item)
             this.entities.push(item)
         }
 
@@ -51,8 +54,8 @@
         }
 
         mousemove(event) {
-            let gridX = Math.floor(event.offsetX / this.map.width  * this.map.tilesX)
-            let gridY = Math.floor(event.offsetY / this.map.height * this.map.tilesY)
+            let gridX = Math.floor(event.offsetX / this.renderingGrid.width  * this.renderingGrid.tilesX)
+            let gridY = Math.floor(event.offsetY / this.renderingGrid.height * this.renderingGrid.tilesY)
 
             if (this.targetCellChanged(gridX, gridY)) {
                 this.setMouseCoordinate(gridX, gridY)
