@@ -4,8 +4,8 @@
 
     class Item extends Entity {
 
-        constructor(x, y) {
-            super(x, y)
+        constructor() {
+            super()
             this.color = 'hsla(207, 89%, 66%, 1)'
         }
 

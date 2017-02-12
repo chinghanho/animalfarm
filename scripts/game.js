@@ -23,7 +23,8 @@
             this.updater    = new Updater(this)
 
             this.initPlayer(username)
-            this.initEntities()
+            this.initItems()
+            this.initNPCs()
 
             this.start()
             log.info('Game initialized')
@@ -41,11 +42,18 @@
             log.info('Player initialized')
         }
 
-        initEntities() {
+        initItems() {
             let item = new Item()
-            item.setGridPosition(14, 8)
+            item.setGridPosition(12, 5)
             this.pathingGrid.register(item)
             this.entities.push(item)
+        }
+
+        initNPCs() {
+            let npc = new Npc()
+            npc.setGridPosition(14, 8)
+            this.pathingGrid.register(npc)
+            this.entities.push(npc)
         }
 
         targetCellChanged(gridX, gridY) {
