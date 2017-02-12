@@ -52,7 +52,10 @@
 
         nextStep() {
             if (this.isDestinationChanged()) {
-                this.path = this.requestPathfingTo(this.newDestination)
+                let newPathing = this.requestPathfingTo(this.newDestination)
+                if (newPathing.length > 1) {
+                    this.path = newPathing
+                }
                 this.newDestination = null
             }
 

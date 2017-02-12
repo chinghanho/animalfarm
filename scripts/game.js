@@ -19,7 +19,7 @@
             this.pathingGrid   = new Grid('number')
             this.entitiesGrid  = new Grid('object')
 
-            this.pathFinder = new PathFinder()
+            this.pathFinder = new PathFinder(this)
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
             this.updater    = new Updater(this)
 
