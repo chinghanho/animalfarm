@@ -14,6 +14,19 @@
             return this
         }
 
+        get(coordinate) {
+            let x = coordinate[0]
+            let y = coordinate[1]
+            return this.grid[y][x]
+        }
+
+        set(coordinate, value) {
+            let x = coordinate[0]
+            let y = coordinate[1]
+            this.grid[y][x] = value
+            return this
+        }
+
         validateType() {
             if (!this.type) {
                 log.error('not given the type of grid')
@@ -49,6 +62,9 @@
             let value = 1
             if (this.type === 'number') {
                 value = 1
+            }
+            else {
+                value = entity
             }
 
             this.grid[entity.gridY][entity.gridX] = value

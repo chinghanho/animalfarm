@@ -38,7 +38,7 @@
             self.player.setGridPosition(13, 8)
             self.entities.push(self.player)
             self.player.onRequestPath = function (start, end) {
-                return self.pathFinder.findPath(self.pathingGrid, start, end)
+                return self.pathFinder.findPath(start, end)
             }
             log.info('Player initialized')
         }
@@ -46,7 +46,7 @@
         initItems() {
             let item = new Item()
             item.setGridPosition(12, 5)
-            this.pathingGrid.register(item)
+            this.entitiesGrid.register(item)
             this.entities.push(item)
         }
 
@@ -54,6 +54,7 @@
             let npc = new Npc()
             npc.setGridPosition(14, 8)
             this.pathingGrid.register(npc)
+            this.entitiesGrid.register(npc)
             this.entities.push(npc)
         }
 
