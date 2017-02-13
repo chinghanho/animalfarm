@@ -75,7 +75,7 @@
                     else {
                         this.path.shift()
                         if (this.path.length > 0) {
-                            this.setOrientation()
+                            this.walk()
                         }
                     }
                 }
@@ -144,6 +144,7 @@
         }
 
         walk() {
+            this.setOrientation()
             this.animate('walk', this.walkSpeed)
         }
 
