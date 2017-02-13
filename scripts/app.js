@@ -80,24 +80,40 @@
 
             self.sprites.stack = [
                 { id: 'players', path: '../images/players.png', sprite: {
-                    width: 60,
-                    height: 70,
+                    width: 64,
+                    height: 110,
                     animations: {
                         walk_left: {
-                            length: 5,
+                            length: 4,
                             row: 1
                         },
                         walk_right: {
-                            length: 5,
+                            length: 4,
                             row: 2
+                        },
+                        walk_up: {
+                            length: 4,
+                            row: 3
+                        },
+                        walk_down: {
+                            length: 4,
+                            row: 4
+                        },
+                        idle_up: {
+                            length: 1,
+                            row: 5
+                        },
+                        idle_down: {
+                            length: 1,
+                            row: 6
                         },
                         idle_left: {
                             length: 1,
-                            row: 3
+                            row: 7
                         },
                         idle_right: {
                             length: 1,
-                            row: 4
+                            row: 8
                         }
                     }
                 }},

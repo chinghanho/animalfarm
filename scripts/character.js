@@ -175,6 +175,7 @@
             else {
                 this.animate('idle', this.idleSpeed)
             }
+            log.debug('idle')
         }
 
     }
