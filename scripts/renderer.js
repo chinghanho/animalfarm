@@ -78,8 +78,12 @@
         drawEntities() {
             let that = this
 
-            that.game.entities.forEach(function (entity) {
-                that.drawEntityAt(entity.x, entity.y, entity.color)
+            that.game.entitiesGrid.grid.forEach(function (row) {
+                row.forEach(function (entity) {
+                    if (!isObjectBlank(entity)) {
+                        that.drawEntityAt(entity.x, entity.y, entity.color)
+                    }
+                })
             })
         }
 

@@ -1,3 +1,7 @@
+window.isObjectBlank = function (obj) {
+    Object.keys(obj).length === 0 && obj.constructor === Object
+}
+
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       ||
