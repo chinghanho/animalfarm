@@ -6,18 +6,27 @@
 
         constructor($app) {
             this.$elem = $app
+            this.triedStartingGame = false
+            this.gameStarted = false
+            this.tmp = null
             this.images = {
                 stack: [],
                 ready: false,
                 counter: 0,
                 loaded: {}
             }
-            this.loadImages()
+            this.sprites = {
+                stack: [],
+                ready: false,
+                counter: 0,
+                loaded: {}
+            }
+            this.preload()
         }
 
         tryingStartGame(name, canvases, next) {
-            this.gameStated = true
-            if (this.images.ready) {
+            this.triedStartingGame = true
+            if (this.images.ready && this.sprites.ready) {
                 this.startGame(name, canvases, next)
             }
             else {
@@ -31,10 +40,23 @@
 
         startGame(name, canvases, next) {
             let self = this
+            this.gameStarted = true
             self.game = new Game(name, canvases, {
-                onBeforeStarted: (game) => game.images = self.images.loaded,
+                onBeforeStarted: function (game) {
+                    game.images = self.images.loaded
+                    game.sprites = self.sprites.loaded
+                },
                 onAfterStarted: next
             })
+
+            if (self.tmp) {
+                self.tmp = null
+            }
+        }
+
+        preload() {
+            this.loadImages()
+            this.loadSprites()
         }
 
         loadImages() {
@@ -42,29 +64,63 @@
 
             self.images.stack = [
                 { id: 'ground',   path: '../images/ground.png' },
-                { id: 'lipstick', path: '../images/lipstick.png' }
+                { id: 'lipstick', path: '../images/lipstick.png' },
             ]
 
-            self.images.loaded = self.images.stack.reduce(function (result, object) {
-                let image
+            self.images.loaded = self._diet(self.images, function (image, object) {
+                return {
+                    id: object.id,
+                    image: image,
+                }
+            })
+        }
 
-                object.id
+        loadSprites() {
+            let self = this
 
-                image = new Image()
+            self.sprites.stack = [
+                { id: 'players', path: '../images/players.png', sprite: {
+                    width: 60,
+                    height: 70,
+                    animations: {
+                        walk_left: {
+                            length: 5,
+                            row: 1
+                        },
+                        walk_right: {
+                            length: 5,
+                            row: 2
+                        }
+                    }
+                }},
+            ]
+
+            self.sprites.loaded = self._diet(self.sprites, function (image, object) {
+                return {
+                    id: object.id,
+                    image: image,
+                    width: object.sprite.width,
+                    height: object.sprite.height,
+                    animations: object.sprite.animations,
+                }
+            })
+        }
+
+        _diet(qq, callback) {
+            let self = this
+            return qq.stack.inject(function (result, mm) {
+                let image = new Image()
                 image.onload = function () {
-                    self.images.counter++
-                    if (self.images.stack.length === self.images.counter) {
-                        self.images.ready = true
-                        if (self.gameStated) {
+                    qq.counter++
+                    if (qq.stack.length === qq.counter) {
+                        qq.ready = true
+                        if (!self.gameStarted && self.triedStartingGame) {
                             self.startGame(self.tmp.name, self.tmp.canvases, self.tmp.next)
-                            self.tmp = null
                         }
                     }
                 }
-                image.src = object.path
-                result[object.id] = {
-                    bitmap: image
-                }
+                image.src = mm.path
+                result[mm.id] = callback(image, mm)
 
                 return result
             }, {})

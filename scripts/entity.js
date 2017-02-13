@@ -23,6 +23,13 @@
             this.setPosition(n * 32, m * 32)
         }
 
+        setSprite(sprite) {
+            // if (!sprite.animations) {
+            //     return log.error('"%s" is invalid sprite', sprite.id)
+            // }
+            this.sprite = sprite
+        }
+
     }
 
     root.Entity = Entity

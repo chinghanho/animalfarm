@@ -7,7 +7,6 @@
         constructor(username) {
             super()
             this.username = username
-            this.color = 'hsla(107, 68%, 55%, 1)'
         }
 
     }

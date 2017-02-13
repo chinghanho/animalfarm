@@ -17,6 +17,11 @@
             this.player.onRequestPath = this.onRequestPath.bind(this)
             this.player.onHasMoved = this.onHasMoved.bind(this)
             this.player.onAfterStep = this.onAfterStep.bind(this)
+
+            // properties
+            this.player.color = 'hsla(107, 68%, 55%, 1)'
+
+            this.player.setSprite(this.game.sprites['players'])
         }
 
         onRequestPath(start, end) {

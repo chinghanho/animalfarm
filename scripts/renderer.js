@@ -31,7 +31,7 @@
 
         initBackground() {
             let self  = this
-            let image = self.game.images['ground'].bitmap
+            let image = self.game.images['ground'].image
             for (let i = 0; i < self.grid.tilesX; i++) {
                 self.backgroundCtx.drawImage(image, i * self.grid.tileSize, 0, self.grid.tileSize, self.grid.tileSize)
                 for (let j = 0; j < self.grid.tilesY; j++) {
@@ -41,7 +41,7 @@
         }
 
         initCursor() {
-            this.cursor = this.game.images['lipstick'].bitmap
+            this.cursor = this.game.images['lipstick'].image
         }
 
         drawMouseTargetCell() {
@@ -68,26 +68,40 @@
         }
 
         drawEntities() {
-            let that = this
-
-            that.game.entitiesGrid.grid.forEach(function (row) {
+            let self = this
+            self.game.entitiesGrid.grid.forEach(function (row) {
                 row.forEach(function (entity) {
                     if (!isObjectBlank(entity)) {
-                        that.drawEntityAt(entity.x, entity.y, entity.color)
+                        self.drawEntitySprite(entity)
                     }
                 })
             })
         }
 
-        drawEntityAt(x, y, color) {
-            let radius = this.grid.tileSize / 2
-            x = x + (this.grid.tileSize / 2)
-            y = y + (this.grid.tileSize / 2)
+        drawEntitySprite(entity) {
+            // NOTE: draw this for test
+            if (!entity.sprite) {
+                let radius = this.grid.tileSize / 2
+                let x = entity.x + (this.grid.tileSize / 2)
+                let y = entity.y + (this.grid.tileSize / 2)
 
-            this.entitiesCtx.beginPath()
-            this.entitiesCtx.arc(x, y, radius, 0, Math.PI * 2)
-            this.entitiesCtx.fillStyle = color
-            this.entitiesCtx.fill()
+                this.entitiesCtx.beginPath()
+                this.entitiesCtx.arc(x, y, radius, 0, Math.PI * 2)
+                this.entitiesCtx.fillStyle = entity.color
+                this.entitiesCtx.fill()
+                return
+            }
+
+            let sWidth  = entity.sprite._width
+            let sHeight = entity.sprite._height
+            let dWidth  = entity.sprite._width / 2
+            let dHeight = entity.sprite._height / 2
+            let offsetX = (dWidth  - this.grid.tileSize) / 2
+            let offsetY = (dHeight - this.grid.tileSize)
+            let dx      = entity.x - offsetX
+            let dy      = entity.y - offsetY
+
+            this.entitiesCtx.drawImage(entity.sprite._image, 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
 
         clearScreen(ctx) {

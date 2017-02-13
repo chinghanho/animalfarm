@@ -1,6 +1,9 @@
 window.isObjectBlank = function (obj) {
-    Object.keys(obj).length === 0 && obj.constructor === Object
+    return Object.keys(obj).length === 0 && obj.constructor === Object
 }
+
+// alias
+Array.prototype.inject = Array.prototype.reduce
 
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 window.requestAnimFrame = (function(){

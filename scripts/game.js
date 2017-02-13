@@ -16,6 +16,10 @@
             this.cursorPosition = []
             this.entities = []
 
+            // assigned from app.js file
+            this.images
+            this.sprites
+
             this.renderingGrid = new Grid('number')
             this.pathingGrid   = new Grid('number')
             this.entitiesGrid  = new Grid('object')
@@ -24,6 +28,7 @@
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
             this.updater    = new Updater(this)
 
+            this.initSprites()
             this.initPlayer(username)
             this.initItems()
             this.initNPCs()
@@ -31,6 +36,12 @@
             this.start()
             log.info('Game initialized')
             callbacks.onAfterStarted(this)
+        }
+
+        initSprites() {
+            for (let key in this.sprites) {
+                this.sprites[key] = new Sprite(this.sprites[key])
+            }
         }
 
         initPlayer(username) {
