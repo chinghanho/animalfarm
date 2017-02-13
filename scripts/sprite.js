@@ -4,15 +4,16 @@
 
     class Sprite {
 
-        constructor(sprite) {
+        constructor(sprite, tileSize) {
             this.id          = sprite.id
-            this._image      = sprite.image
-            this._width      = sprite.width
-            this._height     = sprite.height
-            this._animations = sprite.animations
+            this.image      = sprite.image
+            this.width      = sprite.width
+            this.height     = sprite.height
+            this.animations = sprite.animations
             this._sprite = sprite
+            this.tileSize = tileSize
 
-            this.keys = Object.keys(this._animations)
+            this.keys = Object.keys(this.animations)
         }
 
     }

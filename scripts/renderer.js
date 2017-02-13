@@ -92,16 +92,24 @@
                 return
             }
 
-            let sWidth  = entity.sprite._width
-            let sHeight = entity.sprite._height
-            let dWidth  = entity.sprite._width / 2
-            let dHeight = entity.sprite._height / 2
-            let offsetX = (dWidth  - this.grid.tileSize) / 2
-            let offsetY = (dHeight - this.grid.tileSize)
+            let image   = entity.sprite.image
+            let currentFrame = entity.animation && entity.animation.currentFrame
+
+            if (!currentFrame) {
+                return
+            }
+
+            let sx      = currentFrame.x
+            let sy      = currentFrame.y
+            let sWidth  = entity.sprite.width
+            let sHeight = entity.sprite.height
+            let dWidth  = entity.sprite.width / 2
+            let dHeight = entity.sprite.height / 2
+            let offsetX = (dWidth  - 32) / 2
+            let offsetY = (dHeight - 32)
             let dx      = entity.x - offsetX
             let dy      = entity.y - offsetY
-
-            this.entitiesCtx.drawImage(entity.sprite._image, 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight)
+            this.entitiesCtx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
 
         clearScreen(ctx) {

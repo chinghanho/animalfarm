@@ -9,29 +9,37 @@
         }
 
         update() {
-            this.updateCharacters()
-            this.updateTransitions()
-        }
-
-        updateCharacters() {
-            let that = this
-            that.game.entities.forEach(function (entity) {
-                if (entity instanceof Character) {
-                    that.updateCharacter(entity)
-                }
+            let self = this
+            self.game.entities.forEach(function (entity) {
+                self.updateCharacters(entity)
+                self.updateTransitions(entity)
+                self.updateAnimations(entity)
             })
         }
 
-        updateTransitions() {
-            let that = this
-            that.game.entities.forEach(function (entity) {
-                let m = entity.movement
-                if (m) {
-                    if (m.inProgress) {
-                        m.step(that.game.currentTime)
-                    }
+        updateCharacters(entity) {
+            if (entity instanceof Character) {
+                this.updateCharacter(entity)
+            }
+        }
+
+        updateTransitions(entity) {
+            let self = this
+            let m = entity.movement
+            if (m) {
+                if (m.inProgress) {
+                    m.step(self.game.currentTime)
                 }
-            })
+            }
+        }
+
+        updateAnimations(entity) {
+            let a = entity.animation
+            if (a) {
+                if (a.update(this.game.currentTime)) {
+                    // entity
+                }
+            }
         }
 
         updateCharacter(character) {
@@ -40,10 +48,10 @@
 
             // Estimate of the movement distance for one update
             let tileSize = grid.tileSize
-            let tick     = Math.round(tileSize / c.moveSpeed * Math.round(1000 / this.game.renderer.FPS))
+            let tick     = Math.round(tileSize / c.walkSpeed * Math.round(1000 / this.game.renderer.FPS))
 
             if (c.isMoving() && !c.movement.inProgress) {
-                if (c.orientation === Types.Orientations.UP) {
+                if (c.orientation === 'up') {
                     c.movement.start(this.game.currentTime,
                                              (y) => { c.y = y },
                                              ()  => {
@@ -54,10 +62,10 @@
                                              },
                                              c.y - tick,
                                              c.y - tileSize,
-                                             c.moveSpeed)
+                                             c.walkSpeed)
                 }
 
-                if (c.orientation === Types.Orientations.RIGHT) {
+                if (c.orientation === 'right') {
                     c.movement.start(this.game.currentTime,
                                              (x) => { c.x =  x },
                                              ()  => {
@@ -68,10 +76,10 @@
                                              },
                                              c.x + tick,
                                              c.x + tileSize,
-                                             c.moveSpeed)
+                                             c.walkSpeed)
                 }
 
-                if (c.orientation === Types.Orientations.DOWN) {
+                if (c.orientation === 'down') {
                     c.movement.start(this.game.currentTime,
                                              (y) => { c.y =  y },
                                              ()  => {
@@ -82,10 +90,10 @@
                                              },
                                              c.y + tick,
                                              c.y + tileSize,
-                                             c.moveSpeed)
+                                             c.walkSpeed)
                 }
 
-                if (c.orientation === Types.Orientations.LEFT) {
+                if (c.orientation === 'left') {
                     c.movement.start(this.game.currentTime,
                                              (x) => { c.x =  x },
                                              ()  => {
@@ -96,7 +104,7 @@
                                              },
                                              c.x - tick,
                                              c.x - tileSize,
-                                             c.moveSpeed)
+                                             c.walkSpeed)
                 }
             }
         }

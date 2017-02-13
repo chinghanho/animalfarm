@@ -40,7 +40,7 @@
 
         initSprites() {
             for (let key in this.sprites) {
-                this.sprites[key] = new Sprite(this.sprites[key])
+                this.sprites[key] = new Sprite(this.sprites[key], this.renderingGrid.tileSize)
             }
         }
 

@@ -16,21 +16,18 @@
             this.onHasMoved    = null
 
             // Speeds
+            this.idleSpeed = 200
             this.atkSpeed  = 50
-            this.moveSpeed = 200
+            this.walkSpeed = 200
 
             // Default
-            this.orientation = Types.Orientations.DOWN
+            this.orientation = 'down'
 
             this.movement = new Transition()
         }
 
         isMoving() {
             return !(this.path === null)
-        }
-
-        idle() {
-            this.path = null
         }
 
         isDestinationChanged() {
@@ -51,8 +48,8 @@
                 return this.idle()
             }
 
-
             this.setOrientation()
+            this.walk()
         }
 
         hasMoved() {
@@ -109,26 +106,50 @@
             }
 
             if (this.gridX === destX && this.gridY < destY) {
-                this.orientation = Types.Orientations.DOWN
+                this.orientation = 'down'
             }
 
             if (this.gridX === destX && this.gridY > destY) {
-                this.orientation = Types.Orientations.UP
+                this.orientation = 'up'
             }
 
             if (this.gridY === destY && this.gridX > destX) {
-                this.orientation = Types.Orientations.LEFT
+                this.orientation = 'left'
             }
 
             if (this.gridY === destY && this.gridX < destX) {
-                this.orientation = Types.Orientations.RIGHT
+                this.orientation = 'right'
             }
 
             if (this.gridX === destX && this.gridY === destY) {
-                this.orientation = Types.Orientations.DOWN
+                this.orientation = 'down'
             }
 
             return this.orientation
+        }
+
+        animate(key, speed) {
+            key += '_' + this.orientation
+            let anime = this.sprite.animations[key]
+            if (!anime) {
+                return
+            }
+            this.animation = new Animation(
+                speed,
+                this.sprite.width,
+                this.sprite.height,
+                anime.row,
+                anime.length
+            )
+        }
+
+        walk() {
+            this.animate('walk', this.walkSpeed)
+        }
+
+        idle() {
+            this.path = null
+            this.animate('idle', this.idleSpeed)
         }
 
     }

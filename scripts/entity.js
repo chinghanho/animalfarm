@@ -24,9 +24,6 @@
         }
 
         setSprite(sprite) {
-            // if (!sprite.animations) {
-            //     return log.error('"%s" is invalid sprite', sprite.id)
-            // }
             this.sprite = sprite
         }
 
