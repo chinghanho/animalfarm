@@ -12,6 +12,8 @@
 
             // Callbacks
             this.onRequestPath = null
+            this.onAfterStep   = null
+            this.onHasMoved    = null
 
             // Speeds
             this.atkSpeed  = 50
@@ -49,7 +51,12 @@
                 return this.idle()
             }
 
+
             this.setOrientation()
+        }
+
+        hasMoved() {
+            this.onHasMoved()
         }
 
         nextStep() {
@@ -76,6 +83,8 @@
                     }
                 }
             }
+
+            this.onAfterStep()
         }
 
         requestPathfingTo(destination) {

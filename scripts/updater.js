@@ -47,6 +47,7 @@
                     c.movement.start(this.game.currentTime,
                                              (y) => { c.y = y },
                                              ()  => {
+                                                 c.hasMoved()
                                                  let gridY = Math.floor(c.movement.endValue / grid.height  * grid.tilesY)
                                                  c.setGridPosition(c.gridX, gridY)
                                                  c.nextStep()
@@ -60,6 +61,7 @@
                     c.movement.start(this.game.currentTime,
                                              (x) => { c.x =  x },
                                              ()  => {
+                                                 c.hasMoved()
                                                  let gridX = Math.floor(c.movement.endValue / grid.width  * grid.tilesX)
                                                  c.setGridPosition(gridX, c.gridY)
                                                  c.nextStep()
@@ -73,6 +75,7 @@
                     c.movement.start(this.game.currentTime,
                                              (y) => { c.y =  y },
                                              ()  => {
+                                                 c.hasMoved()
                                                  let gridY = Math.floor(c.movement.endValue / grid.height  * grid.tilesY)
                                                  c.setGridPosition(c.gridX, gridY)
                                                  c.nextStep()
@@ -86,6 +89,7 @@
                     c.movement.start(this.game.currentTime,
                                              (x) => { c.x =  x },
                                              ()  => {
+                                                 c.hasMoved()
                                                  let gridX = Math.floor(c.movement.endValue / grid.width  * grid.tilesX)
                                                  c.setGridPosition(gridX, c.gridY)
                                                  c.nextStep()

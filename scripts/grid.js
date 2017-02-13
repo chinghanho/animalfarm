@@ -58,15 +58,13 @@
 
         register(entity) {
             if (!entity) { return }
+            let value = this.type === 'number' ? 1 : entity
+            this.grid[entity.gridY][entity.gridX] = value
+        }
 
-            let value = 1
-            if (this.type === 'number') {
-                value = 1
-            }
-            else {
-                value = entity
-            }
-
+        unregister(entity) {
+            if (!entity) { return }
+            let value = this.type === 'number' ? 0 : {}
             this.grid[entity.gridY][entity.gridX] = value
         }
 

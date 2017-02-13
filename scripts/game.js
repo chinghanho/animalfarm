@@ -36,9 +36,19 @@
             let self = this
             self.player = new Player(username)
             self.player.setGridPosition(13, 8)
+            this.entitiesGrid.register(self.player)
+            this.pathingGrid.register(self.player)
             self.entities.push(self.player)
             self.player.onRequestPath = function (start, end) {
                 return self.pathFinder.findPath(start, end)
+            }
+            self.player.onHasMoved = function () {
+                self.entitiesGrid.unregister(self.player)
+                self.pathingGrid.unregister(self.player)
+            }
+            self.player.onAfterStep = function () {
+                self.entitiesGrid.register(self.player)
+                self.pathingGrid.register(self.player)
             }
             log.info('Player initialized')
         }
