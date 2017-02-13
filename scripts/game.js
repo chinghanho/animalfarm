@@ -4,8 +4,9 @@
 
     class Game {
 
-        constructor(username, canvases, next) {
-            log.debug('Player "%s" starting the game...', username)
+        constructor(username, canvases, callbacks) {
+
+            callbacks.onBeforeStarted(this)
 
             this.$background = canvases[0]
             this.$entities   = canvases[1]
@@ -29,7 +30,7 @@
 
             this.start()
             log.info('Game initialized')
-            next.call(this)
+            callbacks.onAfterStarted(this)
         }
 
         initPlayer(username) {

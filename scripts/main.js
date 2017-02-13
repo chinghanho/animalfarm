@@ -51,7 +51,7 @@
                 return log.error('Username format invalid')
             }
 
-            app.startGame(username, [$background, $entities, $foreground], function () {
+            app.tryingStartGame(username, [$background, $entities, $foreground], function () {
                 $app.classList.add('initialized')
                 $welcome.remove()
             })
