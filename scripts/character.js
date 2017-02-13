@@ -43,7 +43,9 @@
 
             this.path = this.requestPathfingTo(destination)
 
-            if (this.path && !(this.path.length > 0)) {
+            // length 0: can't get the pathing arrival there
+            // length 1: that means player click on him self
+            if (this.path && (this.path.length < 2)) {
                 return this.idle()
             }
 
@@ -78,7 +80,6 @@
 
         requestPathfingTo(destination) {
             let start = [this.gridX, this.gridY]
-            if (this.gridX === destination[0] && this.gridY === destination[1]) { return null }
 
             if (!this.onRequestPath) {
                 return log.error('there is not onRequestPath callback')
