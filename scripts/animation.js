@@ -19,7 +19,7 @@
             index = (index < this.length - 1) ? index + 1 : 0
 
             this.currentFrame.x = this.width * index
-            this.currentFrame.y = this.height * this.row
+            this.currentFrame.y = this.height * (this.row - 1)
             this.currentFrame.index = index
         }
 
