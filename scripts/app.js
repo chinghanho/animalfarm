@@ -90,6 +90,14 @@
                         walk_right: {
                             length: 5,
                             row: 2
+                        },
+                        idle_left: {
+                            length: 1,
+                            row: 3
+                        },
+                        idle_right: {
+                            length: 1,
+                            row: 4
                         }
                     }
                 }},

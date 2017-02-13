@@ -92,15 +92,14 @@
                 return
             }
 
-            let image   = entity.sprite.image
             let currentFrame = entity.animation && entity.animation.currentFrame
-
             if (!currentFrame) {
                 return
             }
 
             let sx      = currentFrame.x
             let sy      = currentFrame.y
+            let image   = entity.sprite.image
             let sWidth  = entity.sprite.width
             let sHeight = entity.sprite.height
             let dWidth  = entity.sprite.width / 2

@@ -131,6 +131,7 @@
         animate(key, speed) {
             key += '_' + this.orientation
             let anime = this.sprite.animations[key]
+
             if (!anime) {
                 return
             }
@@ -143,14 +144,37 @@
             )
         }
 
+        updateAnimation(key) {
+            key += '_' + this.orientation
+            let anime = this.sprite.animations[key]
+
+            if (!anime) {
+                return
+            }
+
+            this.animation.length = anime.length
+            this.animation.row = anime.row
+        }
+
         walk() {
             this.setOrientation()
-            this.animate('walk', this.walkSpeed)
+            if (this.animation) {
+                this.updateAnimation('walk')
+            }
+            else {
+                this.animate('walk', this.walkSpeed)
+            }
         }
 
         idle() {
             this.path = null
-            this.animate('idle', this.idleSpeed)
+            this.setOrientation()
+            if (this.animation) {
+                this.updateAnimation('idle')
+            }
+            else {
+                this.animate('idle', this.idleSpeed)
+            }
         }
 
     }

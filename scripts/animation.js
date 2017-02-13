@@ -27,7 +27,6 @@
             this.counter++
             let times = 60 / (1000 / this.speed)
             let result = (this.counter % (times / this.length)) < 1
-            // debugger
             return result
         }
 
