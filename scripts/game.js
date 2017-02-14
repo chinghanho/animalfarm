@@ -20,9 +20,10 @@
             this.images
             this.sprites
 
-            this.renderingGrid = new Grid('number')
-            this.pathingGrid   = new Grid('number')
-            this.entitiesGrid  = new Grid('object')
+            this.map = new _Map()
+            this.renderingGrid = new Grid('number', this.map)
+            this.pathingGrid   = new Grid('number', this.map)
+            this.entitiesGrid  = new Grid('object', this.map)
 
             this.pathFinder = new PathFinder(this)
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
@@ -40,7 +41,7 @@
 
         initSprites() {
             for (let key in this.sprites) {
-                this.sprites[key] = new Sprite(this.sprites[key], this.renderingGrid.tileSize)
+                this.sprites[key] = new Sprite(this.sprites[key], this.map.tileSize)
             }
         }
 

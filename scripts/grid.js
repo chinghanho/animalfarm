@@ -2,16 +2,28 @@
 
     'use strict'
 
-    class Grid extends _Map {
+    class Grid {
 
-        constructor(type) {
-            super()
-            this.type = type
+        constructor(type, map) {
+            this.type   = type
+            this.map    = map
+
+            this.width    = map.width
+            this.height   = map.height
+            this.tileSize = map.tileSize
+            this.tilesX   = map.tilesX
+            this.tilesY   = map.tilesY
+
             this.grid = []
             this.validateType()
             this.init()
 
             return this
+        }
+
+        static getWidth() {
+            // debugger
+            return this.width
         }
 
         get(coordinate) {

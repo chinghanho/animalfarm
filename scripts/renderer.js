@@ -6,7 +6,7 @@
 
         constructor(game, $background, $entities, $foreground) {
             this.game = game
-            this.grid = this.game.renderingGrid
+            this.map = this.game.map
 
             this.FPS = 60
 
@@ -18,12 +18,12 @@
             this.entitiesCtx    = this.$entities.getContext('2d')
             this.foregroundCtx  = this.$foreground.getContext('2d')
 
-            this.$background.width  = this.grid.width
-            this.$entities.width    = this.grid.width
-            this.$foreground.width  = this.grid.width
-            this.$background.height = this.grid.height
-            this.$entities.height   = this.grid.height
-            this.$foreground.height = this.grid.height
+            this.$background.width  = this.map.width
+            this.$entities.width    = this.map.width
+            this.$foreground.width  = this.map.width
+            this.$background.height = this.map.height
+            this.$entities.height   = this.map.height
+            this.$foreground.height = this.map.height
 
             this.initBackground()
             this.initCursor()
@@ -32,10 +32,10 @@
         initBackground() {
             let self  = this
             let image = self.game.images['ground'].image
-            for (let i = 0; i < self.grid.tilesX; i++) {
-                self.backgroundCtx.drawImage(image, i * self.grid.tileSize, 0, self.grid.tileSize, self.grid.tileSize)
-                for (let j = 0; j < self.grid.tilesY; j++) {
-                    self.backgroundCtx.drawImage(image, i * self.grid.tileSize, j * self.grid.tileSize, self.grid.tileSize, self.grid.tileSize)
+            for (let i = 0; i < self.map.tilesX; i++) {
+                self.backgroundCtx.drawImage(image, i * self.map.tileSize, 0, self.map.tileSize, self.map.tileSize)
+                for (let j = 0; j < self.map.tilesY; j++) {
+                    self.backgroundCtx.drawImage(image, i * self.map.tileSize, j * self.map.tileSize, self.map.tileSize, self.map.tileSize)
                 }
             }
         }
@@ -57,11 +57,11 @@
         }
 
         drawGridCell(gridX, gridY, color) {
-            gridX = gridX * this.grid.tileSize
-            gridY = gridY * this.grid.tileSize
+            gridX = gridX * this.map.tileSize
+            gridY = gridY * this.map.tileSize
 
             this.foregroundCtx.beginPath()
-            this.foregroundCtx.rect(gridX, gridY, this.grid.tileSize, this.grid.tileSize)
+            this.foregroundCtx.rect(gridX, gridY, this.map.tileSize, this.map.tileSize)
             this.foregroundCtx.lineWidth = 2
             this.foregroundCtx.strokeStyle = color
             this.foregroundCtx.stroke()
@@ -81,9 +81,9 @@
         drawEntitySprite(entity) {
             // NOTE: draw this for test
             if (!entity.sprite) {
-                let radius = this.grid.tileSize / 2
-                let x = entity.x + (this.grid.tileSize / 2)
-                let y = entity.y + (this.grid.tileSize / 2)
+                let radius = this.map.tileSize / 2
+                let x = entity.x + (this.map.tileSize / 2)
+                let y = entity.y + (this.map.tileSize / 2)
 
                 this.entitiesCtx.beginPath()
                 this.entitiesCtx.arc(x, y, radius, 0, Math.PI * 2)
@@ -113,7 +113,7 @@
         }
 
         clearScreen(ctx) {
-            ctx.clearRect(0, 0, this.grid.width, this.grid.height);
+            ctx.clearRect(0, 0, this.map.width, this.map.height);
         }
 
         renderFrame() {

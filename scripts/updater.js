@@ -44,10 +44,10 @@
 
         updateCharacter(character) {
             let c    = character
-            let grid = this.game.renderingGrid
+            let map = this.game.map
 
             // Estimate of the movement distance for one update
-            let tileSize = grid.tileSize
+            let tileSize = map.tileSize
             let tick     = Math.round(tileSize / c.walkSpeed * Math.round(1000 / this.game.renderer.FPS))
 
             if (c.isMoving() && !c.movement.inProgress) {
@@ -56,7 +56,7 @@
                                              (y) => { c.y = y },
                                              ()  => {
                                                  c.hasMoved()
-                                                 let gridY = Math.floor(c.movement.endValue / grid.height  * grid.tilesY)
+                                                 let gridY = Math.floor(c.movement.endValue / map.height  * map.tilesY)
                                                  c.setGridPosition(c.gridX, gridY)
                                                  c.nextStep()
                                              },
@@ -70,7 +70,7 @@
                                              (x) => { c.x =  x },
                                              ()  => {
                                                  c.hasMoved()
-                                                 let gridX = Math.floor(c.movement.endValue / grid.width  * grid.tilesX)
+                                                 let gridX = Math.floor(c.movement.endValue / map.width  * map.tilesX)
                                                  c.setGridPosition(gridX, c.gridY)
                                                  c.nextStep()
                                              },
@@ -84,7 +84,7 @@
                                              (y) => { c.y =  y },
                                              ()  => {
                                                  c.hasMoved()
-                                                 let gridY = Math.floor(c.movement.endValue / grid.height  * grid.tilesY)
+                                                 let gridY = Math.floor(c.movement.endValue / map.height  * map.tilesY)
                                                  c.setGridPosition(c.gridX, gridY)
                                                  c.nextStep()
                                              },
@@ -98,7 +98,7 @@
                                              (x) => { c.x =  x },
                                              ()  => {
                                                  c.hasMoved()
-                                                 let gridX = Math.floor(c.movement.endValue / grid.width  * grid.tilesX)
+                                                 let gridX = Math.floor(c.movement.endValue / map.width  * map.tilesX)
                                                  c.setGridPosition(gridX, c.gridY)
                                                  c.nextStep()
                                              },
