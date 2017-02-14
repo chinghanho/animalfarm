@@ -58,6 +58,7 @@
         initNPCs() {
             let npc = new Npc()
             npc.setGridPosition(14, 8)
+            npc.setSprite(this.sprites['stone'], 'idle')
             this.pathingGrid.register(npc)
             this.entitiesGrid.register(npc)
             this.entities.push(npc)

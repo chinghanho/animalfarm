@@ -79,7 +79,7 @@
             let self = this
 
             self.sprites.stack = [
-                { id: 'players', path: '../images/players.png', sprite: {
+                { id: 'players', path: '../images/vendors/players.png', sprite: {
                     width: 64,
                     height: 110,
                     animations: {
@@ -117,6 +117,18 @@
                         }
                     }
                 }},
+                {
+                    id: 'stone', path: '../images/vendors/stone.png', sprite: {
+                        width: 64,
+                        height: 64,
+                        animations: {
+                            idle: {
+                                length: 1,
+                                row: 1
+                            }
+                        }
+                    }
+                }
             ]
 
             self.sprites.loaded = self._diet(self.sprites, function (image, object) {
