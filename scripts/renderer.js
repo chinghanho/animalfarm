@@ -26,7 +26,7 @@
             this.$foreground.height = this.map.height
 
             this.drawMap()
-            this.initCursor()
+            this.drawCursor()
         }
 
         drawMap() {
@@ -34,12 +34,8 @@
             let image = self.game.images['ground'].image
 
             self.map.tileset.forEach(function (tile) {
-                self.backgroundCtx.drawImage(image, tile[0] * self.map.tileSize, tile[1] * self.map.tileSize, self.map.tileSize, self.map.tileSize)
+                self.backgroundCtx.drawImage(image, tile.x * self.map.tileSize, tile.y * self.map.tileSize, self.map.tileSize, self.map.tileSize)
             })
-        }
-
-        initCursor() {
-            this.cursor = this.game.images['lipstick'].image
         }
 
         drawMouseTargetCell() {
@@ -49,8 +45,9 @@
         }
 
         drawCursor() {
-            if (this.cursor && this.game.cursorPosition.length > 0) {
-                this.foregroundCtx.drawImage(this.cursor, this.game.cursorPosition[0], this.game.cursorPosition[1], 24, 24)
+            this.game.cursor = this.game.images['lipstick'].image
+            if (this.game.cursor && this.game.cursorPosition.length > 0) {
+                this.foregroundCtx.drawImage(this.game.cursor, this.game.cursorPosition[0], this.game.cursorPosition[1], 24, 24)
             }
         }
 
