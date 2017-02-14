@@ -21,18 +21,20 @@
             this.sprites
 
             this.map = new _Map()
+            this.map.setTileset('room')
+
             this.renderingGrid = new Grid('number', this.map)
             this.pathingGrid   = new Grid('number', this.map)
             this.entitiesGrid  = new Grid('object', this.map)
-
-            this.pathFinder = new PathFinder(this)
-            this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
-            this.updater    = new Updater(this)
 
             this.initSprites()
             this.initPlayer(username)
             this.initItems()
             this.initNPCs()
+
+            this.pathFinder = new PathFinder(this)
+            this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
+            this.updater    = new Updater(this)
 
             this.start()
             log.info('Game initialized')

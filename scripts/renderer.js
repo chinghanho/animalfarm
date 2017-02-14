@@ -25,19 +25,17 @@
             this.$entities.height   = this.map.height
             this.$foreground.height = this.map.height
 
-            this.initBackground()
+            this.drawMap()
             this.initCursor()
         }
 
-        initBackground() {
+        drawMap() {
             let self  = this
             let image = self.game.images['ground'].image
-            for (let i = 0; i < self.map.tilesX; i++) {
-                self.backgroundCtx.drawImage(image, i * self.map.tileSize, 0, self.map.tileSize, self.map.tileSize)
-                for (let j = 0; j < self.map.tilesY; j++) {
-                    self.backgroundCtx.drawImage(image, i * self.map.tileSize, j * self.map.tileSize, self.map.tileSize, self.map.tileSize)
-                }
-            }
+
+            self.map.tileset.forEach(function (tile) {
+                self.backgroundCtx.drawImage(image, tile[0] * self.map.tileSize, tile[1] * self.map.tileSize, self.map.tileSize, self.map.tileSize)
+            })
         }
 
         initCursor() {
