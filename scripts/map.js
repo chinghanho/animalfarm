@@ -23,11 +23,16 @@
             this.tileset = null
         }
 
-        setTileset(key) {
+        set(key) {
             let tileset
             tileset = this.tilesets[key]
             tileset = tileset.ground.map((t) => tileIndex(t).toGridPosition())
             this.tileset = tileset
+            this.generateCollisionGrid()
+        }
+
+        generateCollisionGrid() {
+            return
         }
 
     }

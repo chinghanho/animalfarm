@@ -21,7 +21,7 @@
             this.sprites
 
             this.map = new _Map()
-            this.map.setTileset('room')
+            this.map.set('room')
 
             this.renderingGrid = new Grid('number', this.map)
             this.pathingGrid   = new Grid('number', this.map)
