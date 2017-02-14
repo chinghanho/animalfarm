@@ -11,7 +11,12 @@
             this.row    = row
             this.length = length
             this.counter = 0
+            this.animated = false
             this.reset()
+            // show the first frame, prevent started with x:0, y:0
+            if (!this.animated) {
+                this.nextFrame()
+            }
         }
 
         nextFrame() {
@@ -32,6 +37,9 @@
 
         update(currentTime) {
             if (this.isTimeToNextFrame()) {
+                if (!this.animated) {
+                    this.animated = true
+                }
                 this.nextFrame()
                 return true
             }
