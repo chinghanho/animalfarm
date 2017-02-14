@@ -4,7 +4,7 @@
 
     class PlayersController {
 
-        constructor(game) {
+        constructor(game, username) {
             this.game = game
             this.player = new Player(username)
             this.player.setGridPosition(13, 8)

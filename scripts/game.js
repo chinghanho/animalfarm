@@ -46,7 +46,7 @@
         }
 
         initPlayer(username) {
-            this.player = (new PlayersController(this)).player
+            this.player = (new PlayersController(this, username)).player
         }
 
         initItems() {
