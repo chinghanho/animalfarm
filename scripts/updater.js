@@ -53,60 +53,45 @@
             if (c.isMoving() && !c.movement.inProgress) {
                 if (c.orientation === 'up') {
                     c.movement.start(this.game.currentTime,
-                                             (y) => { c.y = y },
-                                             ()  => {
-                                                 c.hasMoved()
-                                                 let gridY = Math.floor(c.movement.endValue / map.height  * map.tilesY)
-                                                 c.setGridPosition(c.gridX, gridY)
-                                                 c.nextStep()
-                                             },
-                                             c.y - tick,
-                                             c.y - tileSize,
-                                             c.walkSpeed)
+                                     this._onMoveY.bind(c), this._onMoveYEnd.bind(c, map),
+                                     c.y - tick, c.y - tileSize, c.walkSpeed)
                 }
 
                 if (c.orientation === 'right') {
                     c.movement.start(this.game.currentTime,
-                                             (x) => { c.x =  x },
-                                             ()  => {
-                                                 c.hasMoved()
-                                                 let gridX = Math.floor(c.movement.endValue / map.width  * map.tilesX)
-                                                 c.setGridPosition(gridX, c.gridY)
-                                                 c.nextStep()
-                                             },
-                                             c.x + tick,
-                                             c.x + tileSize,
-                                             c.walkSpeed)
+                                     this._onMoveX.bind(c), this._onMoveXEnd.bind(c, map),
+                                     c.x + tick, c.x + tileSize, c.walkSpeed)
                 }
 
                 if (c.orientation === 'down') {
                     c.movement.start(this.game.currentTime,
-                                             (y) => { c.y =  y },
-                                             ()  => {
-                                                 c.hasMoved()
-                                                 let gridY = Math.floor(c.movement.endValue / map.height  * map.tilesY)
-                                                 c.setGridPosition(c.gridX, gridY)
-                                                 c.nextStep()
-                                             },
-                                             c.y + tick,
-                                             c.y + tileSize,
-                                             c.walkSpeed)
+                                     this._onMoveY.bind(c), this._onMoveYEnd.bind(c, map),
+                                     c.y + tick, c.y + tileSize, c.walkSpeed)
                 }
 
                 if (c.orientation === 'left') {
                     c.movement.start(this.game.currentTime,
-                                             (x) => { c.x =  x },
-                                             ()  => {
-                                                 c.hasMoved()
-                                                 let gridX = Math.floor(c.movement.endValue / map.width  * map.tilesX)
-                                                 c.setGridPosition(gridX, c.gridY)
-                                                 c.nextStep()
-                                             },
-                                             c.x - tick,
-                                             c.x - tileSize,
-                                             c.walkSpeed)
+                                     this._onMoveX.bind(c), this._onMoveXEnd.bind(c, map),
+                                     c.x - tick, c.x - tileSize, c.walkSpeed)
                 }
             }
+        }
+
+        _onMoveX(x) { this.x = x }
+        _onMoveY(y) { this.y = y }
+
+        _onMoveXEnd(map) {
+            this.hasMoved()
+            let gridX = Math.floor(this.movement.endValue / map.width  * map.tilesX)
+            this.setGridPosition(gridX, this.gridY)
+            this.nextStep()
+        }
+
+        _onMoveYEnd(map) {
+            this.hasMoved()
+            let gridY = Math.floor(this.movement.endValue / map.height  * map.tilesY)
+            this.setGridPosition(this.gridX, gridY)
+            this.nextStep()
         }
 
     }
