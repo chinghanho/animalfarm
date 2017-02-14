@@ -98,16 +98,17 @@
             }
 
             let sx      = currentFrame.x
-            let sy      = currentFrame.y
-            let image   = entity.sprite.image
-            let sWidth  = entity.sprite.width
-            let sHeight = entity.sprite.height
-            let dWidth  = entity.sprite.width / 2
-            let dHeight = entity.sprite.height / 2
-            let offsetX = (dWidth  - 32) / 2
-            let offsetY = (dHeight - 32)
-            let dx      = entity.x - offsetX
-            let dy      = entity.y - offsetY
+              , sy      = currentFrame.y
+              , image   = entity.sprite.image
+              , sWidth  = entity.sprite.width
+              , sHeight = entity.sprite.height
+              , dWidth  = entity.sprite.width / 2
+              , dHeight = entity.sprite.height / 2
+              , offsetX = (dWidth  - 32) / 2
+              , offsetY = (dHeight - 32)
+              , dx      = entity.x - offsetX
+              , dy      = entity.y - offsetY
+
             this.entitiesCtx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
 

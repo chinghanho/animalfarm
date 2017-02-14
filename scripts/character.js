@@ -135,47 +135,23 @@
             if (!anime) {
                 return
             }
-            this.animation = new Animation(
-                speed,
-                this.sprite.width,
-                this.sprite.height,
-                anime.row,
-                anime.length
-            )
-        }
 
-        updateAnimation(key) {
-            key += '_' + this.orientation
-            let anime = this.sprite.animations[key]
-
-            if (!anime) {
-                return
-            }
-
-            this.animation.length = anime.length
-            this.animation.row = anime.row
+            this.animation.extends({
+                length: anime.length,
+                row:    anime.row,
+                speed:  speed
+            })
         }
 
         walk() {
             this.setOrientation()
-            if (this.animation) {
-                this.updateAnimation('walk')
-            }
-            else {
-                this.animate('walk', this.walkSpeed)
-            }
+            this.animate('walk', this.walkSpeed)
         }
 
         idle() {
             this.path = null
             this.setOrientation()
-            if (this.animation) {
-                this.updateAnimation('idle')
-            }
-            else {
-                this.animate('idle', this.idleSpeed)
-            }
-            log.debug('idle')
+            this.animate('idle', this.idleSpeed)
         }
 
     }

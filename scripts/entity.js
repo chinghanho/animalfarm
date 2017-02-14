@@ -19,12 +19,12 @@
         setGridPosition(n, m) {
             this.gridX = n
             this.gridY = m
-
             this.setPosition(n * 32, m * 32)
         }
 
-        setSprite(sprite) {
+        setSprite(sprite, defaultKey) {
             this.sprite = sprite
+            this.animation = this.sprite.setAnimation(defaultKey)
         }
 
     }

@@ -4,41 +4,51 @@
 
     class Animation {
 
-        constructor(speed, width, height, row, length) {
-            this.speed  = speed
-            this.width  = width
-            this.height = height
-            this.row    = row
-            this.length = length
-            this.counter = 0
-            this.animated = false
+        constructor(width, height, row, length) {
+            this.sprite = {
+                width:  width,
+                height: height,
+                row:    row,
+                length: length
+            }
+            this._counter = 0
+            this._animated = false
             this.reset()
             // show the first frame, prevent started with x:0, y:0
-            if (!this.animated) {
+            if (!this._animated) {
                 this.nextFrame()
             }
         }
 
+        extends(params) {
+            Object.assign(this.sprite, params)
+            return this
+        }
+
+        setSpeed(speed) {
+            this.sprite.speed = speed
+        }
+
         nextFrame() {
             let index = this.currentFrame.index
-            index = (index < this.length - 1) ? index + 1 : 0
+            index = (index < this.sprite.length - 1) ? index + 1 : 0
 
-            this.currentFrame.x = this.width * index
-            this.currentFrame.y = this.height * (this.row - 1)
+            this.currentFrame.x = this.sprite.width * index
+            this.currentFrame.y = this.sprite.height * (this.sprite.row - 1)
             this.currentFrame.index = index
         }
 
         isTimeToNextFrame() {
-            this.counter++
-            let times = 60 / (1000 / this.speed)
-            let result = (this.counter % (times / this.length)) < 1
+            this._counter++
+            let times = 60 / (1000 / this.sprite.speed)
+            let result = (this._counter % (times / this.sprite.length)) < 1
             return result
         }
 
         update(currentTime) {
             if (this.isTimeToNextFrame()) {
-                if (!this.animated) {
-                    this.animated = true
+                if (!this._animated) {
+                    this._animated = true
                 }
                 this.nextFrame()
                 return true
@@ -54,7 +64,7 @@
                 x: 0,
                 y: 0
             }
-            this.counter = 0
+            this._counter = 0
         }
 
     }

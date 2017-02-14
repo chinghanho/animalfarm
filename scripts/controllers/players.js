@@ -21,8 +21,7 @@
             // properties
             this.player.color = 'hsla(107, 68%, 55%, 1)'
 
-            this.player.setSprite(this.game.sprites['players'])
-            this.player.idle()
+            this.player.setSprite(this.game.sprites['players'], 'idle_down')
         }
 
         onRequestPath(start, end) {
