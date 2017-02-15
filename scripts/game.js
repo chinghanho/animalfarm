@@ -20,7 +20,7 @@
             this.images
             this.sprites
 
-            this.map = new _Map()
+            this.map = new _Map(this)
             this.map.set('room')
 
             this.renderingGrid = new Grid('number', this.map)

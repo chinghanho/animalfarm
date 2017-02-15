@@ -31,11 +31,12 @@
 
         drawMap() {
             let self  = this
-            let image = self.game.images['ground'].image
-
-            self.map.tileset.forEach(function (tile) {
-                self.backgroundCtx.drawImage(image, tile.x * self.map.tileSize, tile.y * self.map.tileSize, self.map.tileSize, self.map.tileSize)
-            })
+            for (let key in self.map.tileset) {
+                let tiles = self.map.tileset[key]
+                tiles.forEach(function (tile) {
+                    self.backgroundCtx.drawImage(tile.image, tile.x * self.map.tileSize, tile.y * self.map.tileSize, self.map.tileSize, self.map.tileSize)
+                })
+            }
         }
 
         drawMouseTargetCell() {
