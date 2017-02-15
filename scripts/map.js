@@ -24,8 +24,8 @@
         }
 
         set(key) {
-            this._tileset = this.tilesets[key].ground.map((t) => new Tile(t))
-            this.tileset = this._tileset
+            this._tileset = this.tilesets[key]
+            this.tileset = this._tileset.ground.map((t) => new Tile(t))
         }
 
     }
