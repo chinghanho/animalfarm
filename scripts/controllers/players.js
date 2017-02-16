@@ -9,10 +9,6 @@
             this.player = new Player(username)
             this.player.setGridPosition(13, 8)
 
-            this.game.entitiesGrid.register(this.player)
-            this.game.pathingGrid.register(this.player)
-            this.game.entities.push(this.player)
-
             // Callbacks
             this.player.onRequestPath = this.onRequestPath.bind(this)
             this.player.onHasMoved    = this.onHasMoved.bind(this)
@@ -24,6 +20,12 @@
             this.player.color = 'hsla(107, 68%, 55%, 1)'
 
             this.player.setSprite(this.game.sprites['players'], 'idle_down')
+        }
+
+        ready() {
+            this.game.entitiesGrid.register(this.player)
+            this.game.pathingGrid.register(this.player)
+            this.game.entities.push(this.player)
         }
 
         onRequestPath(start, end) {

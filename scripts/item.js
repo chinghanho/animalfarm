@@ -6,7 +6,6 @@
 
         constructor() {
             super()
-            this.color = 'hsla(207, 89%, 66%, 1)'
         }
 
     }

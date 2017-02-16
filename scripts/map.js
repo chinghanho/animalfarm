@@ -28,19 +28,25 @@
             }
 
             this.tilesets = {
-                "room": roomMapData
+                "room": roomMapData,
+                "wild": wildMapData,
             }
 
-            this.tileset = {}
+            // Callbacks
+            this.onSet = null
         }
 
         set(key) {
+            this.key = key
             let self = this
+            self.tileset = {}
             self._tileset = self.tilesets[key]
             Object.keys(self._tileset.data).forEach(function (key) {
                 let image = self.game.images[key].image
                 self.tileset[key] = self._tileset.data[key].map((i) => new Tile(i, image))
             })
+
+            this.onSet()
         }
 
     }

@@ -25,7 +25,6 @@
             this.$entities.height   = this.map.height
             this.$foreground.height = this.map.height
 
-            this.drawMap()
             this.drawCursor()
         }
 
@@ -74,26 +73,13 @@
         }
 
         drawEntitySprite(entity) {
-            // NOTE: draw this for test
-            if (!entity.sprite) {
-                let radius = this.map.tileSize / 2
-                let x = entity.x + (this.map.tileSize / 2)
-                let y = entity.y + (this.map.tileSize / 2)
-
-                this.entitiesCtx.beginPath()
-                this.entitiesCtx.arc(x, y, radius, 0, Math.PI * 2)
-                this.entitiesCtx.fillStyle = entity.color
-                this.entitiesCtx.fill()
+            let frame = entity.animation && entity.animation.currentFrame
+            if (!frame) {
                 return
             }
 
-            let currentFrame = entity.animation && entity.animation.currentFrame
-            if (!currentFrame) {
-                return
-            }
-
-            let sx      = currentFrame.x
-              , sy      = currentFrame.y
+            let sx      = frame.x
+              , sy      = frame.y
               , image   = entity.sprite.image
               , sWidth  = entity.sprite.width
               , sHeight = entity.sprite.height

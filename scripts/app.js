@@ -67,6 +67,7 @@
                 { id: 'lipstick', path: '../images/lipstick.png' },
                 { id: 'talk',     path: '../images/talk.png' },
                 { id: 'stone',    path: '../images/vendors/stone.png' },
+                { id: 'rock-ground',    path: '../images/vendors/rock-ground.png' },
             ]
 
             self.images.loaded = self._diet(self.images, function (image, object) {

@@ -5,6 +5,11 @@
     class Grid {
 
         constructor(type, map) {
+
+            if (!type) {
+                log.error('not given the type of grid')
+            }
+
             this.type   = type
             this.map    = map
 
@@ -15,14 +20,14 @@
             this.tilesY   = map.tilesY
 
             this.grid = []
-            this.validateType()
+
             this.init()
 
             return this
         }
 
-        static getWidth() {
-            return this.width
+        reload() {
+            this.init()
         }
 
         get(coordinate) {
@@ -36,12 +41,6 @@
             let y = coordinate[1]
             this.grid[y][x] = value
             return this
-        }
-
-        validateType() {
-            if (!this.type) {
-                log.error('not given the type of grid')
-            }
         }
 
         init() {

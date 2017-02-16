@@ -15,19 +15,15 @@
             this.cursorGridPosition = []
             this.cursorPosition = []
             this.entities = []
+            this.renderingGrid = null
+            this.pathingGrid   = null
+            this.entitiesGrid  = null
 
             // assigned from app.js file
             this.images
             this.sprites
 
-            this.map = new _Map(this)
-            this.map.set('room')
-
-            this.initGrids()
-            this.initSprites()
-            this.initPlayer(username)
-            this.initItems()
-            this.initNPCs()
+            this.initControllers()
 
             this.pathFinder = new PathFinder(this)
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
@@ -38,10 +34,31 @@
             callbacks.onAfterStarted(this)
         }
 
-        initGrids() {
-            this.renderingGrid = new Grid('number', this.map)
-            this.pathingGrid   = new Grid('number', this.map)
-            this.entitiesGrid  = new Grid('object', this.map)
+        initControllers() {
+
+            this.controllers = {
+                stack: [],
+                ready: function() {
+                    this.stack.forEach(function (controller) {
+                        controller.ready()
+                    })
+                },
+                add: function (controller) {
+                    this.stack.push(controller)
+                }
+            }
+
+            this.initMap()
+            this.initSprites()
+            this.initPlayer(username)
+            this.initItems()
+            this.initNPCs()
+        }
+
+        initMap() {
+            let controller = new MapsController(this)
+            this.controllers.add(controller)
+            this.map = controller.map
         }
 
         initSprites() {
@@ -51,25 +68,19 @@
         }
 
         initPlayer(username) {
-            this.player = (new PlayersController(this, username)).player
+            let controller = new PlayersController(this, username)
+            this.controllers.add(controller)
+            this.player = controller.player
         }
 
         initItems() {
-            // let item = new Item()
-            // item.setGridPosition(12, 5)
-            // this.entitiesGrid.register(item)
-            // this.entities.push(item)
+            let controller = new ItemsController(this)
+            this.controllers.add(controller)
         }
 
         initNPCs() {
-            let npc = new Npc('oldman')
-            npc.setGridPosition(14, 8)
-            npc.setSprite(this.sprites['oldman'], 'idle_down')
-            npc.idleSpeed = 1000
-            npc.idle()
-            this.pathingGrid.register(npc)
-            this.entitiesGrid.register(npc)
-            this.entities.push(npc)
+            let controller = new NpcsController(this)
+            this.controllers.add(controller)
         }
 
         targetCellChanged(gridX, gridY) {
@@ -118,6 +129,7 @@
         start() {
             this.tick()
             this.cursor = this.images['lipstick'].image
+            this.controllers.ready()
             this.started = true
             log.info('Game Started')
         }
