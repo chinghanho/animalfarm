@@ -59,7 +59,7 @@
         }
 
         initNPCs() {
-            let npc = new Npc()
+            let npc = new Npc('oldman')
             npc.setGridPosition(14, 8)
             npc.setSprite(this.sprites['oldman'], 'idle_down')
             npc.idleSpeed = 1000

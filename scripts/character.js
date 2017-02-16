@@ -9,11 +9,14 @@
 
             this.path = null
             this.newDestination = null
+            this.target = null
 
             // Callbacks
             this.onRequestPath = null
             this.onAfterStep   = null
             this.onHasMoved    = null
+            this.onMoveTo      = null
+            this.onStopPathing = null
 
             // Speeds
             this.idleSpeed = 200
@@ -40,6 +43,7 @@
                 return
             }
 
+            this.onMoveTo(destination)
             this.path = this.requestPathfingTo(destination)
 
             // length 0: can't get the pathing arrival there
@@ -65,11 +69,12 @@
                 this.newDestination = null
             }
 
-            if (this.path) {
+            if (this.isMoving()) {
                 if (this.path.length > 0) {
                     let gridX = this.path[this.path.length - 1][0]
                     let gridY = this.path[this.path.length - 1][1]
                     if (this.gridX === gridX && this.gridY === gridY) {
+                        this.onStopPathing()
                         this.idle()
                     }
                     else {
@@ -152,6 +157,14 @@
             this.path = null
             this.setOrientation()
             this.animate('idle', this.idleSpeed)
+        }
+
+        setTarget(target) {
+            this.target = target
+        }
+
+        removeTarget() {
+            this.target = null
         }
 
     }

@@ -15,8 +15,10 @@
 
             // Callbacks
             this.player.onRequestPath = this.onRequestPath.bind(this)
-            this.player.onHasMoved = this.onHasMoved.bind(this)
-            this.player.onAfterStep = this.onAfterStep.bind(this)
+            this.player.onHasMoved    = this.onHasMoved.bind(this)
+            this.player.onAfterStep   = this.onAfterStep.bind(this)
+            this.player.onMoveTo      = this.onMoveTo.bind(this)
+            this.player.onStopPathing = this.onStopPathing.bind(this)
 
             // properties
             this.player.color = 'hsla(107, 68%, 55%, 1)'
@@ -36,6 +38,23 @@
         onAfterStep() {
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)
+        }
+
+        onMoveTo(destination) {
+            let entity = this.game.entitiesGrid.get(destination)
+            this.player.setTarget(entity)
+        }
+
+        onStopPathing() {
+            if (isObjectBlank(this.player.target)) {
+                return
+            }
+
+            let target = this.player.target
+
+            if (target.talk) {
+                log.debug(target.talk())
+            }
         }
 
     }
