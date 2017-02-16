@@ -6,8 +6,6 @@
 
         constructor(game, $background, $entities, $foreground) {
             this.game = game
-            this.map = this.game.map
-
             this.FPS = 60
 
             this.$background = $background
@@ -17,23 +15,25 @@
             this.backgroundCtx  = this.$background.getContext('2d')
             this.entitiesCtx    = this.$entities.getContext('2d')
             this.foregroundCtx  = this.$foreground.getContext('2d')
+        }
 
-            this.$background.width  = this.map.width
-            this.$entities.width    = this.map.width
-            this.$foreground.width  = this.map.width
-            this.$background.height = this.map.height
-            this.$entities.height   = this.map.height
-            this.$foreground.height = this.map.height
-
+        ready() {
+            this.$background.width  = this.game.map.width
+            this.$entities.width    = this.game.map.width
+            this.$foreground.width  = this.game.map.width
+            this.$background.height = this.game.map.height
+            this.$entities.height   = this.game.map.height
+            this.$foreground.height = this.game.map.height
             this.drawCursor()
         }
 
         drawMap() {
-            let self  = this
-            for (let key in self.map.tileset) {
-                let tiles = self.map.tileset[key]
+            let self = this
+            let map  = self.game.map
+            for (let key in map.tileset) {
+                let tiles = map.tileset[key]
                 tiles.forEach(function (tile) {
-                    self.backgroundCtx.drawImage(tile.image, tile.x * self.map.tileSize, tile.y * self.map.tileSize, self.map.tileSize, self.map.tileSize)
+                    self.backgroundCtx.drawImage(tile.image, tile.x * map.tileSize, tile.y * map.tileSize, map.tileSize, map.tileSize)
                 })
             }
         }
@@ -51,11 +51,11 @@
         }
 
         drawGridCell(gridX, gridY, color) {
-            gridX = gridX * this.map.tileSize
-            gridY = gridY * this.map.tileSize
+            gridX = gridX * this.game.map.tileSize
+            gridY = gridY * this.game.map.tileSize
 
             this.foregroundCtx.beginPath()
-            this.foregroundCtx.rect(gridX, gridY, this.map.tileSize, this.map.tileSize)
+            this.foregroundCtx.rect(gridX, gridY, this.game.map.tileSize, this.game.map.tileSize)
             this.foregroundCtx.lineWidth = 2
             this.foregroundCtx.strokeStyle = color
             this.foregroundCtx.stroke()
@@ -98,7 +98,7 @@
         }
 
         clearScreen(ctx) {
-            ctx.clearRect(0, 0, this.map.width, this.map.height);
+            ctx.clearRect(0, 0, this.game.map.width, this.game.map.height);
         }
 
         renderFrame() {

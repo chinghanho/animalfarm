@@ -39,48 +39,24 @@
             this.controllers = {
                 stack: [],
                 ready: function() {
-                    this.stack.forEach(function (controller) {
-                        controller.ready()
-                    })
+                    this.stack.forEach((controller) => controller.ready())
                 },
                 add: function (controller) {
                     this.stack.push(controller)
                 }
             }
 
-            this.initMap()
-            this.initSprites()
-            this.initPlayer(username)
-            this.initItems()
-            this.initNPCs()
-        }
+            let mapController     = new MapsController(this)
+            let spritesController = new SpritesController(this)
+            let playersController = new PlayersController(this, username)
+            let itemsController   = new ItemsController(this)
+            let npcsController    = new NpcsController(this)
 
-        initMap() {
-            let controller = new MapsController(this)
-            this.controllers.add(controller)
-            this.map = controller.map
-        }
-
-        initSprites() {
-            for (let key in this.sprites) {
-                this.sprites[key] = new Sprite(this.sprites[key], this.map.tileSize)
-            }
-        }
-
-        initPlayer(username) {
-            let controller = new PlayersController(this, username)
-            this.controllers.add(controller)
-            this.player = controller.player
-        }
-
-        initItems() {
-            let controller = new ItemsController(this)
-            this.controllers.add(controller)
-        }
-
-        initNPCs() {
-            let controller = new NpcsController(this)
-            this.controllers.add(controller)
+            this.controllers.add(mapController)
+            this.controllers.add(spritesController)
+            this.controllers.add(playersController)
+            this.controllers.add(itemsController)
+            this.controllers.add(npcsController)
         }
 
         targetCellChanged(gridX, gridY) {
@@ -127,9 +103,9 @@
         }
 
         start() {
-            this.tick()
-            this.cursor = this.images['lipstick'].image
+            this.renderer.ready()
             this.controllers.ready()
+            this.tick()
             this.started = true
             log.info('Game Started')
         }

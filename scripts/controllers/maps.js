@@ -8,9 +8,14 @@
             this.game = game
             this.map = new _Map(this.game)
             this.map.onSet = this.onSet
+            this.game.map = this.map
         }
 
         ready() {
+            this._onReady()
+        }
+
+        _onReady() {
             this.map.set('room')
         }
 

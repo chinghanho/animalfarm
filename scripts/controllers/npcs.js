@@ -7,6 +7,10 @@
         }
 
         ready() {
+            this._onReady()
+        }
+
+        _onReady() {
             let npc = new Npc('oldman')
             npc.setGridPosition(14, 8)
             npc.setSprite(this.game.sprites['oldman'], 'idle_down')

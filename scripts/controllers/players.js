@@ -18,14 +18,18 @@
 
             // properties
             this.player.color = 'hsla(107, 68%, 55%, 1)'
-
-            this.player.setSprite(this.game.sprites['players'], 'idle_down')
         }
 
         ready() {
+            this._onReady()
+        }
+
+        _onReady() {
+            this.game.player = this.player
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)
             this.game.entities.push(this.player)
+            this.player.setSprite(this.game.sprites['players'], 'idle_down')
         }
 
         onRequestPath(start, end) {
