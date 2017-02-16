@@ -5,6 +5,25 @@ body {
   line-height: 1;
 }
 
+#app {
+  margin-left: 100px;
+  margin-top: 100px;
+}
+
+#bubbles {
+  position: relative;
+  z-index: 500;
+}
+
+.bubble {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: hsla(0, 0%, 13%, 0.85);
+  padding: 8px 17px;
+  color: hsla(0, 0%, 94%, 1);
+  border-radius: 13px;
+}
 
 #background,
 #entities,

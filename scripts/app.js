@@ -24,24 +24,24 @@
             this.preload()
         }
 
-        tryingStartGame(name, canvases, next) {
+        tryingStartGame(name, elements, next) {
             this.triedStartingGame = true
             if (this.images.ready && this.sprites.ready) {
-                this.startGame(name, canvases, next)
+                this.startGame(name, elements, next)
             }
             else {
                 this.tmp = {
                     name: name,
-                    canvases: canvases,
+                    elements: elements,
                     next: next
                 }
             }
         }
 
-        startGame(name, canvases, next) {
+        startGame(name, elements, next) {
             let self = this
             this.gameStarted = true
-            self.game = new Game(name, canvases, {
+            self.game = new Game(name, elements, {
                 onBeforeStarted: function (game) {
                     game.images = self.images.loaded
                     game.sprites = self.sprites.loaded
@@ -152,7 +152,7 @@
                     if (qq.stack.length === qq.counter) {
                         qq.ready = true
                         if (!self.gameStarted && self.triedStartingGame) {
-                            self.startGame(self.tmp.name, self.tmp.canvases, self.tmp.next)
+                            self.startGame(self.tmp.name, self.tmp.elements, self.tmp.next)
                         }
                     }
                 }

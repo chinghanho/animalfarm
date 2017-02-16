@@ -12,6 +12,7 @@
         var $background = document.querySelector('#background')
         var $entities   = document.querySelector('#entities')
         var $foreground = document.querySelector('#foreground')
+        var $bubbles    = document.querySelector('#bubbles')
 
         root.app = app = new App($app)
 
@@ -51,7 +52,7 @@
                 return log.error('Username format invalid')
             }
 
-            app.tryingStartGame(username, [$background, $entities, $foreground], function () {
+            app.tryingStartGame(username, [$background, $entities, $foreground, $bubbles], function () {
                 $app.classList.add('initialized')
                 $welcome.remove()
             })

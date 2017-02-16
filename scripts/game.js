@@ -4,13 +4,14 @@
 
     class Game {
 
-        constructor(username, canvases, callbacks) {
+        constructor(username, elements, callbacks) {
 
             callbacks.onBeforeStarted(this)
 
-            this.$background = canvases[0]
-            this.$entities   = canvases[1]
-            this.$foreground = canvases[2]
+            this.$background = elements[0]
+            this.$entities   = elements[1]
+            this.$foreground = elements[2]
+            this.$bubbles    = elements[3]
 
             this.cursorGridPosition = []
             this.cursorPosition = []

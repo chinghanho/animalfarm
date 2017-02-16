@@ -66,7 +66,7 @@
             }
 
             if (target.talk) {
-                log.debug(target.talk())
+                let msg = target.talk()
             }
 
             this.player.target = null
