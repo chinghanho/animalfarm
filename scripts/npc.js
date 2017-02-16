@@ -18,14 +18,22 @@
             this.talkIndex = 0
         }
 
-        talk() {
+        talk(callback) {
             if ((this.talkIndex + 1) > this.talkCount) {
                 this.talkIndex = 0
             }
 
             let msg = talks[this.id][this.talkIndex]
+
+            if (this.bubble) {
+                this.bubble.destroy()
+            }
+
+            this.bubble = new Bubble(msg)
+
             this.talkIndex++
-            return msg
+
+            callback.call(this, this.bubble)
         }
 
     }

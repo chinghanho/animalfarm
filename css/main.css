@@ -23,6 +23,30 @@ body {
   padding: 8px 17px;
   color: hsla(0, 0%, 94%, 1);
   border-radius: 13px;
+  border: 1px solid hsla(0, 0%, 93%, 0.85);
+}
+.bubble:after, .bubble:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.bubble:after {
+  border-color: transparent;
+  border-top-color: hsla(0, 0%, 13%, 0.85);
+  border-width: 5px;
+  margin-left: -5px;
+}
+.bubble:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-top-color: hsla(0, 0%, 93%, 0.85);
+  border-width: 6px;
+  margin-left: -6px;
 }
 
 #background,
