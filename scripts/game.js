@@ -107,7 +107,6 @@
 
         tick() {
             this.currentTime = new Date().getTime()
-
             this.renderer.renderFrame()
             this.updater.update()
             requestAnimFrame(this.tick.bind(this))

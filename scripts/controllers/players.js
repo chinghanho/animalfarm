@@ -42,11 +42,14 @@
 
         onMoveTo(destination) {
             let entity = this.game.entitiesGrid.get(destination)
+
             if (isObjectBlank(entity)) {
-                log.debug('no entity')
                 return
             }
-            this.player.following(entity)
+
+            if (entity instanceof Npc) {
+                this.player.following(entity)
+            }
         }
 
         onStopPathing() {

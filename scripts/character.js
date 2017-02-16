@@ -79,22 +79,20 @@
                 let path = this.requestPathfingTo(this.newDestination)
                 this.newDestination = null
                 this.followPath(path)
-                return
+                return this.onAfterStep()
             }
 
-            if (this.isMoving()) {
-                if (this.path.length > 0) {
-                    let gridX = this.path[this.path.length - 1][0]
-                    let gridY = this.path[this.path.length - 1][1]
-                    if (this.gridX === gridX && this.gridY === gridY) {
-                        this.onStopPathing()
-                        this.idle()
-                    }
-                    else {
-                        this.path.shift()
-                        if (this.path.length > 0) {
-                            this.walk()
-                        }
+            if (this.path.length > 0) {
+                let gridX = this.path[this.path.length - 1][0]
+                let gridY = this.path[this.path.length - 1][1]
+                if (this.gridX === gridX && this.gridY === gridY) {
+                    this.onStopPathing()
+                    this.idle()
+                }
+                else {
+                    this.path.shift()
+                    if (this.path.length > 0) {
+                        this.walk()
                     }
                 }
             }
@@ -117,11 +115,6 @@
 
             let destX = this.path[0][0]
             let destY = this.path[0][1]
-
-            // if (destX === this.gridX && destY === this.gridY) {
-            //     destX = this.path[1][0]
-            //     destY = this.path[1][1]
-            // }
 
             if (this.gridX === destX && this.gridY < destY) {
                 this.orientation = 'down'
