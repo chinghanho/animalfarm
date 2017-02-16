@@ -23,10 +23,7 @@
             this.map = new _Map(this)
             this.map.set('room')
 
-            this.renderingGrid = new Grid('number', this.map)
-            this.pathingGrid   = new Grid('number', this.map)
-            this.entitiesGrid  = new Grid('object', this.map)
-
+            this.initGrids()
             this.initSprites()
             this.initPlayer(username)
             this.initItems()
@@ -39,6 +36,12 @@
             this.start()
             log.info('Game initialized')
             callbacks.onAfterStarted(this)
+        }
+
+        initGrids() {
+            this.renderingGrid = new Grid('number', this.map)
+            this.pathingGrid   = new Grid('number', this.map)
+            this.entitiesGrid  = new Grid('object', this.map)
         }
 
         initSprites() {
