@@ -66,6 +66,7 @@
                 { id: 'ground',   path: '../images/ground.png' },
                 { id: 'lipstick', path: '../images/lipstick.png' },
                 { id: 'talk',     path: '../images/talk.png' },
+                { id: 'stone',    path: '../images/vendors/stone.png' },
             ]
 
             self.images.loaded = self._diet(self.images, function (image, object) {
@@ -115,16 +116,6 @@
                         idle_right: {
                             length: 1,
                             row: 8
-                        }
-                    }
-                }},
-                { id: 'stone', path: '../images/vendors/stone.png', sprite: {
-                    width: 64,
-                    height: 64,
-                    animations: {
-                        idle_down: {
-                            length: 1,
-                            row: 1
                         }
                     }
                 }},

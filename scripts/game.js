@@ -55,10 +55,10 @@
         }
 
         initItems() {
-            let item = new Item()
-            item.setGridPosition(12, 5)
-            this.entitiesGrid.register(item)
-            this.entities.push(item)
+            // let item = new Item()
+            // item.setGridPosition(12, 5)
+            // this.entitiesGrid.register(item)
+            // this.entities.push(item)
         }
 
         initNPCs() {
