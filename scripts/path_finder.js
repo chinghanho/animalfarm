@@ -19,7 +19,6 @@
                 game.pathingGrid.set(end, 0)
                 pathing = this._getPath(start, end)
                 game.pathingGrid.set(end, 1)
-                pathing.pop()
             }
             else {
                 pathing = this._getPath(start, end)

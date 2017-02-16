@@ -42,19 +42,26 @@
 
         onMoveTo(destination) {
             let entity = this.game.entitiesGrid.get(destination)
-            this.player.setTarget(entity)
+            if (isObjectBlank(entity)) {
+                log.debug('no entity')
+                return
+            }
+            this.player.following(entity)
         }
 
         onStopPathing() {
-            if (isObjectBlank(this.player.target)) {
+            let target = this.player.target
+
+            if (!target) {
                 return
             }
-
-            let target = this.player.target
 
             if (target.talk) {
                 log.debug(target.talk())
             }
+
+            this.player.target = null
+            this.player.isFollowing = false
         }
 
     }

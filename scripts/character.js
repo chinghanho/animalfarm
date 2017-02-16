@@ -9,6 +9,7 @@
 
             this.path = null
             this.newDestination = null
+            this.isFollowing = null
             this.target = null
 
             // Callbacks
@@ -38,22 +39,35 @@
         }
 
         moveTo(destination) {
+            this.onMoveTo(destination)
+
             if (this.isMoving()) {
-                this.newDestination = destination
-                return
+                return this.continueTo(destination)
             }
 
-            this.onMoveTo(destination)
-            this.path = this.requestPathfingTo(destination)
+            let path = this.requestPathfingTo(destination)
+            this.followPath(path)
+        }
 
+        continueTo(destination) {
+            this.newDestination = destination
+        }
+
+        followPath(path) {
             // length 0: can't get the pathing arrival there
             // length 1: that means player click on him self
-            if (this.path && (this.path.length < 2)) {
+            if (path && (path.length < 2)) {
                 return this.idle()
             }
 
+            this.path = path
+
+            if (this.isFollowing) {
+                this.path.pop()
+            }
+
             this.setOrientation()
-            this.walk()
+            this.nextStep()
         }
 
         hasMoved() {
@@ -62,11 +76,10 @@
 
         nextStep() {
             if (this.isDestinationChanged()) {
-                let newPathing = this.requestPathfingTo(this.newDestination)
-                if (newPathing.length > 1) {
-                    this.path = newPathing
-                }
+                let path = this.requestPathfingTo(this.newDestination)
                 this.newDestination = null
+                this.followPath(path)
+                return
             }
 
             if (this.isMoving()) {
@@ -105,10 +118,10 @@
             let destX = this.path[0][0]
             let destY = this.path[0][1]
 
-            if (destX === this.gridX && destY === this.gridY) {
-                destX = this.path[1][0]
-                destY = this.path[1][1]
-            }
+            // if (destX === this.gridX && destY === this.gridY) {
+            //     destX = this.path[1][0]
+            //     destY = this.path[1][1]
+            // }
 
             if (this.gridX === destX && this.gridY < destY) {
                 this.orientation = 'down'
@@ -159,12 +172,9 @@
             this.animate('idle', this.idleSpeed)
         }
 
-        setTarget(target) {
+        following(target) {
             this.target = target
-        }
-
-        removeTarget() {
-            this.target = null
+            this.isFollowing = true
         }
 
     }
