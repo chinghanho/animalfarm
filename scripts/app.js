@@ -65,6 +65,7 @@
             self.images.stack = [
                 { id: 'ground',   path: '../images/ground.png' },
                 { id: 'lipstick', path: '../images/lipstick.png' },
+                { id: 'talk',     path: '../images/talk.png' },
             ]
 
             self.images.loaded = self._diet(self.images, function (image, object) {

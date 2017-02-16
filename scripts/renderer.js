@@ -46,7 +46,6 @@
         }
 
         drawCursor() {
-            this.game.cursor = this.game.images['lipstick'].image
             if (this.game.cursor && this.game.cursorPosition.length > 0) {
                 this.foregroundCtx.drawImage(this.game.cursor, this.game.cursorPosition[0], this.game.cursorPosition[1], 24, 24)
             }

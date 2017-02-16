@@ -84,6 +84,7 @@
 
             if (this.targetCellChanged(gridX, gridY)) {
                 this.setMouseGridPosition(gridX, gridY)
+                this.cursor = (this.entitiesGrid.get([gridX, gridY]) instanceof Npc) ? this.images['talk'].image : this.images['lipstick'].image
             }
         }
 
@@ -114,6 +115,7 @@
 
         start() {
             this.tick()
+            this.cursor = this.images['lipstick'].image
             this.started = true
             log.info('Game Started')
         }
