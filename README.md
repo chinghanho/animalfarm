@@ -23,3 +23,11 @@
 ### 地圖
 
 * [ ] 可以切換地圖場景
+
+## 材質製作解釋
+
+![](./explained.png)
+
+下載 [PikoPixel](http://twilightedge.com/mac/pikopixel/) 繪製 Pixel Art 工具。
+
+可以開一張 16x16 的 artboard，輸出時選擇 scale 3 增加三倍，物體超出畫格範圍沒有關係，視需求而定。
