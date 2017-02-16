@@ -28,6 +28,7 @@
 
         reload() {
             this.init()
+            return this
         }
 
         get(coordinate) {

@@ -33,7 +33,7 @@
             for (let key in map.tileset) {
                 let tiles = map.tileset[key]
                 tiles.forEach(function (tile) {
-                    self.backgroundCtx.drawImage(tile.image, tile.x * map.tileSize, tile.y * map.tileSize, map.tileSize, map.tileSize)
+                    self.backgroundCtx.drawImage(tile.image, tile.gridX * map.tileSize, tile.gridY * map.tileSize, map.tileSize, map.tileSize)
                 })
             }
         }

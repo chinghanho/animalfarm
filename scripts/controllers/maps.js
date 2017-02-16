@@ -20,20 +20,27 @@
         }
 
         onSet() {
+            let self = this
             log.debug('set map: %s', this.key)
 
-            if (this.game.renderingGrid && this.game.pathingGrid && this.game.entitiesGrid) {
-                this.game.renderingGrid.reload()
-                this.game.pathingGrid.reload()
-                this.game.entitiesGrid.reload()
+            if (self.game.renderingGrid && self.game.pathingGrid && self.game.entitiesGrid) {
+                self.game.renderingGrid.reload()
+                self.game.pathingGrid.reload().generateBlocking(self.blockings)
+                self.game.entitiesGrid.reload()
             }
             else {
-                this.game.renderingGrid = new Grid('number', this)
-                this.game.pathingGrid   = new Grid('number', this)
-                this.game.entitiesGrid  = new Grid('object', this)
+                self.game.renderingGrid = new Grid('number', self)
+                self.game.pathingGrid   = new Grid('number', self)
+                self.game.entitiesGrid  = new Grid('object', self)
+
+                self.blockings.forEach(function (tileIndex) {
+                    let tile = new Tile(tileIndex)
+                    self.game.pathingGrid.register(tile)
+                })
+
             }
 
-            this.game.renderer.drawMap()
+            self.game.renderer.drawMap()
         }
 
     }
