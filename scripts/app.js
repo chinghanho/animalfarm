@@ -121,7 +121,7 @@
                     width: 64,
                     height: 64,
                     animations: {
-                        idle: {
+                        idle_down: {
                             length: 1,
                             row: 1
                         }
@@ -131,7 +131,7 @@
                     width: 64,
                     height: 60,
                     animations: {
-                        idle: {
+                        idle_down: {
                             length: 2,
                             row: 1
                         }

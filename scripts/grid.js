@@ -22,7 +22,6 @@
         }
 
         static getWidth() {
-            // debugger
             return this.width
         }
 

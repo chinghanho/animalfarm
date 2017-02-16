@@ -38,15 +38,15 @@
             this.currentFrame.index = index
         }
 
-        isTimeToNextFrame() {
+        isTimeToNextFrame(time) {
             this._counter++
             let times = 60 / (1000 / this.sprite.speed)
             let result = (this._counter % (times / this.sprite.length)) < 1
             return result
         }
 
-        update(currentTime) {
-            if (this.isTimeToNextFrame()) {
+        update(time) {
+            if (this.isTimeToNextFrame(time)) {
                 if (!this._animated) {
                     this._animated = true
                 }

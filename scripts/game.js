@@ -61,7 +61,9 @@
         initNPCs() {
             let npc = new Npc()
             npc.setGridPosition(14, 8)
-            npc.setSprite(this.sprites['oldman'], 'idle')
+            npc.setSprite(this.sprites['oldman'], 'idle_down')
+            npc.idleSpeed = 1000
+            npc.idle()
             this.pathingGrid.register(npc)
             this.entitiesGrid.register(npc)
             this.entities.push(npc)
