@@ -39,12 +39,8 @@
 
             this.controllers = {
                 stack: [],
-                ready: function() {
-                    this.stack.forEach((controller) => controller.ready())
-                },
-                add: function (controller) {
-                    this.stack.push(controller)
-                }
+                ready: () => this.controllers.stack.forEach((controller) => controller.ready()),
+                add: (controller) => this.controllers.stack.push(controller)
             }
 
             let mapController     = new MapsController(this)
