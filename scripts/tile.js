@@ -20,6 +20,12 @@
             this.position = [this.gridX, this.gridY]
         }
 
+        static toGrid(index) {
+            let gridX = (index - 1) % 30
+            let gridY = Math.floor((index - 1) / 30)
+            return [gridX, gridY]
+        }
+
     }
 
     root.Tile = Tile

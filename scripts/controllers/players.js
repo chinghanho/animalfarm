@@ -7,7 +7,6 @@
         constructor(game, username) {
             this.game = game
             this.player = new Player(username)
-            this.player.setGridPosition(13, 8)
 
             // Callbacks
             this.player.onRequestPath = this.onRequestPath.bind(this)
@@ -26,6 +25,7 @@
 
         _onReady() {
             this.game.player = this.player
+            this.player.setGridPosition(13, 8)
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)
             this.game.entities.push(this.player)
@@ -75,6 +75,10 @@
                 if (openDoor) {
                     let key = door.object.to
                     self.game.map.set(key)
+                    let position = Tile.toGrid(door.object.toPosition)
+                    self.player.setGridPosition(position[0], position[1])
+                    self.game.entitiesGrid.register(self.player)
+                    self.game.pathingGrid.register(self.player)
                 }
             })
 
