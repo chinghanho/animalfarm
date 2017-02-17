@@ -62,17 +62,21 @@
             let self = this
             let target = self.player.target
 
-            if (!target) {
-                return
-            }
-
-            if (target.talk) {
-                target.talk(function (bubble) {
+            if (target) {
+                target.talk && target.talk(function (bubble) {
                     self.game.$bubbles.appendChild(this.bubble.element)
                     bubble.element.style.left = target.x - (bubble.element.offsetWidth / 2) + (self.game.map.tileSize / 2) + 'px'
                     bubble.element.style.top  = target.y - (bubble.element.offsetHeight) - 8 + 'px'
                 })
             }
+
+            self.game.map.doors.forEach(function (door) {
+                let openDoor = door.gridX === self.player.gridX && door.gridY === self.player.gridY
+                if (openDoor) {
+                    let key = door.object.to
+                    self.game.map.set(key)
+                }
+            })
 
             self.player.target = null
             self.player.isFollowing = false

@@ -25,20 +25,19 @@
 
             if (self.game.renderingGrid && self.game.pathingGrid && self.game.entitiesGrid) {
                 self.game.renderingGrid.reload()
-                self.game.pathingGrid.reload().generateBlocking(self.blockings)
+                self.game.pathingGrid.reload()
                 self.game.entitiesGrid.reload()
             }
             else {
                 self.game.renderingGrid = new Grid('number', self)
                 self.game.pathingGrid   = new Grid('number', self)
                 self.game.entitiesGrid  = new Grid('object', self)
-
-                self.blockings.forEach(function (tileIndex) {
-                    let tile = new Tile(tileIndex)
-                    self.game.pathingGrid.register(tile)
-                })
-
             }
+
+            self.blockings.forEach(function (tileIndex) {
+                let tile = new Tile(tileIndex)
+                self.game.pathingGrid.register(tile)
+            })
 
             self.game.renderer.drawMap()
         }

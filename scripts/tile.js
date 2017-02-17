@@ -4,7 +4,8 @@
 
     class Tile {
 
-        constructor(index, image) {
+        constructor(index, image, object) {
+            this.object   = object
             this.index    = index
             this.gridX        = null
             this.gridY        = null
