@@ -7,26 +7,17 @@
         constructor($app) {
             this.$elem = $app
             this.triedStartingGame = false
-            this.gameStarted = false
+            this.spritesReady = false
+            this.imagesReady  = false
+            this.mapDataReady = false
             this.tmp = null
-            this.images = {
-                stack: [],
-                ready: false,
-                counter: 0,
-                loaded: {}
-            }
-            this.sprites = {
-                stack: [],
-                ready: false,
-                counter: 0,
-                loaded: {}
-            }
+            this.mapData = null
             this.preload()
         }
 
         tryingStartGame(name, elements, next) {
             this.triedStartingGame = true
-            if (this.images.ready && this.sprites.ready) {
+            if (this.spritesReady && this.imagesReady && this.mapDataReady) {
                 this.startGame(name, elements, next)
             }
             else {
@@ -40,11 +31,11 @@
 
         startGame(name, elements, next) {
             let self = this
-            this.gameStarted = true
             self.game = new Game(name, elements, {
                 onBeforeStarted: function (game) {
-                    game.images = self.images.loaded
-                    game.sprites = self.sprites.loaded
+                    game.images = self.images
+                    game.sprites = self.sprites
+                    game.mapData = self.mapData
                 },
                 onAfterStarted: next
             })
@@ -55,33 +46,69 @@
         }
 
         preload() {
-            this.loadImages()
-            this.loadSprites()
+            let self, promises
+
+            self = this
+
+            promises = [
+                self.loadImages(),
+                self.loadSprites(),
+                self.loadMapData()
+            ].reduce(function (arr, p) {
+                arr.push(p)
+                return arr
+            }, [])
+
+            Promise.all(promises).then(function (values) {
+                let response
+                self.images   = values[0]
+                self.sprites  = values[1]
+                response = values[2]
+                return response
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                self.mapData = data
+                if (self.triedStartingGame) {
+                    self.startGame(self.tmp.name, self.tmp.elements, self.tmp.next)
+                }
+            })
         }
 
         loadImages() {
-            let self = this
 
-            self.images.stack = [
+            let self, imageObjects, promise
+
+            self = this
+
+            imageObjects = [
                 { id: 'ground',   path: '../images/ground.png' },
                 { id: 'lipstick', path: '../images/lipstick.png' },
                 { id: 'talk',     path: '../images/talk.png' },
                 { id: 'stone',    path: '../images/vendors/stone.png' },
                 { id: 'rock-ground',    path: '../images/vendors/rock-ground.png' },
             ]
+            promise = new Promise(function (resolve, reject) {
 
-            self.images.loaded = self._diet(self.images, function (image, object) {
-                return {
-                    id: object.id,
-                    image: image,
-                }
+                self.imagesParser(imageObjects, resolve, reject, function (object, image) {
+                    return {
+                        id: object.id,
+                        image: image
+                    }
+                })
+
             })
+
+            return promise
         }
 
         loadSprites() {
-            let self = this
 
-            self.sprites.stack = [
+            let self, spriteObjects, promise
+
+            self = this
+
+            spriteObjects = [
                 { id: 'players', path: '../images/vendors/players.png', sprite: {
                     width: 64,
                     height: 110,
@@ -132,35 +159,54 @@
                 }}
             ]
 
-            self.sprites.loaded = self._diet(self.sprites, function (image, object) {
-                return {
-                    id: object.id,
-                    image: image,
-                    width: object.sprite.width,
-                    height: object.sprite.height,
-                    animations: object.sprite.animations,
-                }
+            promise = new Promise(function (resolve, reject) {
+
+                self.imagesParser(spriteObjects, resolve, reject, function (object, image) {
+                    return {
+                        id: object.id,
+                        image: image,
+                        width: object.sprite.width,
+                        height: object.sprite.height,
+                        animations: object.sprite.animations,
+                    }
+                })
+
             })
+
+            return promise
         }
 
-        _diet(qq, callback) {
-            let self = this
-            return qq.stack.inject(function (result, mm) {
+        loadMapData() {
+            return fetch('/map/world.json')
+        }
+
+        imagesParser(collection, resolve, reject, callback) {
+
+            let counter, images
+
+            counter = 0
+            images  = {}
+
+            collection.forEach(function (object) {
+
                 let image = new Image()
                 image.onload = function () {
-                    qq.counter++
-                    if (qq.stack.length === qq.counter) {
-                        qq.ready = true
-                        if (!self.gameStarted && self.triedStartingGame) {
-                            self.startGame(self.tmp.name, self.tmp.elements, self.tmp.next)
-                        }
-                    }
-                }
-                image.src = mm.path
-                result[mm.id] = callback(image, mm)
 
-                return result
-            }, {})
+                    counter++
+
+                    let result = callback(object, image)
+                    images[object.id] = result
+
+                    if (collection.length === counter) {
+                        resolve(images)
+                    }
+
+                }
+                image.src = object.path
+
+            })
+
+
         }
 
     }

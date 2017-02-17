@@ -23,6 +23,7 @@
             // assigned from app.js file
             this.images
             this.sprites
+            this.mapData
 
             this.initControllers()
 
