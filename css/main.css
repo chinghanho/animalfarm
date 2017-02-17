@@ -55,6 +55,7 @@ body {
   position: absolute;
   display: none;
   cursor: none;
+  user-select: none;
 }
 
 .initialized #background,
