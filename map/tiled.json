@@ -30,7 +30,7 @@
         {
          "columns":3,
          "firstgid":1,
-         "image":"..\/code\/game\/images\/tilesheet.png",
+         "image":"..\/images\/tilesheet.png",
          "imageheight":64,
          "imagewidth":192,
          "margin":0,
