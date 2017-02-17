@@ -8,13 +8,14 @@
             if (!msg) {
                 log.error('must provide message for new Bubble')
             }
+            this.init(msg, wait)
+        }
 
+        init(msg, wait) {
             this.msg = msg
             this.wait = wait || 5000 // ms
             this.isOver = false
-
             this.element = this.getElement()
-
             this.countdown()
         }
 
@@ -29,7 +30,11 @@
                 self.element.remove()
                 self.isOver = true
                 clearTimeout(self.timer)
-            }, this.wait)
+            }, self.wait)
+        }
+
+        update(msg, wait) {
+            this.init(msg, wait)
         }
 
         destroy() {
