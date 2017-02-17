@@ -25,6 +25,13 @@
             this.$entities.height   = this.game.map.height
             this.$foreground.height = this.game.map.height
             this.drawCursor()
+            this.drawBackground()
+        }
+
+        drawBackground() {
+            this.backgroundCtx.fillStyle = 'black'
+            this.backgroundCtx.rect(0, 0, this.game.map.width, this.game.map.height)
+            this.backgroundCtx.fill()
         }
 
         drawMap() {
