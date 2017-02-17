@@ -97,10 +97,6 @@
               , dx      = entity.x - offsetX
               , dy      = entity.y - offsetY
 
-            // if (entity instanceof Player) {
-            //     log.debug([sx, sy])
-            // }
-
             this.entitiesCtx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
 
