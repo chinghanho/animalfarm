@@ -70,8 +70,8 @@
 
             this.setMousePosition(event.offsetX, event.offsetY)
 
-            gridX = Math.floor(this.cursorPosition[0] / this.renderingGrid.width  * this.renderingGrid.tilesX)
-            gridY = Math.floor(this.cursorPosition[1] / this.renderingGrid.height * this.renderingGrid.tilesY)
+            gridX = Math.floor(this.cursorPosition[0] / this.map.width  * this.map.tilesX)
+            gridY = Math.floor(this.cursorPosition[1] / this.map.height * this.map.tilesY)
 
             if (this.targetCellChanged(gridX, gridY)) {
                 this.setMouseGridPosition(gridX, gridY)
