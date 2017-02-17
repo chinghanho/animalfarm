@@ -8,8 +8,9 @@
             this.env = env || 'development'
 
             this.info  = console.info
-            this.debug   = console.log
+            this.debug = console.log
             this.error = console.error
+            this.count = console.count
         }
 
     }
