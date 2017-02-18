@@ -46,6 +46,7 @@
             self.pathingGrid   = new Grid('number', self.map)
             self.entitiesGrid  = new Grid('object', self.map)
 
+            // filling rendering grid
             self.map.data.data.forEach(function (id, index) {
                 let gridX = index % 100
                 let gridY = Math.floor(index / 100)
@@ -55,6 +56,16 @@
                 }
 
                 self.renderingGrid.set([gridX, gridY], id)
+            })
+
+            // blockings
+            self.map.data.blockings.forEach(function (blocking, index) {
+                let gridX = index % 100
+                let gridY = Math.floor(index / 100)
+
+                if (blocking !== 0) {
+                    self.pathingGrid.set([gridX, gridY], 1)
+                }
             })
         }
 

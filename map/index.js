@@ -6,8 +6,7 @@ let _    = require('lodash')
 
 let json = {}
 
-let layersData, doorsData
-  , width, height
+let layersData, doorsData, blockingsDoor, width, height
 
 layersData = getLayerData(data)
 layersData = combineLayers(layersData)
@@ -15,11 +14,14 @@ layersData = combineLayers(layersData)
 doorsData = getDoorsData(data)
 doorsData = parseDoorsData(doorsData)
 
+blockingsDoor = getBlockings(data)
+
 json['width']  = data['width']
 json['height'] = data['height']
 json['tilewidth'] = data['tilewidth']
 json['data'] = layersData
 json['doors'] = doorsData
+json['blockings'] = blockingsDoor
 
 output(json)
 
@@ -28,7 +30,7 @@ function getLayerData(data) {
 
     return data['layers'].reduce((result, layer) => {
 
-        if (layer['type'] === 'tilelayer') {
+        if (layer['type'] === 'tilelayer' && !(layer['name'] === 'blocking')) {
             result.push(layer.data)
         }
 
@@ -54,6 +56,12 @@ function combineLayers(data) {
         }
     })
 
+}
+
+function getBlockings(data) {
+    return data['layers'].find(function (layer) {
+        return (layer['type'] === 'tilelayer') && (layer['name'] === 'blocking')
+    }).data
 }
 
 function getDoorsData(data) {
