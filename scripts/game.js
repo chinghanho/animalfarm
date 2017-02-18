@@ -25,18 +25,56 @@
             this.sprites
             this.mapData
 
-            this.initControllers()
+            this.initMap()
+            this.initPlayer()
+            this.init(username)
 
             this.pathFinder = new PathFinder(this)
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
             this.updater    = new Updater(this)
+            this.camera     = new Camera(this)
 
             this.start()
             log.info('Game initialized')
             callbacks.onAfterStarted(this)
         }
 
-        initControllers() {
+        initMap() {
+            let self = this
+            self.map = new _Map(self)
+            self.renderingGrid = new Grid('number', self.map)
+            self.pathingGrid   = new Grid('number', self.map)
+            self.entitiesGrid  = new Grid('object', self.map)
+
+            self.map.data.data.forEach(function (id, index) {
+                let gridX = index % 100
+                let gridY = Math.floor(index / 100)
+
+                if (Array.isArray(id)) {
+                    self.renderingGrid.set([gridX, gridY], id)
+                }
+
+                self.renderingGrid.set([gridX, gridY], id)
+            })
+        }
+
+        forEachVisibleTiles(callback) {
+            let self = this
+            self.camera.forEachVisiblePositions(function (x, y, index) {
+                callback.call(self, self.renderingGrid.get([x, y]), index)
+            })
+        }
+
+        initPlayer() {
+            //
+        }
+
+        init(username) {
+
+            this.cursor = this.images['lipstick'].image
+            for (let key in this.sprites) {
+                this.sprites[key] = new Sprite(this.sprites[key], this.map.tileSize)
+            }
 
             this.controllers = {
                 stack: [],
@@ -44,14 +82,10 @@
                 add: (controller) => this.controllers.stack.push(controller)
             }
 
-            let mapController     = new MapsController(this)
-            let spritesController = new SpritesController(this)
             let playersController = new PlayersController(this, username)
             let itemsController   = new ItemsController(this)
             let npcsController    = new NpcsController(this)
 
-            this.controllers.add(mapController)
-            this.controllers.add(spritesController)
             this.controllers.add(playersController)
             this.controllers.add(itemsController)
             this.controllers.add(npcsController)
@@ -102,7 +136,9 @@
 
         start() {
             this.renderer.ready()
+            this.camera.setGridPosition(0, 20)
             this.controllers.ready()
+            this.renderer.drawTerrain()
             this.tick()
             this.started = true
             log.info('Game Started')

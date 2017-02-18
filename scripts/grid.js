@@ -10,24 +10,18 @@
                 log.error('not given the type of grid')
             }
 
-            this.type   = type
-            this.map    = map
-
+            this.type     = type
+            this.map      = map
             this.width    = map.width
             this.height   = map.height
             this.tileSize = map.tileSize
-            this.tilesX   = map.tilesX
-            this.tilesY   = map.tilesY
+            this.tilesX   = map.data.width
+            this.tilesY   = map.data.height
 
             this.grid = []
 
             this.init()
 
-            return this
-        }
-
-        reload() {
-            this.init()
             return this
         }
 
@@ -40,7 +34,12 @@
         set(coordinate, value) {
             let x = coordinate[0]
             let y = coordinate[1]
-            this.grid[y][x] = value
+            try {
+                this.grid[y][x] = value
+            }
+            catch(e) {
+                debugger
+            }
             return this
         }
 

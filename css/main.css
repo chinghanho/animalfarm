@@ -58,8 +58,8 @@ body {
   user-select: none;
 }
 
-.initialized #background,
-.initialized #entities,
-.initialized #foreground {
+.started #background,
+.started #entities,
+.started #foreground {
   display: block;
 }

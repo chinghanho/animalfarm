@@ -26,23 +26,54 @@
             this.$foreground.height = this.game.map.height
             this.drawCursor()
             this.drawBackground()
+            this.tilesheet = this.game.images['tilesheet'].image
         }
 
         drawBackground() {
+            log.debug('draw background')
             this.backgroundCtx.fillStyle = 'black'
             this.backgroundCtx.rect(0, 0, this.game.map.width, this.game.map.height)
             this.backgroundCtx.fill()
         }
 
-        drawMap() {
+        drawTerrain() {
             let self = this
             let map  = self.game.map
-            for (let key in map.tileset) {
-                let tiles = map.tileset[key]
-                tiles.forEach(function (tile) {
-                    self.backgroundCtx.drawImage(tile.image, tile.gridX * map.tileSize, tile.gridY * map.tileSize, map.tileSize, map.tileSize)
-                })
-            }
+            self.game.forEachVisibleTiles(function (id, index) {
+
+                if (id === 0) {
+                    return
+                }
+
+                if (Array.isArray(id)) {
+                    id.forEach(function (_id) {
+                        self.drawTile(self.backgroundCtx, _id, self.tilesheet, index)
+                    })
+                }
+
+                self.drawTile(self.backgroundCtx, id, self.tilesheet, index)
+            })
+        }
+
+        drawTile(ctx, id, tilesheet, index) {
+            let tilewidth, n , sCol , sRow , dGridX , dGridY , sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
+
+            tilewidth = this.game.map.data.tilewidth
+            n         = tilesheet.width / tilewidth
+            sCol      = (id - 1) % n
+            sRow      = Math.floor((id - 1) / n)
+            dGridX    = index % this.game.map.tilesX
+            dGridY    = Math.floor(index / this.game.map.tilesX)
+            sx        = sCol * tilewidth
+            sy        = sRow * tilewidth
+            sWidth    = tilewidth
+            sHeight   = tilewidth
+            dx        = dGridX * this.game.map.tileSize
+            dy        = dGridY * this.game.map.tileSize
+            dWidth    = this.game.map.tileSize
+            dHeight   = this.game.map.tileSize
+
+            ctx.drawImage(tilesheet, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
         }
 
         drawMouseTargetCell() {

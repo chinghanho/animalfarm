@@ -52,11 +52,11 @@
                 return log.error('Username format invalid')
             }
 
-            app.tryingStartGame(username, [$background, $entities, $foreground, $bubbles], function () {
-                $app.classList.add('initialized')
-                $welcome.remove()
-            })
+            $app.classList.add('started')
+            $welcome.remove()
 
+            app.tryingStartGame(username, [$background, $entities, $foreground, $bubbles], function () {
+            })
         }
 
     }

@@ -87,6 +87,7 @@
                 { id: 'talk',     path: '../images/talk.png' },
                 { id: 'stone',    path: '../images/vendors/stone.png' },
                 { id: 'rock-ground',    path: '../images/vendors/rock-ground.png' },
+                { id: 'tilesheet',    path: '../images/tilesheet.png' },
             ]
             promise = new Promise(function (resolve, reject) {
 

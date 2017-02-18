@@ -7,6 +7,7 @@ let _    = require('lodash')
 let json = {}
 
 let layersData, doorsData
+  , width, height
 
 layersData = getLayerData(data)
 layersData = combineLayers(layersData)
@@ -14,6 +15,9 @@ layersData = combineLayers(layersData)
 doorsData = getDoorsData(data)
 doorsData = parseDoorsData(doorsData)
 
+json['width']  = data['width']
+json['height'] = data['height']
+json['tilewidth'] = data['tilewidth']
 json['data'] = layersData
 json['doors'] = doorsData
 

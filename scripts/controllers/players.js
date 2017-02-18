@@ -70,18 +70,6 @@
                 })
             }
 
-            self.game.map.doors.forEach(function (door) {
-                let openDoor = door.gridX === self.player.gridX && door.gridY === self.player.gridY
-                if (openDoor) {
-                    let key = door.object.to
-                    self.game.map.set(key)
-                    let position = Tile.toGrid(door.object.toPosition)
-                    self.player.setGridPosition(position[0], position[1])
-                    self.game.entitiesGrid.register(self.player)
-                    self.game.pathingGrid.register(self.player)
-                }
-            })
-
             self.player.target = null
             self.player.isFollowing = false
         }
