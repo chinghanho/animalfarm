@@ -14,17 +14,9 @@
             this.player.onAfterStep   = this.onAfterStep.bind(this)
             this.player.onMoveTo      = this.onMoveTo.bind(this)
             this.player.onStopPathing = this.onStopPathing.bind(this)
-
-            // properties
-            this.player.color = 'hsla(107, 68%, 55%, 1)'
         }
 
         ready() {
-            this._onReady()
-        }
-
-        _onReady() {
-            this.game.player = this.player
             this.player.setGridPosition(13, 8)
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)

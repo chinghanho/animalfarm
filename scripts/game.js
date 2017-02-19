@@ -76,11 +76,12 @@
             })
         }
 
-        initPlayer() {
-            //
+        initPlayer(username) {
+            this.playerLogic = new PlayerLogic(this, username)
+            this.player      = this.playerLogic.player
         }
 
-        init(username) {
+        init() {
 
             this.cursor = this.images['lipstick'].image
             for (let key in this.sprites) {
@@ -93,11 +94,9 @@
                 add: (controller) => this.controllers.stack.push(controller)
             }
 
-            let playerLogic = new PlayerLogic(this, username)
             let itemLogic   = new ItemLogic(this)
             let npcLogic    = new NpcLogic(this)
 
-            this.controllers.add(playerLogic)
             this.controllers.add(itemLogic)
             this.controllers.add(npcLogic)
         }
@@ -148,6 +147,7 @@
         start() {
             this.renderer.ready()
             this.camera.setGridPosition(0, 20)
+            this.playerLogic.ready()
             this.controllers.ready()
             this.renderer.drawTerrain()
             this.tick()
