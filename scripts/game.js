@@ -26,8 +26,8 @@
             this.mapData
 
             this.initMap()
-            this.initPlayer()
-            this.init(username)
+            this.initPlayer(username)
+            this.init()
 
             this.pathFinder = new PathFinder(this)
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
@@ -93,13 +93,13 @@
                 add: (controller) => this.controllers.stack.push(controller)
             }
 
-            let playersController = new PlayersController(this, username)
-            let itemsController   = new ItemsController(this)
-            let npcsController    = new NpcsController(this)
+            let playerLogic = new PlayerLogic(this, username)
+            let itemLogic   = new ItemLogic(this)
+            let npcLogic    = new NpcLogic(this)
 
-            this.controllers.add(playersController)
-            this.controllers.add(itemsController)
-            this.controllers.add(npcsController)
+            this.controllers.add(playerLogic)
+            this.controllers.add(itemLogic)
+            this.controllers.add(npcLogic)
         }
 
         targetCellChanged(gridX, gridY) {

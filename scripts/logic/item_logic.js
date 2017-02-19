@@ -2,7 +2,7 @@
 
     'use strict'
 
-    class ItemsController {
+    class ItemLogic {
 
         constructor(game) {
             this.game = game
@@ -21,6 +21,6 @@
 
     }
 
-    root.ItemsController = ItemsController
+    root.ItemLogic = ItemLogic
 
 })(this)

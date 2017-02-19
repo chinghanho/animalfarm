@@ -1,6 +1,6 @@
 (function (root) {
 
-    class NpcsController {
+    class NpcLogic {
 
         constructor(game) {
             this.game = game
@@ -23,6 +23,6 @@
 
     }
 
-    root.NpcsController = NpcsController
+    root.NpcLogic = NpcLogic
 
 })(this)

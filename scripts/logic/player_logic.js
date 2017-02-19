@@ -2,7 +2,7 @@
 
     'use strict'
 
-    class PlayersController {
+    class PlayerLogic {
 
         constructor(game, username) {
             this.game = game
@@ -76,6 +76,6 @@
 
     }
 
-    root.PlayersController = PlayersController
+    root.PlayerLogic = PlayerLogic
 
 })(this)
