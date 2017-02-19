@@ -44,11 +44,15 @@
                  "name":"",
                  "properties":
                     {
+                     "cx":0,
+                     "cy":0,
                      "x":15,
                      "y":0
                     },
                  "propertytypes":
                     {
+                     "cx":"int",
+                     "cy":"int",
                      "x":"int",
                      "y":"int"
                     },

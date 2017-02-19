@@ -88,7 +88,9 @@ function parseDoorsData(data) {
             x: object.x,
             y: object.y,
             dx: object.properties.x,
-            dy: object.properties.y
+            dy: object.properties.y,
+            cx: object.properties.cx,
+            cy: object.properties.cy,
         }
 
     })
