@@ -24,6 +24,17 @@
 
 * [ ] 可以切換地圖場景
 
+## 開發測試
+
+在 Github 上使用 fork 功能將 repo 建立到自己帳號下，再 clone 到自己本機端。
+
+```
+cd animalfarm
+python -m SimpleHTTPServer
+```
+
+在瀏覽器打開網址 [127.0.0.1:8000](http://127.0.0.1:8000)。
+
 ## 材質製作解釋
 
 ![](./explained.png)
