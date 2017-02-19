@@ -39,7 +39,7 @@
         drawTerrain() {
             let self = this
             let map  = self.game.map
-            self.game.forEachVisibleTiles(function (id, index) {
+            self.game.forEachVisibleRenderingGrid(function (id, index) {
 
                 if (id === 0) {
                     return

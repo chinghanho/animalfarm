@@ -69,7 +69,7 @@
             })
         }
 
-        forEachVisibleTiles(callback) {
+        forEachVisibleRenderingGrid(callback) {
             let self = this
             self.camera.forEachVisiblePositions(function (x, y, index) {
                 callback.call(self, self.renderingGrid.get([x, y]), index)
