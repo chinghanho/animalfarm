@@ -116,6 +116,10 @@
                 return
             }
 
+            if (this.isOutOfCameraBounds(entity.gridX, entity.gridY)) {
+                return
+            }
+
             let sx      = frame.x
               , sy      = frame.y
               , image   = entity.sprite.image
@@ -129,6 +133,15 @@
               , dy      = entity.y - offsetY
 
             this.entitiesCtx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+        }
+
+        isOutOfCameraBounds(gridX, gridY) {
+            let minX = this.game.camera.gridX
+            let maxX = this.game.camera.gridX + 30
+            let minY = this.game.camera.gridY
+            let maxY = this.game.camera.gridY + 20
+
+            return !((gridX >= minX && gridX <= maxX) && (gridY >= minY && gridY <= maxY))
         }
 
         clearScreen(ctx) {

@@ -125,7 +125,7 @@
         }
 
         setMouseGridPosition(gridX, gridY) {
-            this.cursorGridPosition = [gridX, gridY]
+            this.cursorGridPosition = [gridX + this.camera.gridX, gridY + this.camera.gridY]
             log.debug(this.cursorGridPosition)
         }
 

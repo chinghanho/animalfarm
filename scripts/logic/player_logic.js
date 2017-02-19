@@ -14,10 +14,11 @@
             this.player.onAfterStep   = this.onAfterStep.bind(this)
             this.player.onMoveTo      = this.onMoveTo.bind(this)
             this.player.onStopPathing = this.onStopPathing.bind(this)
+            this.player.onSetGridPosition = this.onSetGridPosition.bind(this)
         }
 
         ready() {
-            this.player.setGridPosition(13, 8)
+            this.player.setGridPosition(13, 28)
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)
             this.game.entities.push(this.player)
@@ -64,6 +65,11 @@
 
             self.player.target = null
             self.player.isFollowing = false
+        }
+
+        onSetGridPosition(gridX, gridY) {
+            this.player.x = (this.player.gridX - this.game.camera.gridX) * this.game.map.tileSize
+            this.player.y = (this.player.gridY - this.game.camera.gridY) * this.game.map.tileSize
         }
 
     }

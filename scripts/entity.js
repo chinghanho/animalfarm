@@ -9,6 +9,9 @@
             this.y     = null
             this.gridX = null
             this.gridY = null
+
+            // Callbacks
+            this.onSetGridPosition = null
         }
 
         setPosition(x, y) {
@@ -19,7 +22,9 @@
         setGridPosition(n, m) {
             this.gridX = n
             this.gridY = m
-            this.setPosition(n * 32, m * 32)
+            if (this.onSetGridPosition) {
+                this.onSetGridPosition(n, m)
+            }
         }
 
         setSprite(sprite, defaultKey) {
