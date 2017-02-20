@@ -42,31 +42,9 @@
         initMap() {
             let self = this
             self.map = new _Map(self)
-            self.renderingGrid = new Grid('number', self.map)
-            self.pathingGrid   = new Grid('number', self.map)
-            self.entitiesGrid  = new Grid('object', self.map)
-
-            // filling rendering grid
-            self.map.data.data.forEach(function (id, index) {
-                let gridX = index % 100
-                let gridY = Math.floor(index / 100)
-
-                if (Array.isArray(id)) {
-                    self.renderingGrid.set([gridX, gridY], id)
-                }
-
-                self.renderingGrid.set([gridX, gridY], id)
-            })
-
-            // blockings
-            self.map.data.blockings.forEach(function (blocking, index) {
-                let gridX = index % 100
-                let gridY = Math.floor(index / 100)
-
-                if (blocking !== 0) {
-                    self.pathingGrid.set([gridX, gridY], 1)
-                }
-            })
+            self.renderingGrid = self.map.renderingGrid
+            self.pathingGrid   = self.map.pathingGrid
+            self.entitiesGrid  = self.map.entitiesGrid
         }
 
         forEachVisibleRenderingGrid(callback) {
