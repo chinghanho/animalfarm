@@ -77,8 +77,8 @@
         }
 
         drawMouseTargetCell() {
-            let gridX = this.game.cursorGridPosition[0]
-            let gridY = this.game.cursorGridPosition[1]
+            let gridX = this.game.cursorGridPosition[0] - this.game.camera.gridX
+            let gridY = this.game.cursorGridPosition[1] - this.game.camera.gridY
             this.drawGridCell(gridX, gridY, 'hsla(3, 71%, 56%, 1)')
         }
 
