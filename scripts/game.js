@@ -116,7 +116,7 @@
 
             if (this.targetCellChanged(gridX, gridY)) {
                 this.setMouseGridPosition(gridX, gridY)
-                this.cursor = (this.entitiesGrid.get([gridX, gridY]) instanceof Npc) ? this.images['talk'].image : this.images['lipstick'].image
+                this.cursor = (this.entitiesGrid.get(this.cursorGridPosition) instanceof Npc) ? this.images['talk'].image : this.images['lipstick'].image
             }
         }
 
