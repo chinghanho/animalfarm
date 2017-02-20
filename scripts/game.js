@@ -132,6 +132,16 @@
             log.info('Game Started')
         }
 
+        gridPositionToTileIndex(gridX, gridY) {
+            return (gridY * this.map.tilesX) + gridX + 1
+        }
+
+        positionToGridPosition(x, y) {
+            let gridX = x / this.map.width * this.map.tilesX
+            let gridY = y / this.map.height * this.map.tilesY
+            return [gridX, gridY]
+        }
+
     }
 
     root.Game = Game

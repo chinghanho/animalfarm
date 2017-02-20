@@ -58,8 +58,24 @@
         initDoors() {
             let self = this
             self.data.doors.forEach(function (door) {
-                self.doors.push(door)
+
+                let doorObject = {
+                    x: door.x,
+                    y: door.y,
+                    gridX: Math.floor(door.x / (self.data.width * self.tileSize)  * self.data.width) / 2,
+                    gridY: Math.floor(door.y / (self.data.height * self.tileSize) * self.data.height) / 2,
+                    destX: door.dx,
+                    destY: door.dy,
+                    cameraX: door.cx,
+                    cameraY: door.cy,
+                }
+
+                self.doors.push(doorObject)
             })
+        }
+
+        isDoor(gridX, gridY) {
+            return this.doors.find((door) => door.gridX === gridX && door.gridY === gridY)
         }
 
     }

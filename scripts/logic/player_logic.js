@@ -63,6 +63,17 @@
                 })
             }
 
+            let door
+            if (door = self.game.map.isDoor(self.player.gridX, self.player.gridY)) {
+                self.game.camera.setGridPosition(door.cameraX, door.cameraY)
+                self.game.renderer.drawTerrain()
+                self.game.entitiesGrid.unregister(self.player)
+                self.game.pathingGrid.unregister(self.player)
+                self.player.setGridPosition(door.destX, door.destY)
+                self.game.entitiesGrid.register(self.player)
+                self.game.pathingGrid.register(self.player)
+            }
+
             self.player.target = null
             self.player.isFollowing = false
         }
