@@ -133,8 +133,7 @@
          * Process game logic when the player triggers a click event during the game.
          */
         click() {
-            let destination = [this.cursorGridPosition[0], this.cursorGridPosition[1]]
-            this.player.moveTo(destination)
+            this.player.moveTo(this.cursorGridPosition)
         }
 
         tick() {
