@@ -8,18 +8,8 @@
             super()
         }
 
-        animate(key) {
-            let anime = this.sprite.animations[key]
-
-            if (!anime) {
-                return
-            }
-
-            this.animation.extends({
-                length: anime.length,
-                row:    anime.row,
-                speed:  800
-            })
+        animate(key, speed) {
+            super.animate(key, speed)
         }
 
     }

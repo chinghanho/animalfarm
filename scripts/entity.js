@@ -32,6 +32,20 @@
             this.animation = this.sprite.setAnimation(defaultKey)
         }
 
+        animate(key, speed) {
+            let anime = this.sprite.animations[key]
+
+            if (!anime) {
+                return
+            }
+
+            this.animation.extends({
+                length: anime.length,
+                row:    anime.row,
+                speed:  speed
+            })
+        }
+
     }
 
     root.Entity = Entity

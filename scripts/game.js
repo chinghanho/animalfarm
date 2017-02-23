@@ -115,7 +115,7 @@
             this.entitiesGrid.register(item)
             this.entities.push(item)
             item.setSprite(this.sprites['axe'], 'idle')
-            item.animate('idle')
+            item.animate('idle', 800)
         }
 
         /**

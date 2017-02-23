@@ -142,17 +142,7 @@
 
         animate(key, speed) {
             key += '_' + this.orientation
-            let anime = this.sprite.animations[key]
-
-            if (!anime) {
-                return
-            }
-
-            this.animation.extends({
-                length: anime.length,
-                row:    anime.row,
-                speed:  speed
-            })
+            super.animate(key, speed)
         }
 
         walk() {
