@@ -157,6 +157,16 @@
                             row: 1
                         }
                     }
+                }},
+                { id: "axe", path: "../images/axe.png", sprite: {
+                    width: 64,
+                    height: 64,
+                    animations: {
+                        idle: {
+                            length: 4,
+                            row: 1
+                        }
+                    }
                 }}
             ]
 

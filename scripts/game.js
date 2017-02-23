@@ -110,8 +110,12 @@
         createItem(position) {
             let item = new Item()
             item.setGridPosition(position[0], position[1])
+            item.x = (item.gridX - this.camera.gridX) * this.map.tileSize
+            item.y = (item.gridY - this.camera.gridY) * this.map.tileSize
             this.entitiesGrid.register(item)
             this.entities.push(item)
+            item.setSprite(this.sprites['axe'], 'idle')
+            item.animate('idle')
         }
 
         /**
