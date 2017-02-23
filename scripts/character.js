@@ -18,6 +18,7 @@
             this.onHasMoved    = null
             this.onMoveTo      = null
             this.onStopPathing = null
+            this.onFollowing   = null
 
             // Speeds
             this.idleSpeed = 200
@@ -63,7 +64,7 @@
             this.path = path
 
             if (this.isFollowing) {
-                this.path.pop()
+                this.onFollowing()
             }
 
             this.setOrientation()

@@ -13,6 +13,7 @@
             this.player.onHasMoved    = this.onHasMoved.bind(this)
             this.player.onAfterStep   = this.onAfterStep.bind(this)
             this.player.onMoveTo      = this.onMoveTo.bind(this)
+            this.player.onFollowing   = this.onFollowing.bind(this)
             this.player.onStopPathing = this.onStopPathing.bind(this)
             this.player.onSetGridPosition = this.onSetGridPosition.bind(this)
         }
@@ -46,8 +47,12 @@
                 return
             }
 
-            if (entity instanceof Npc) {
-                this.player.following(entity)
+            this.player.following(entity)
+        }
+
+        onFollowing() {
+            if (this.player.target instanceof Npc) {
+                this.player.path.pop()
             }
         }
 
@@ -55,7 +60,7 @@
             let self = this
             let target = self.player.target
 
-            if (target) {
+            if (target && target instanceof Npc) {
                 target.talk && target.talk(function (bubble) {
                     self.game.$bubbles.appendChild(this.bubble.element)
                     bubble.element.style.left = target.x - (bubble.element.offsetWidth / 2) + (self.game.map.tileSize / 2) + 'px'
