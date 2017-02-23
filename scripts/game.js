@@ -107,6 +107,13 @@
             log.debug(this.cursorGridPosition)
         }
 
+        createItem(position) {
+            let item = new Item()
+            item.setGridPosition(position[0], position[1])
+            this.entitiesGrid.register(item)
+            this.entities.push(item)
+        }
+
         /**
          * Process game logic when the player triggers a click event during the game.
          */

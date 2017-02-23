@@ -13,10 +13,7 @@
         }
 
         _onReady() {
-            // let item = new Item()
-            // item.setGridPosition(12, 5)
-            // this.game.entitiesGrid.register(item)
-            // this.game.entities.push(item)
+            this.game.createItem([12, 26])
         }
 
     }
