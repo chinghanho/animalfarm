@@ -5,6 +5,9 @@
     class Entity {
 
         constructor(options) {
+
+            includes(this, Gridable)
+
             this.x     = 0
             this.y     = 0
             this.gridX = 0
@@ -25,32 +28,6 @@
         setPosition(x, y) {
             this.x = x
             this.y = y
-        }
-
-        /*
-            deprecate soon...
-         */
-        setGridPosition(n, m) {
-            this.gridX = n
-            this.gridY = m
-            if (this.onSetGridPosition) {
-                this.onSetGridPosition(n, m)
-            }
-        }
-
-        setGridPoint(...args) {
-            if (args.length > 2 || args.length < 1) {
-                throw new Error('Expected 1 or 2 arguments, got ' + args.length + '.')
-            }
-
-            if (args.length === 2) {
-                this.gridX = args[0]
-                this.gridY = args[1]
-            }
-            else { // args.length === 1
-                this.gridX = args[0][0]
-                this.gridY = args[0][1]
-            }
         }
 
         setSprite(sprite, defaultKey) {

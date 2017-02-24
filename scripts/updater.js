@@ -83,14 +83,14 @@
         _onMoveXEnd(map) {
             this.hasMoved()
             let gridX = Math.floor(this.movement.endValue / map.width  * map.tilesX) + map.game.camera.gridX
-            this.setGridPosition(gridX, this.gridY)
+            this.setGridPoint(gridX, this.gridY)
             this.nextStep()
         }
 
         _onMoveYEnd(map) {
             this.hasMoved()
             let gridY = Math.floor(this.movement.endValue / map.height  * map.tilesY) + map.game.camera.gridY
-            this.setGridPosition(this.gridX, gridY)
+            this.setGridPoint(this.gridX, gridY)
             this.nextStep()
         }
 

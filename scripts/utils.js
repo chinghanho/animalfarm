@@ -16,3 +16,7 @@ window.requestAnimFrame = (function(){
             window.setTimeout(callback, 1000 / 60);
           };
 })();
+
+window.includes = function (self, module) {
+    Object.assign(self, module)
+}

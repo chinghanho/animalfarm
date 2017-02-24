@@ -5,6 +5,9 @@
     class Camera {
 
         constructor(game, options) {
+
+            includes(this, Gridable)
+
             this.game = game
             this.x = 0
             this.y = 0
@@ -20,21 +23,6 @@
         setPosition(position) {
             this.x = position[0]
             this.y = position[1]
-        }
-
-        setGridPoint(...args) {
-            if (args.length > 2 || args.length < 1) {
-                throw new Error('Expected 1 or 2 arguments, got ' + args.length + '.')
-            }
-
-            if (args.length === 2) {
-                this.gridX = args[0]
-                this.gridY = args[1]
-            }
-            else { // args.length === 1
-                this.gridX = args[0][0]
-                this.gridY = args[0][1]
-            }
         }
 
         forEachVisiblePositions(callback) {
