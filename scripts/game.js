@@ -29,6 +29,10 @@
 
             this.initMap()
 
+            this.camera     = new Camera(this, {
+                gridPoint: [0, 20]
+            })
+
             for (let key in this.sprites) {
                 this.sprites[key] = new Sprite(this.sprites[key], this.map.tileSize)
             }
@@ -39,7 +43,6 @@
             this.pathFinder = new PathFinder(this)
             this.renderer   = new Renderer(this, this.$background, this.$entities, this.$foreground)
             this.updater    = new Updater(this)
-            this.camera     = new Camera(this)
 
             this.start()
             log.info('Game initialized')
@@ -136,7 +139,6 @@
 
         start() {
             this.renderer.ready()
-            this.camera.setGridPosition(0, 20)
             this.playerLogic.ready()
             this.controllers.ready()
             this.renderer.drawTerrain()

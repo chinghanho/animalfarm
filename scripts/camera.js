@@ -4,13 +4,17 @@
 
     class Camera {
 
-        constructor(game) {
+        constructor(game, options) {
             this.game = game
             this.x = 0
             this.y = 0
             this.gridX = 0
             this.gridY = 0
             this.getVisibleTiles = this.getVisibleTiles
+
+            if (options.gridPoint) {
+                this.setGridPoint(options.gridPoint)
+            }
         }
 
         setPosition(position) {
@@ -18,10 +22,19 @@
             this.y = position[1]
         }
 
-        setGridPosition(n, m) {
-            this.gridX = n
-            this.gridY = m
-            this.setPosition(n * 32, m * 32)
+        setGridPoint(...args) {
+            if (args.length > 2 || args.length < 1) {
+                throw new Error('Expected 1 or 2 arguments, got ' + args.length + '.')
+            }
+
+            if (args.length === 2) {
+                this.gridX = args[0]
+                this.gridY = args[1]
+            }
+            else { // args.length === 1
+                this.gridX = args[0][0]
+                this.gridY = args[0][1]
+            }
         }
 
         forEachVisiblePositions(callback) {
