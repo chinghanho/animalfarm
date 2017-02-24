@@ -6,7 +6,11 @@
 
         constructor(game, username) {
             this.game = game
-            this.player = new Player(username)
+            this.player = new Player(username, {
+                gridPoint: [13, 28],
+                sprite: this.game.sprites['players'],
+                defaultSprite: 'idle_down',
+            })
 
             // Callbacks
             this.player.onRequestPath = this.onRequestPath.bind(this)
@@ -19,11 +23,11 @@
         }
 
         ready() {
-            this.player.setGridPosition(13, 28)
+            this.player.x = (this.player.gridX - this.game.camera.gridX) * this.game.map.tileSize
+            this.player.y = (this.player.gridY - this.game.camera.gridY) * this.game.map.tileSize
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)
             this.game.entities.push(this.player)
-            this.player.setSprite(this.game.sprites['players'], 'idle_down')
         }
 
         onRequestPath(start, end) {

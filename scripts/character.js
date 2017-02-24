@@ -4,8 +4,8 @@
 
     class Character extends Entity {
 
-        constructor() {
-            super()
+        constructor(options) {
+            super(options)
 
             this.path = null
             this.newDestination = null

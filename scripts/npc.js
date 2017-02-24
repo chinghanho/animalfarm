@@ -11,8 +11,8 @@
 
     class Npc extends Character {
 
-        constructor(id) {
-            super()
+        constructor(id, options) {
+            super(options)
             this.id = id
             this.talkCount = talks[this.id].length
             this.talkIndex = 0

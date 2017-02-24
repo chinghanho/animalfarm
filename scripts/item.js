@@ -4,8 +4,8 @@
 
     class Item extends Entity {
 
-        constructor() {
-            super()
+        constructor(options) {
+            super(options)
         }
 
         animate(key, speed) {

@@ -4,8 +4,8 @@
 
     class Player extends Character {
 
-        constructor(username) {
-            super()
+        constructor(username, options) {
+            super(options)
             this.username = username
         }
 

@@ -25,7 +25,14 @@
             this.sprites
             this.mapData
 
+            this.cursor = this.images['lipstick'].image
+
             this.initMap()
+
+            for (let key in this.sprites) {
+                this.sprites[key] = new Sprite(this.sprites[key], this.map.tileSize)
+            }
+
             this.initPlayer(username)
             this.init()
 
@@ -60,12 +67,6 @@
         }
 
         init() {
-
-            this.cursor = this.images['lipstick'].image
-            for (let key in this.sprites) {
-                this.sprites[key] = new Sprite(this.sprites[key], this.map.tileSize)
-            }
-
             this.controllers = {
                 stack: [],
                 ready: () => this.controllers.stack.forEach((controller) => controller.ready()),
@@ -107,9 +108,10 @@
             log.debug(this.cursorGridPosition)
         }
 
-        createItem(position) {
-            let item = new Item()
-            item.setGridPosition(position[0], position[1])
+        createItem(gridPoint) {
+            let item = new Item({
+                gridPoint: gridPoint
+            })
             item.x = (item.gridX - this.camera.gridX) * this.map.tileSize
             item.y = (item.gridY - this.camera.gridY) * this.map.tileSize
             this.entitiesGrid.register(item)
