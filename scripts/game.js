@@ -111,6 +111,10 @@
             log.debug(this.cursorGridPosition)
         }
 
+        createPlayer(username, options) {
+            return new Player(username, options)
+        }
+
         createItem(gridPoint) {
             let item = new Item({
                 gridPoint: gridPoint

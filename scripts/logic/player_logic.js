@@ -6,7 +6,8 @@
 
         constructor(game, username) {
             this.game = game
-            this.player = new Player(username, {
+
+            this.player = this.game.createPlayer(username, {
                 gridPoint: [13, 28],
                 sprite: this.game.sprites['players'],
                 defaultSprite: 'idle_down',

@@ -32,6 +32,10 @@
 
     }
 
-    root.Point = Point
+    function toPoint(a, b) {
+        //
+    }
+
+    root.Point = toPoint
 
 })(this)
