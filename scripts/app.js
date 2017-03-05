@@ -167,6 +167,44 @@
                             row: 1
                         }
                     }
+                }},
+                { id: "running-cat", path: "../images/vendors/running-cat.png", sprite: {
+                    width: 64,
+                    height: 64,
+                    animations: {
+                        walk_left: {
+                            length: 2,
+                            row: 1
+                        },
+                        walk_right: {
+                            length: 2,
+                            row: 2
+                        },
+                        walk_up: {
+                            length: 2,
+                            row: 1
+                        },
+                        walk_down: {
+                            length: 2,
+                            row: 1
+                        },
+                        idle_left: {
+                            length: 1,
+                            row: 3
+                        },
+                        idle_right: {
+                            length: 1,
+                            row: 4
+                        },
+                        idle_down: {
+                            length: 1,
+                            row: 3
+                        },
+                        idle_up: {
+                            length: 1,
+                            row: 4
+                        }
+                    }
                 }}
             ]
 
