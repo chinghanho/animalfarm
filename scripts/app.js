@@ -205,6 +205,44 @@
                             row: 4
                         }
                     }
+                }},
+                { id: "pig", path: "../images/vendors/pig.png", sprite: {
+                    width: 88,
+                    height: 88,
+                    animations: {
+                        walk_left: {
+                            length: 2,
+                            row: 1
+                        },
+                        walk_right: {
+                            length: 2,
+                            row: 2
+                        },
+                        walk_up: {
+                            length: 2,
+                            row: 1
+                        },
+                        walk_down: {
+                            length: 2,
+                            row: 1
+                        },
+                        idle_left: {
+                            length: 1,
+                            row: 3
+                        },
+                        idle_right: {
+                            length: 1,
+                            row: 4
+                        },
+                        idle_down: {
+                            length: 1,
+                            row: 3
+                        },
+                        idle_up: {
+                            length: 1,
+                            row: 4
+                        }
+                    }
                 }}
             ]
 

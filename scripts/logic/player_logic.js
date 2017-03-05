@@ -23,7 +23,7 @@
             this.game.entitiesGrid.register(this.player)
             this.game.pathingGrid.register(this.player)
             this.game.entities.push(this.player)
-            this.player.setSprite(this.game.sprites['running-cat'], 'idle_down')
+            this.player.setSprite(this.game.sprites['pig'], 'idle_down')
         }
 
         onRequestPath(start, end) {
