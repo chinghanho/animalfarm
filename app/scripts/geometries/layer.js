@@ -14,8 +14,7 @@ class Layer {
     }
 
     create(tagName, {id}) {
-        var elem
-        elem = document.createElement(tagName)
+        var elem = document.createElement(tagName)
         elem.id = id
         return elem
     }
