@@ -1,4 +1,4 @@
-const entity = require('./entity')
+const Entity = require('./entity')
 
 class Character extends Entity {
 

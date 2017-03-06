@@ -1,42 +1,45 @@
-(function (root) {
+const Point = require('./point')
 
-    'use strict'
+class Camera {
 
-    class Camera {
+    constructor(game, options) {
 
-        constructor(game, options) {
+        // includes(this, Gridable)
 
-            includes(this, Gridable)
+        this.game = game
+        this.point = Point(0, 0)
+        this.gridX = 0
+        this.gridY = 0
+        // this.getVisibleTiles = this.getVisibleTiles
 
-            this.game = game
-            this.x = 0
-            this.y = 0
-            this.gridX = 0
-            this.gridY = 0
-            this.getVisibleTiles = this.getVisibleTiles
-
-            if (options.gridPoint) {
-                this.setGridPoint(options.gridPoint)
-            }
-        }
-
-        setPosition(position) {
-            this.x = position[0]
-            this.y = position[1]
-        }
-
-        forEachVisiblePositions(callback) {
-            let index = 0
-            for(let y = this.gridY, maxY = y + 20; y < maxY; y++) {
-                for(let x = this.gridX, maxX = x + 30; x < maxX ; x++) {
-                    callback.call(this, x, y, index)
-                    index++
-                }
-            }
-        }
-
+        // if (options.gridPoint) {
+        //     this.setGridPoint(options.gridPoint)
+        // }
     }
 
-    root.Camera = Camera
+    get x() {
+        return this.point.x
+    }
 
-})(this)
+    get y() {
+        return this.point.y
+    }
+
+    setPosition(position) {
+        this.x = position[0]
+        this.y = position[1]
+    }
+
+    forEachVisiblePositions(callback) {
+        let index = 0
+        for(let y = this.gridY, maxY = y + 20; y < maxY; y++) {
+            for(let x = this.gridX, maxX = x + 30; x < maxX ; x++) {
+                callback.call(this, x, y, index)
+                index++
+            }
+        }
+    }
+
+}
+
+module.exports = Camera

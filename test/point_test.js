@@ -5,7 +5,7 @@ test.beforeEach(t => {
     t.context.point = point(13, 7)
 })
 
-test('G point constructor', t => {
+test('Point constructor', t => {
     t.is(point(13, 7).x, 13)
     t.is(point([13, 7]).x, 13)
     t.is(point(point(13, 7)).x, 13)
