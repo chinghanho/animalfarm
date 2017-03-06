@@ -1,5 +1,4 @@
-
-# Created by https://www.gitignore.io/api/node,git,sublimetext,osx,dreamweaver,vim,windows,linux
+/scripts
 
 ### Dreamweaver ###
 # DW Dreamweaver added files
@@ -182,5 +181,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# End of https://www.gitignore.io/api/node,git,sublimetext,osx,dreamweaver,vim,windows,linux
