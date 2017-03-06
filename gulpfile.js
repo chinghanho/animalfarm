@@ -6,7 +6,7 @@ const buffer = require('vinyl-buffer')
 const source = require('vinyl-source-stream')
 const sourcemaps = require('gulp-sourcemaps')
 
-var bundler = browserify('./_scripts/index.js')
+var bundler = browserify('./app/scripts/game.js', { debug: true })
 
 gulp.task('script', function () {
     return bundling()
@@ -28,8 +28,8 @@ function bundling(bundle) {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./scripts'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('./public/scripts'))
 }
 
 function onBundleError(err) {
