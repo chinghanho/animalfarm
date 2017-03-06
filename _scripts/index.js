@@ -1,1 +1,8 @@
-exports.point = require('./point')
+class Game {
+
+    constructor() {
+        this.point = require('./point')
+        this.entity = require('./entities')
+    }
+
+}

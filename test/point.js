@@ -1,17 +1,17 @@
 const test = require('ava')
-const G = require('../_scripts')
+const point = require('../_scripts/point')
 
 test.beforeEach(t => {
-    t.context.point = G.point(13, 7)
+    t.context.point = point(13, 7)
 })
 
 test('G point constructor', t => {
-    t.is(G.point(13, 7).x, 13)
-    t.is(G.point([13, 7]).x, 13)
-    t.is(G.point(G.point(13, 7)).x, 13)
-    t.is(G.point(13, 7).y, 7)
-    t.is(G.point([13, 7]).y, 7)
-    t.is(G.point(G.point(13, 7)).y, 7)
+    t.is(point(13, 7).x, 13)
+    t.is(point([13, 7]).x, 13)
+    t.is(point(point(13, 7)).x, 13)
+    t.is(point(13, 7).y, 7)
+    t.is(point([13, 7]).y, 7)
+    t.is(point(point(13, 7)).y, 7)
 })
 
 test('add', t => {
