@@ -18,7 +18,6 @@ class Layer {
         elem = document.createElement(tagName)
         elem.id = id
         return elem
-
     }
 
 }
