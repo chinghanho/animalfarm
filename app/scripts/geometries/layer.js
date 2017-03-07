@@ -4,9 +4,9 @@ var instance, maker
  * @singleton
  * @example
  *
- * LayerMaker.create('canvas', { id: 'background' })
- * LayerMaker.create('canvas', { id: 'entities'   })
- * LayerMaker.create('canvas', { id: 'foreground' })
+ * Layer.create('canvas', { id: 'background' })
+ * Layer.create('canvas', { id: 'entities'   })
+ * Layer.create('canvas', { id: 'foreground' })
  */
 class Layer {
 
