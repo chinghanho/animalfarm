@@ -1,9 +1,13 @@
-var layers = [
+var layersData, layers
+
+layersData = [
     { tagName: 'div', id: 'bubbles' },
     { tagName: 'canvas', id: 'background' },
     { tagName: 'canvas', id: 'entities' },
     { tagName: 'canvas', id: 'foreground' },
 ]
+
+layers = []
 
 class Layer {
 
@@ -22,17 +26,22 @@ class Layer {
         return this
     }
 
+    static get getList() {
+        return layers
+    }
+
     static addTo(game) {
+        game.layer = this
         this.createLayers(function (layer) {
             layer.appendTo(game.container)
-            game.addLayer(layer)
+            layers.push(layer)
         })
 
         return this
     }
 
     static createLayers(callback) {
-        layers.forEach(function ({ tagName, id }) {
+        layersData.forEach(function ({ tagName, id }) {
             callback(new Layer(tagName, id))
         })
     }
