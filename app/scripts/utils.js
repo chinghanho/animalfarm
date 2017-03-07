@@ -1,22 +1,33 @@
-window.isObjectBlank = function (obj) {
-    return Object.keys(obj).length === 0 && obj.constructor === Object
+class Util {
+
+    static stamp(object) {
+        object.__id__ = object.__id__ || Symbol(object)
+        return object.__id__
+    }
+
 }
 
-// alias
-Array.prototype.inject = Array.prototype.reduce
+module.exports = Util
 
-// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          window.oRequestAnimationFrame      ||
-          window.msRequestAnimationFrame     ||
-          function(/* function */ callback, /* DOMElement */ element){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
+// window.isObjectBlank = function (obj) {
+//     return Object.keys(obj).length === 0 && obj.constructor === Object
+// }
 
-window.includes = function (self, module) {
-    Object.assign(self, module)
-}
+// // alias
+// Array.prototype.inject = Array.prototype.reduce
+
+// // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+// window.requestAnimFrame = (function(){
+//   return  window.requestAnimationFrame       ||
+//           window.webkitRequestAnimationFrame ||
+//           window.mozRequestAnimationFrame    ||
+//           window.oRequestAnimationFrame      ||
+//           window.msRequestAnimationFrame     ||
+//           function(/* function */ callback, /* DOMElement */ element){
+//             window.setTimeout(callback, 1000 / 60);
+//           };
+// })();
+
+// window.includes = function (self, module) {
+//     Object.assign(self, module)
+// }

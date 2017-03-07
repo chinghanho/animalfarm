@@ -53,7 +53,7 @@ body {
 #entities,
 #foreground {
   position: absolute;
-  display: none;
+  /* display: none; */
   cursor: none;
   user-select: none;
 }

@@ -9,7 +9,7 @@ gulp.task('script', function () {
     return browserify('./app/scripts/game.js', { debug: true })
             .transform("babelify", { presets: ["es2015"], sourceMaps: true })
             .bundle()
-            .on('error', function onBundleError() {
+            .on('error', function onBundleError(err) {
                 console.error(err.message)
                 this.emit('end')
             })

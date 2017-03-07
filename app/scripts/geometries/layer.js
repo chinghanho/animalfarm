@@ -12,6 +12,17 @@ class Layer {
 
     appendTo(container) {
         container.appendChild(this.elem)
+        return this
+    }
+
+    addTo(game) {
+        game.addLayer(this)
+        return this
+    }
+
+    addControl(controller) {
+        controller.addLayer(this)
+        return this
     }
 
 }
