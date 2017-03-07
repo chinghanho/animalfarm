@@ -1,3 +1,10 @@
+var layers = [
+    { tagName: 'div', id: 'bubbles' },
+    { tagName: 'canvas', id: 'background' },
+    { tagName: 'canvas', id: 'entities' },
+    { tagName: 'canvas', id: 'foreground' },
+]
+
 class Layer {
 
     constructor(tagName, id) {
@@ -15,26 +22,21 @@ class Layer {
         return this
     }
 
-}
-
-var layers = [
-    { tagName: 'div', id: 'bubbles' },
-    { tagName: 'div', id: 'background' },
-    { tagName: 'div', id: 'entities' },
-    { tagName: 'div', id: 'foreground' },
-]
-
-class LayerFactory {
-
     static addTo(game) {
-        var self = this
-        layers.forEach(function ({ tagName, id }) {
-            var layer = new Layer(tagName, id)
+        this.createLayers(function (layer) {
             layer.appendTo(game.container)
             game.addLayer(layer)
+        })
+
+        return this
+    }
+
+    static createLayers(callback) {
+        layers.forEach(function ({ tagName, id }) {
+            callback(new Layer(tagName, id))
         })
     }
 
 }
 
-module.exports = LayerFactory
+module.exports = Layer

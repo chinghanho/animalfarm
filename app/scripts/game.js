@@ -38,8 +38,7 @@ class Game {
      * })
      */
     forEachLayers(iterator) {
-        this._layers.forEach(iterator)
-        return null
+        return this._layers.forEach(iterator)
     }
 
     init(module) {
