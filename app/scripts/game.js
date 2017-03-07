@@ -1,4 +1,4 @@
-// const Renderer = require('./core/renderer')
+const Renderer = require('./core/renderer')
 const Layer = require('./geometries/layer')
 const Util = require('./utils')
 
@@ -52,6 +52,7 @@ class Game {
         //     .init(Renderer)
         //     .init(Control)
         this.init(Layer)
+            .init(Renderer)
     }
 
 }
