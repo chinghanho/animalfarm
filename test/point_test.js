@@ -1,5 +1,5 @@
 const test = require('ava')
-const point = require('../_scripts/point')
+const point = require('../app/scripts/point')
 
 test.beforeEach(t => {
     t.context.point = point(13, 7)
