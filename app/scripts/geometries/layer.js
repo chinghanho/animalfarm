@@ -1,26 +1,29 @@
-var instance, maker
-
-/**
- * @singleton
- * @example
- *
- * Layer.create('canvas', { id: 'background' })
- * Layer.create('canvas', { id: 'entities'   })
- * Layer.create('canvas', { id: 'foreground' })
- */
 class Layer {
 
-    constructor() {
+    constructor(tagName, id) {
+        this.elem = this.create(tagName, id)
     }
 
-    create(tagName, {id}) {
+    create(tagName, id) {
         var elem = document.createElement(tagName)
         elem.id = id
         return elem
     }
 
+    appendTo(container) {
+        container.appendChild(this.elem)
+    }
+
 }
 
-maker = new Layer()
+/**
+ * Create the HTML layer.
+ * @example
+ *
+ * Layer('canvas', { id: 'entities' })
+ */
+function toLayer(tagName, {id}) {
+    return new Layer(tagName, id)
+}
 
-module.exports = maker
+module.exports = toLayer

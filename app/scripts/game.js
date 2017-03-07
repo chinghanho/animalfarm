@@ -17,10 +17,10 @@ class Game {
     }
 
     initLayers() {
-        this.container.appendChild(this.layer.create('div',    { id: 'bubbles' }))
-        this.container.appendChild(this.layer.create('canvas', { id: 'background' }))
-        this.container.appendChild(this.layer.create('canvas', { id: 'entities' }))
-        this.container.appendChild(this.layer.create('canvas', { id: 'foreground' }))
+        this.layer('div',    { id: 'bubbles' }).appendTo(this.container)
+        this.layer('canvas', { id: 'background' }).appendTo(this.container)
+        this.layer('canvas', { id: 'entities' }).appendTo(this.container)
+        this.layer('canvas', { id: 'foreground' }).appendTo(this.container)
     }
 
     start() {
@@ -29,4 +29,5 @@ class Game {
 
 }
 
-new Game({})
+var game = new Game({})
+game.start()
