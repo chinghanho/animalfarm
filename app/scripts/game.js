@@ -1,16 +1,17 @@
+// const Renderer = require('./core/renderer')
+const Layer = require('./geometries/layer')
 const Util = require('./utils')
 
 class Game {
 
     constructor(options) {
         this.container = document.getElementById('app')
-        this.entity = require('./entities')
-        this.camera = require('./camera')
-        this.grid = require('./geometries/grid')
-        this.layer = require('./geometries/layer')
-        this.control = require('./controls')
+        // this.entity = require('./entities')
+        // this.camera = require('./camera')
+        // this.grid = require('./geometries/grid')
+        // this.control = require('./controls')
 
-        this._layers = {}
+        this._layers = []
     }
 
     pointToGrid(point) {
@@ -21,32 +22,37 @@ class Game {
         //
     }
 
-    initLayers() {
-        // this.layer('div', { id: 'bubbles' })
-        //     .appendTo(this.container).addTo(this)
-        //     .addControl(this.control.by('bubbles'))
-
-        // this.layer('canvas', { id: 'background' })
-        //     .appendTo(this.container).addTo(this)
-        //     .addControl(this.control.by('background'))
-
-        this.layer('canvas', { id: 'entities' })
-            .appendTo(this.container).addTo(this)
-            .addControl(this.control.by('entities'))
-
-        // this.layer('canvas', { id: 'foreground' })
-        //     .appendTo(this.container).addTo(this)
-        //     .addControl(this.control.by('foreground'))
+    addLayer(layer) {
+        this._layers.push(layer)
+        return this
     }
 
-    addLayer(layer) {
-        var id = Util.stamp(layer)
-        this._layers[id] = layer
+    /**
+     * Executed a provided iterator once for each layers.
+     *
+     * @example
+     *
+     * game.forEachLayers(function(layer, index) {
+     *     layer // the current layer being processed in the `_layers` array.
+     *     index // the index of the current layer.
+     * })
+     */
+    forEachLayers(iterator) {
+        this._layers.forEach(iterator)
+        return null
+    }
+
+    init(module) {
+        module.addTo(this)
         return this
     }
 
     start() {
-        this.initLayers()
+        // this.init(Map)
+        //     .init(Layer)
+        //     .init(Renderer)
+        //     .init(Control)
+        this.init(Layer)
     }
 
 }

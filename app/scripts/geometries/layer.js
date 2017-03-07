@@ -15,26 +15,26 @@ class Layer {
         return this
     }
 
-    addTo(game) {
-        game.addLayer(this)
-        return this
-    }
+}
 
-    addControl(controller) {
-        controller.addLayer(this)
-        return this
+var layers = [
+    { tagName: 'div', id: 'bubbles' },
+    { tagName: 'div', id: 'background' },
+    { tagName: 'div', id: 'entities' },
+    { tagName: 'div', id: 'foreground' },
+]
+
+class LayerFactory {
+
+    static addTo(game) {
+        var self = this
+        layers.forEach(function ({ tagName, id }) {
+            var layer = new Layer(tagName, id)
+            layer.appendTo(game.container)
+            game.addLayer(layer)
+        })
     }
 
 }
 
-/**
- * Create the HTML layer.
- * @example
- *
- * Layer('canvas', { id: 'entities' })
- */
-function toLayer(tagName, {id}) {
-    return new Layer(tagName, id)
-}
-
-module.exports = toLayer
+module.exports = LayerFactory
