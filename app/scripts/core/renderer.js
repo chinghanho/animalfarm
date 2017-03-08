@@ -1,9 +1,11 @@
 var _instance
 
+const FPS = 60
+
 class Renderer {
 
     constructor() {
-        this.FPS = 60
+        this.FPS = FPS
 
         this.layer = Renderer.game.layer
         this.map = Renderer.game.map
