@@ -1,9 +1,12 @@
+var _instance
+
 class Renderer {
 
-    // constructor(game, $background, $entities, $foreground) {
-    //     this.game = game
-    //     this.FPS = 60
+    constructor() {
+        this.FPS = 60
+    }
 
+    // constructor(game, $background, $entities, $foreground) {
     //     this.$background = $background
     //     this.$entities   = $entities
     //     this.$foreground = $foreground
@@ -155,8 +158,14 @@ class Renderer {
     //     }
     // }
 
+    static get instance() {
+        return _instance
+    }
+
     static addTo(game) {
-        game.renderer = new Renderer()
+        this.game = game
+        _instance = _instance || new Renderer()
+        return _instance
     }
 
 }

@@ -1,4 +1,5 @@
 const Renderer = require('./core/renderer')
+const Map = require('./map')
 const Layer = require('./geometries/layer')
 const Util = require('./utils')
 
@@ -34,18 +35,16 @@ class Game {
         return this.layer.getList.forEach(iterator)
     }
 
-    init(module) {
+    load(module) {
         module.addTo(this)
         return this
     }
 
     start() {
-        // this.init(Map)
-        //     .init(Layer)
-        //     .init(Renderer)
-        //     .init(Control)
-        this.init(Layer)
-            .init(Renderer)
+        this.layer = this.load(Layer)
+        this.map = this.load(Map)
+        this.renderer = this.load(Renderer)
+        // .init(Control)
     }
 
 }

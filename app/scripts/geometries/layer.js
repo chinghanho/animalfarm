@@ -31,7 +31,6 @@ class Layer {
     }
 
     static addTo(game) {
-        game.layer = this
         this.createLayers(function (layer) {
             layer.appendTo(game.container)
             layers.push(layer)

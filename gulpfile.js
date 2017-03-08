@@ -20,6 +20,6 @@ gulp.task('script', function () {
             .pipe(gulp.dest('./public/scripts'))
 })
 
-gulp.task('serve', ['script'], function () {
+gulp.task('watch', ['script'], function () {
     return gulp.watch('./app/scripts/**/*.js', ['script'])
 })
