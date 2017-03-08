@@ -27,8 +27,17 @@ class Layer {
         return this
     }
 
+    /**
+     * Get the layer with the given identifier.
+     * @param  {String} listID - Get the available identifiers through `Layer.keys`.
+     * @return {Layer}
+     */
     static getList(listID) {
         return listID ? _layers[listID] : _layers
+    }
+
+    static get keys() {
+        return Object.keys(_layers)
     }
 
     static addTo(game) {
