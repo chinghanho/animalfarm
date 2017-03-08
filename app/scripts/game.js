@@ -1,5 +1,5 @@
 const Renderer = require('./core/renderer')
-const Map = require('./map')
+const Map = require('./core/map')
 const Layer = require('./geometries/layer')
 const Util = require('./utils')
 
@@ -27,17 +27,16 @@ class Game {
      * @example
      *
      * game.forEachLayers(function(layer, index) {
-     *     layer // the current layer being processed in the `layer.getList` array.
+     *     layer // the current layer being processed in the `layer.getList()` array.
      *     index // the index of the current layer.
      * })
      */
     forEachLayers(iterator) {
-        return this.layer.getList.forEach(iterator)
+        return this.layer.getList().forEach(iterator)
     }
 
     load(module) {
-        module.addTo(this)
-        return this
+        return module.addTo(this)
     }
 
     start() {

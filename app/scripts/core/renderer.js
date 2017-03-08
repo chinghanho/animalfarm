@@ -1,28 +1,47 @@
+const Layer = require('../geometries/layer')
+const Map = require('./map')
+
 var _instance
 
 class Renderer {
 
     constructor() {
         this.FPS = 60
+
+        this.getElements()
+        this.getContexts()
+        this.setCanvasSize()
     }
 
-    // constructor(game, $background, $entities, $foreground) {
-    //     this.$background = $background
-    //     this.$entities   = $entities
-    //     this.$foreground = $foreground
+    getElements() {
+        this.$background = Layer.getList('background').elem
+        this.$entities = Layer.getList('entities').elem
+        this.$foreground = Layer.getList('foreground').elem
+    }
 
-    //     this.backgroundCtx  = this.$background.getContext('2d')
-    //     this.entitiesCtx    = this.$entities.getContext('2d')
-    //     this.foregroundCtx  = this.$foreground.getContext('2d')
-    // }
+    getContexts() {
+        this.backgroundCtx = this.$background.getContext('2d')
+        this.entitiesCtx = this.$entities.getContext('2d')
+        this.foregroundCtx = this.$foreground.getContext('2d')
+    }
+
+    setCanvasSize(width, height) {
+        if (!Map.instance) {
+            throw new Error("Couldn't get the `Map` instance.")
+        }
+
+        // width
+        this.$background.width  = width || Map.instance.width
+        this.$entities.width    = width || Map.instance.width
+        this.$foreground.width  = width || Map.instance.width
+
+        // height
+        this.$background.height = height || Map.instance.height
+        this.$entities.height   = height || Map.instance.height
+        this.$foreground.height = height || Map.instance.height
+    }
 
     // ready() {
-    //     this.$background.width  = this.game.map.width
-    //     this.$entities.width    = this.game.map.width
-    //     this.$foreground.width  = this.game.map.width
-    //     this.$background.height = this.game.map.height
-    //     this.$entities.height   = this.game.map.height
-    //     this.$foreground.height = this.game.map.height
     //     this.drawCursor()
     //     this.drawBackground()
     //     this.tilesheet = this.game.images['tilesheet'].image
@@ -163,7 +182,6 @@ class Renderer {
     }
 
     static addTo(game) {
-        this.game = game
         _instance = _instance || new Renderer()
         return _instance
     }

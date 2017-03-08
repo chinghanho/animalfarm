@@ -1,17 +1,18 @@
-var layersData, layers
+var _layerTypes, _layers
 
-layersData = [
+_layerTypes = [
     { tagName: 'div', id: 'bubbles' },
     { tagName: 'canvas', id: 'background' },
     { tagName: 'canvas', id: 'entities' },
     { tagName: 'canvas', id: 'foreground' },
 ]
 
-layers = []
+_layers = {}
 
 class Layer {
 
     constructor(tagName, id) {
+        this.id = id
         this.elem = this.create(tagName, id)
     }
 
@@ -26,21 +27,21 @@ class Layer {
         return this
     }
 
-    static get getList() {
-        return layers
+    static getList(listID) {
+        return listID ? _layers[listID] : _layers
     }
 
     static addTo(game) {
         this.createLayers(function (layer) {
             layer.appendTo(game.container)
-            layers.push(layer)
+            _layers[layer.id] = layer
         })
 
         return this
     }
 
     static createLayers(callback) {
-        layersData.forEach(function ({ tagName, id }) {
+        _layerTypes.forEach(function ({ tagName, id }) {
             callback(new Layer(tagName, id))
         })
     }
