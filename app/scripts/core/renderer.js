@@ -1,6 +1,3 @@
-const Layer = require('../geometries/layer')
-const Map = require('./map')
-
 var _instance
 
 class Renderer {
@@ -8,15 +5,18 @@ class Renderer {
     constructor() {
         this.FPS = 60
 
+        this.layer = Renderer.game.layer
+        this.map = Renderer.game.map
+
         this.getElements()
         this.getContexts()
         this.setCanvasSize()
     }
 
     getElements() {
-        this.$background = Layer.getList('background').elem
-        this.$entities = Layer.getList('entities').elem
-        this.$foreground = Layer.getList('foreground').elem
+        this.$background = this.layer.getList('background').elem
+        this.$entities = this.layer.getList('entities').elem
+        this.$foreground = this.layer.getList('foreground').elem
     }
 
     getContexts() {
@@ -26,19 +26,19 @@ class Renderer {
     }
 
     setCanvasSize(width, height) {
-        if (!Map.instance) {
+        if (!this.map) {
             throw new Error("Couldn't get the `Map` instance.")
         }
 
         // width
-        this.$background.width  = width || Map.instance.width
-        this.$entities.width    = width || Map.instance.width
-        this.$foreground.width  = width || Map.instance.width
+        this.$background.width  = width || this.map.width
+        this.$entities.width    = width || this.map.width
+        this.$foreground.width  = width || this.map.width
 
         // height
-        this.$background.height = height || Map.instance.height
-        this.$entities.height   = height || Map.instance.height
-        this.$foreground.height = height || Map.instance.height
+        this.$background.height = height || this.map.height
+        this.$entities.height   = height || this.map.height
+        this.$foreground.height = height || this.map.height
     }
 
     // ready() {
@@ -182,6 +182,7 @@ class Renderer {
     }
 
     static addTo(game) {
+        this.game = game
         _instance = _instance || new Renderer()
         return _instance
     }

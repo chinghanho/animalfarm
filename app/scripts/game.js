@@ -1,6 +1,7 @@
 const Renderer = require('./core/renderer')
 const Map = require('./core/map')
 const Layer = require('./geometries/layer')
+const Grid = require('./geometries/grid')
 const Util = require('./utils')
 
 class Game {
@@ -42,6 +43,7 @@ class Game {
     start() {
         this.layer = this.load(Layer)
         this.map = this.load(Map)
+        // this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
         // .init(Control)
     }
