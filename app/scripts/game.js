@@ -43,7 +43,7 @@ class Game {
     start() {
         this.layer = this.load(Layer)
         this.map = this.load(Map)
-        // this.grid = this.load(Grid)
+        this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
         // .init(Control)
     }

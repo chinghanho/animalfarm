@@ -9,10 +9,10 @@ class Map {
 
         this.width  = 960
         this.height = 640
-        // this.tileSize = 32
+        this.tileSize = 32
         // this.tilewidth = this.data.tilewidth
-        // this.tilesX = this.width  / this.tileSize // 30
-        // this.tilesY = this.height / this.tileSize // 20
+        this.xTiles = this.width  / this.tileSize // 30
+        this.yTiles = this.height / this.tileSize // 20
 
         // this.doors = []
 
