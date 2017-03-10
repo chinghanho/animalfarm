@@ -42,10 +42,17 @@ class Game {
 
     start() {
         this.layer = this.load(Layer)
-        this.map = this.load(Map)
+        this.map = this.load(Map).onLoaded(this._onMapLoaded.bind(this))
         this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
         // .init(Control)
+    }
+
+    _onMapLoaded(map) {
+        if (map.isValid) {
+            return
+        }
+        throw new Error('Not Implement')
     }
 
 }

@@ -1,5 +1,9 @@
 var _instance
 
+/**
+ * Map Class
+ * @singleton
+ */
 class Map {
 
     constructor() {
@@ -23,6 +27,15 @@ class Map {
         // this.initRenderingGrid()
         // this.initBlockings()
         // this.initDoors()
+    }
+
+    onLoaded(callback) {
+        callback(this)
+        return this
+    }
+
+    get isValid() {
+        return window.innerWidth > this.width
     }
 
     // initRenderingGrid() {
