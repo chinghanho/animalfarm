@@ -1,7 +1,8 @@
-const Renderer = require('./core/renderer')
-const Map = require('./core/map')
 const Layer = require('./geometries/layer')
+const Map = require('./core/map')
 const Grid = require('./geometries/grid')
+const Renderer = require('./core/renderer')
+const Control = require('./control')
 const Util = require('./utils')
 
 class Game {
@@ -10,8 +11,10 @@ class Game {
         this.container = document.getElementById('app')
         // this.entity = require('./entities')
         // this.camera = require('./camera')
-        // this.grid = require('./geometries/grid')
-        // this.control = require('./controls')
+    }
+
+    action(actionName) {
+        console.log('action name: %s', actionName)
     }
 
     pointToGrid(point) {
@@ -45,7 +48,7 @@ class Game {
         this.map = this.load(Map).onLoaded(this._onMapLoaded.bind(this))
         this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
-        // .init(Control)
+        this.control = this.load(Control)
     }
 
     _onMapLoaded(map) {
