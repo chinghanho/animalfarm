@@ -16,9 +16,9 @@ class Renderer {
     }
 
     getElements() {
-        this.$background = this.layer.getList('background').elem
-        this.$entities = this.layer.getList('entities').elem
-        this.$foreground = this.layer.getList('foreground').elem
+        this.$background = this.layer.getLayer('background').elem
+        this.$entities = this.layer.getLayer('entities').elem
+        this.$foreground = this.layer.getLayer('foreground').elem
     }
 
     getContexts() {

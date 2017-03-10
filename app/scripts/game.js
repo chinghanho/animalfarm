@@ -28,12 +28,12 @@ class Game {
      * @example
      *
      * game.forEachLayers(function(layer, index) {
-     *     layer // the current layer being processed in the `layer.getList()` array.
+     *     layer // the current layer being processed in the `layer.getLayer()` array.
      *     index // the index of the current layer.
      * })
      */
     forEachLayers(iterator) {
-        return this.layer.getList().forEach(iterator)
+        return this.layer.getLayer().forEach(iterator)
     }
 
     load(module) {

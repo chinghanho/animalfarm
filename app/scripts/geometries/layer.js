@@ -29,11 +29,11 @@ class Layer {
 
     /**
      * Get the layer with the given identifier.
-     * @param  {String} listID - Get the available identifiers through `Layer.keys`.
+     * @param  {String} id - Get the available identifiers through `Layer.keys`.
      * @return {Layer}
      */
-    static getList(listID) {
-        return listID ? _layers[listID] : _layers
+    static getLayer(id) {
+        return id ? _layers[id] : _layers
     }
 
     static get keys() {
