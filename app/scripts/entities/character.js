@@ -6,6 +6,8 @@ class Character extends Entity {
     constructor(options) {
         super(options)
 
+        var orientation = options.orientation
+
         if (options && options.control) {
             declareCallbacks([
                 "onRequestPath",
@@ -28,7 +30,7 @@ class Character extends Entity {
         this.walkSpeed = 200
 
         // Default
-        this.orientation = 'down'
+        this.orientation = orientation || 'down'
 
         // this.movement = new Transition()
     }

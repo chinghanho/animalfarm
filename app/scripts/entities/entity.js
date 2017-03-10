@@ -1,13 +1,14 @@
+const GridPoint = require('../grid_point')
+
 class Entity {
 
-    constructor(options) {
+    constructor({ gridPoint }) {
 
         // includes(this, Gridable)
 
         this.x     = 0
         this.y     = 0
-        this.gridX = 0
-        this.gridY = 0
+        this.gridPoint = GridPoint(gridPoint)
 
         // Callbacks
         // this.onSetGridPosition = null
@@ -21,29 +22,37 @@ class Entity {
         // }
     }
 
-    setPosition(x, y) {
-        this.x = x
-        this.y = y
+    get gridX() {
+        return this.gridPoint.gridX
     }
 
-    setSprite(sprite, defaultKey) {
-        this.sprite = sprite
-        this.animation = this.sprite.setAnimation(defaultKey)
+    get gridY() {
+        return this.gridPoint.gridY
     }
 
-    animate(key, speed) {
-        let anime = this.sprite.animations[key]
+    // setPosition(x, y) {
+    //     this.x = x
+    //     this.y = y
+    // }
 
-        if (!anime) {
-            return
-        }
+    // setSprite(sprite, defaultKey) {
+    //     this.sprite = sprite
+    //     this.animation = this.sprite.setAnimation(defaultKey)
+    // }
 
-        this.animation.extends({
-            length: anime.length,
-            row:    anime.row,
-            speed:  speed
-        })
-    }
+    // animate(key, speed) {
+    //     let anime = this.sprite.animations[key]
+
+    //     if (!anime) {
+    //         return
+    //     }
+
+    //     this.animation.extends({
+    //         length: anime.length,
+    //         row:    anime.row,
+    //         speed:  speed
+    //     })
+    // }
 
 }
 

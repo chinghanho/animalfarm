@@ -21,6 +21,7 @@ class Game {
 
     spawnPlayer() {
         this.player = new Player('', {
+            gridPoint: [13, 28],
             control: this.control.by('player')
         })
     }

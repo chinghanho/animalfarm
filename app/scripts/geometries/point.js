@@ -28,30 +28,30 @@ class Point {
         return this
     }
 
-}
+    /**
+     * Create a point object with the given coordinate arguments.
+     * @param  {Point|Array|Number} a
+     * @param  {Number} [b]
+     * @return {Point}
+     *
+     * @example
+     *
+     * Point(13, 7)
+     * Point([13, 7])
+     * Point(Point(13, 7))
+     */
+    static toPoint(a, b) {
+        if (a instanceof Point) {
+            return a
+        }
 
-/**
- * Create a point object with the given coordinate arguments.
- * @param  {Point|Array|Number} a
- * @param  {Number} [b]
- * @return {Point}
- *
- * @example
- *
- * G.point(13, 7)
- * G.point([13, 7])
- * G.point(G.point(13, 7))
- */
-function toPoint(a, b) {
-    if (a instanceof Point) {
-        return a
+        if (Array.isArray(a)) {
+            return new Point(a[0], a[1])
+        }
+
+        return new Point(a, b)
     }
 
-    if (Array.isArray(a)) {
-        return new Point(a[0], a[1])
-    }
-
-    return new Point(a, b)
 }
 
-module.exports = toPoint
+module.exports = Point.toPoint
