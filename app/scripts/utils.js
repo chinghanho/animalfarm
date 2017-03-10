@@ -5,6 +5,27 @@ class Util {
         return object.__id__
     }
 
+    /**
+     * Interface validator.
+     * @param  {Array} callbackNames - Names of callback should be implemented.
+     * @param  {Object} controller   - The instance of the controller.
+     * @return {Object}
+     */
+    static defineInterface(callbackNames, controller) {
+        var notImplemented = callbackNames.reduce(function (errors, callbackName) {
+            if (typeof controller[callbackName] !== 'function') {
+                errors.push(callbackName)
+            }
+            return errors
+        }, [])
+
+        if (notImplemented.length > 0) {
+            throw new Error(notImplemented.join(', ') + ' method not implement yet.')
+        }
+
+        return this
+    }
+
 }
 
 module.exports = Util

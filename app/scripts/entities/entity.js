@@ -2,7 +2,7 @@ class Entity {
 
     constructor(options) {
 
-        includes(this, Gridable)
+        // includes(this, Gridable)
 
         this.x     = 0
         this.y     = 0
@@ -10,15 +10,15 @@ class Entity {
         this.gridY = 0
 
         // Callbacks
-        this.onSetGridPosition = null
+        // this.onSetGridPosition = null
 
-        if (options.gridPoint) {
-            this.setGridPoint(options.gridPoint)
-        }
+        // if (options.gridPoint) {
+        //     this.setGridPoint(options.gridPoint)
+        // }
 
-        if (options.sprite && options.defaultSprite) {
-            this.setSprite(options.sprite, options.defaultSprite)
-        }
+        // if (options.sprite && options.defaultSprite) {
+        //     this.setSprite(options.sprite, options.defaultSprite)
+        // }
     }
 
     setPosition(x, y) {

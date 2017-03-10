@@ -27,6 +27,10 @@ class Grid extends Array {
 
     static addTo(game) {
         this.game = game
+        if (!game.map) {
+            throw new Error("Couldn't get the `Map` instance.")
+        }
+
         this.createGrids(game.map.xTiles, game.map.yTiles, function (grid) {
             _grids[grid.id] = grid
         })

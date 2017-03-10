@@ -1,22 +1,26 @@
 const Entity = require('./entity')
+const declareCallbacks = require('../utils').defineInterface
 
 class Character extends Entity {
 
     constructor(options) {
         super(options)
 
+        if (options && options.control) {
+            declareCallbacks([
+                "onRequestPath",
+                "onAfterStep",
+                "onHasMoved",
+                "onMoveTo",
+                "onStopPathing",
+                "onFollowing",
+            ], options.control)
+        }
+
         this.path = null
         this.newDestination = null
         this.isFollowing = null
         this.target = null
-
-        // Callbacks
-        this.onRequestPath = null
-        this.onAfterStep   = null
-        this.onHasMoved    = null
-        this.onMoveTo      = null
-        this.onStopPathing = null
-        this.onFollowing   = null
 
         // Speeds
         this.idleSpeed = 200
@@ -26,7 +30,7 @@ class Character extends Entity {
         // Default
         this.orientation = 'down'
 
-        this.movement = new Transition()
+        // this.movement = new Transition()
     }
 
     isMoving() {

@@ -5,6 +5,8 @@ const Renderer = require('./core/renderer')
 const Control = require('./control')
 const Util = require('./utils')
 
+const Player = require('./entities/player')
+
 class Game {
 
     constructor(options) {
@@ -15,6 +17,12 @@ class Game {
 
     action(actionName) {
         console.log('action name: %s', actionName)
+    }
+
+    spawnPlayer() {
+        this.player = new Player('', {
+            control: this.control.by('player')
+        })
     }
 
     pointToGrid(point) {
@@ -49,6 +57,8 @@ class Game {
         this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
         this.control = this.load(Control)
+
+        this.spawnPlayer()
     }
 
     _onMapLoaded(map) {
@@ -60,5 +70,6 @@ class Game {
 
 }
 
+// Let's play a game!
 var game = new Game({})
 game.start()
