@@ -1,4 +1,4 @@
-const Point = require('./geometries/point')
+const Point = require('./point')
 
 class Camera {
 
