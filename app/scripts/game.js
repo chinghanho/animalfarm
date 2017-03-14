@@ -11,6 +11,14 @@ class Game {
 
     constructor(options) {
         this.container = document.getElementById('app')
+
+        // Loading...
+        this.layer = this.load(Layer)
+        this.map = this.load(Map).onLoaded(this._onMapLoaded.bind(this))
+        this.grid = this.load(Grid)
+        this.renderer = this.load(Renderer)
+        this.control = this.load(Control)
+
         // this.entity = require('./entities')
         // this.camera = require('./camera')
     }
@@ -46,11 +54,6 @@ class Game {
     }
 
     start() {
-        this.layer = this.load(Layer)
-        this.map = this.load(Map).onLoaded(this._onMapLoaded.bind(this))
-        this.grid = this.load(Grid)
-        this.renderer = this.load(Renderer)
-        this.control = this.load(Control)
         this.player = new Player()
         this.player.spawn([13, 28])
     }
