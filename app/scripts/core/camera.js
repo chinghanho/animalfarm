@@ -6,21 +6,27 @@ var _instance
 class Camera {
 
     constructor(options) {
-        this.point = Point(0, 0)
-        this.gird
+        //
+    }
+
+    setPoint(point) {
+        return this._point = point
+    }
+
+    set point(point) {
+        return this._point = Point(point)
+    }
+
+    get point() {
+        return this_point
     }
 
     get x() {
-        return this.point.x
+        return this._point.x
     }
 
     get y() {
-        return this.point.y
-    }
-
-    setPosition(position) {
-        this.x = position[0]
-        this.y = position[1]
+        return this._point.y
     }
 
     setGridPoint(gridPoint) {

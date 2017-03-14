@@ -3,12 +3,6 @@ const GridPoint = require('../grid_point')
 class Entity {
 
     constructor() {
-
-        // includes(this, Gridable)
-
-        this.x     = 0
-        this.y     = 0
-
         // Callbacks
         // this.onSetGridPosition = null
 
@@ -19,6 +13,26 @@ class Entity {
         // if (options.sprite && options.defaultSprite) {
         //     this.setSprite(options.sprite, options.defaultSprite)
         // }
+    }
+
+    setPoint(point) {
+        return this._point = point
+    }
+
+    set point(point) {
+        return this._point = Point(point)
+    }
+
+    get point() {
+        return this_point
+    }
+
+    get x() {
+        return this._point.x
+    }
+
+    get y() {
+        return this._point.y
     }
 
     setGridPoint(gridPoint) {
