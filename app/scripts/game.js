@@ -19,13 +19,6 @@ class Game {
         console.log('action name: %s', actionName)
     }
 
-    spawnPlayer() {
-        this.player = new Player('', {
-            gridPoint: [13, 28],
-            control: this.control.by('player')
-        })
-    }
-
     pointToGrid(point) {
         //
     }
@@ -58,8 +51,8 @@ class Game {
         this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
         this.control = this.load(Control)
-
-        this.spawnPlayer()
+        this.player = new Player()
+        this.player.spawn([13, 28])
     }
 
     _onMapLoaded(map) {

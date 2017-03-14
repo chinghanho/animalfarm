@@ -7,6 +7,10 @@ class Player extends Character {
         this.username = username
     }
 
+    spawn(gridPoint) {
+        this.setGridPoint(gridPoint)
+    }
+
 }
 
 module.exports = Player
