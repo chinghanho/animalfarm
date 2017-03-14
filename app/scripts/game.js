@@ -5,6 +5,7 @@ const Renderer = require('./core/renderer')
 const Control = require('./control')
 const Util = require('./utils')
 
+const Entities = require('./entities')
 const Player = require('./entities/player')
 const Npc = require('./entities/npc')
 
@@ -19,8 +20,8 @@ class Game {
         this.grid = this.load(Grid)
         this.renderer = this.load(Renderer)
         this.control = this.load(Control)
+        this.entities = this.load(Entities)
 
-        // this.entity = require('./entities')
         // this.camera = require('./camera')
     }
 
@@ -55,7 +56,7 @@ class Game {
     }
 
     start() {
-        this.player = new Player()
+        this.player = this.entities.create('player')
         this.player.spawn([13, 28])
     }
 

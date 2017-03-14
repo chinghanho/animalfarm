@@ -2,7 +2,7 @@ const Player = require('./player')
 const Npc = require('./npc')
 const Item = require('./item')
 
-var maker, instance
+var _instance
 
 /**
  * @singleton
@@ -10,13 +10,13 @@ var maker, instance
 class EntityMaker {
 
     constructor() {
-        if (!instance) {
-            instance = this
+        if (!_instance) {
+            _instance = this
         }
 
         this.types = {}
 
-        return instance
+        return _instance
     }
 
     register(className, type) {
@@ -29,12 +29,18 @@ class EntityMaker {
         return type ? new type(custom) : null
     }
 
+    static addTo(game) {
+        _instance = _instance || new EntityMaker()
+        this.init()
+        return _instance
+    }
+
+    static init() {
+        _instance.register('player', Player)
+        _instance.register('npc', Npc)
+        _instance.register('item', Item)
+    }
+
 }
 
-maker = new EntityMaker()
-
-maker.register('player', Player)
-maker.register('npc', Npc)
-maker.register('item', Item)
-
-module.exports = maker
+module.exports = EntityMaker
