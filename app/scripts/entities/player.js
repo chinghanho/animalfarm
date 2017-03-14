@@ -8,7 +8,7 @@ class Player extends Character {
     }
 
     spawn(gridPoint) {
-        this.setGridPoint(gridPoint)
+        this.gridPoint = gridPoint
     }
 
 }

@@ -22,15 +22,23 @@ class Entity {
     }
 
     setGridPoint(gridPoint) {
-        return this.gridPoint = GridPoint(gridPoint)
+        return this.gridPoint = gridPoint
+    }
+
+    set gridPoint(gridPoint) {
+        return this._gridPoint = GridPoint(gridPoint)
+    }
+
+    get gridPoint() {
+        return this._gridPoint
     }
 
     get gridX() {
-        return this.gridPoint.gridX
+        return this._gridPoint.gridX
     }
 
     get gridY() {
-        return this.gridPoint.gridY
+        return this._gridPoint.gridY
     }
 
     // setPosition(x, y) {
