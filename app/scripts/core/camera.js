@@ -1,20 +1,13 @@
-const Point = require('./point')
+const Point = require('../geometries/point')
+const GridPoint = require('../grid_point')
+
+var _instance
 
 class Camera {
 
-    constructor(game, options) {
-
-        // includes(this, Gridable)
-
-        this.game = game
+    constructor(options) {
         this.point = Point(0, 0)
-        this.gridX = 0
-        this.gridY = 0
-        // this.getVisibleTiles = this.getVisibleTiles
-
-        // if (options.gridPoint) {
-        //     this.setGridPoint(options.gridPoint)
-        // }
+        this.gird
     }
 
     get x() {
@@ -30,6 +23,26 @@ class Camera {
         this.y = position[1]
     }
 
+    setGridPoint(gridPoint) {
+        return this.gridPoint = gridPoint
+    }
+
+    set gridPoint(gridPoint) {
+        return this._gridPoint = GridPoint(gridPoint)
+    }
+
+    get gridPoint() {
+        return this._gridPoint
+    }
+
+    get gridX() {
+        return this._gridPoint.gridX
+    }
+
+    get gridY() {
+        return this._gridPoint.gridY
+    }
+
     forEachVisiblePositions(callback) {
         let index = 0
         for(let y = this.gridY, maxY = y + 20; y < maxY; y++) {
@@ -38,6 +51,11 @@ class Camera {
                 index++
             }
         }
+    }
+
+    static addTo(game) {
+        _instance = _instance || new Camera()
+        return _instance
     }
 
 }

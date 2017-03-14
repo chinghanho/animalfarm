@@ -4,7 +4,7 @@ const Grid = require('./geometries/grid')
 const Renderer = require('./core/renderer')
 const Control = require('./control')
 const Util = require('./utils')
-
+const Camera = require('./core/camera')
 const Entities = require('./entities')
 const Player = require('./entities/player')
 const Npc = require('./entities/npc')
@@ -21,8 +21,7 @@ class Game {
         this.renderer = this.load(Renderer)
         this.control = this.load(Control)
         this.entities = this.load(Entities)
-
-        // this.camera = require('./camera')
+        this.camera = this.load(Camera)
     }
 
     action(actionName) {
@@ -56,6 +55,7 @@ class Game {
     }
 
     start() {
+        this.camera.gridPoint = [0, 0]
         this.player = this.entities.create('player')
         this.player.spawn([13, 28])
     }
