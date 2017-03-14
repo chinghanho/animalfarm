@@ -42,3 +42,5 @@ class Npc extends Character {
     }
 
 }
+
+module.exports = Npc

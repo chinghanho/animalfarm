@@ -6,6 +6,7 @@ const Control = require('./control')
 const Util = require('./utils')
 
 const Player = require('./entities/player')
+const Npc = require('./entities/npc')
 
 class Game {
 
