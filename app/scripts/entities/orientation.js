@@ -4,6 +4,10 @@ class Orientation {
         this._orientation = defaultOrientation || 'down'
     }
 
+    toString() {
+        return this._orientation
+    }
+
     get isRight() {
         return this._orientation === 'right'
     }

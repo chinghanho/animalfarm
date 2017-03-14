@@ -120,30 +120,30 @@ class Character extends Entity {
         let destY = this.path[0][1]
 
         if (this.gridX === destX && this.gridY < destY) {
-            this.orientation = 'down'
+            this.orientation.goDown()
         }
 
         if (this.gridX === destX && this.gridY > destY) {
-            this.orientation = 'up'
+            this.orientation.goUp()
         }
 
         if (this.gridY === destY && this.gridX > destX) {
-            this.orientation = 'left'
+            this.orientation.goLeft()
         }
 
         if (this.gridY === destY && this.gridX < destX) {
-            this.orientation = 'right'
+            this.orientation.goRight()
         }
 
         if (this.gridX === destX && this.gridY === destY) {
-            this.orientation = 'down'
+            this.orientation.goDown()
         }
 
         return this.orientation
     }
 
     animate(key, speed) {
-        key += '_' + this.orientation
+        key += '_' + this.orientation.toString()
         super.animate(key, speed)
     }
 
